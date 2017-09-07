@@ -1,3 +1,5 @@
+*.qm
+
 # C++ objects and libs
 
 *.slo

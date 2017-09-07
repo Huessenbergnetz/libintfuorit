@@ -1,0 +1,11 @@
+prefix=$$PREFIX
+exec_prefix=${prefix}
+libdir=$$INSTALL_LIB_DIR
+includedir=$$INSTALL_HEADERS_DIR
+
+Name: libintfuorit
+Description: Qt library to access the API of haveibeenpwned.com
+Version: $$VERSION
+Libs: -L${libdir} -lintfuorit
+Cflags: -I${includedir}
+Requires: Qt5Core Qt5Network

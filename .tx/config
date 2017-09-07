@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[libintfuorit.main]
+file_filter = translations/libintfuorit_<lang>.ts
+source_file = translations/libintfuorit.ts
+source_lang = en
+type = QT
+
