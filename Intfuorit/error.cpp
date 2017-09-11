@@ -28,14 +28,13 @@ Error::Error(QObject *parent) : QObject(parent), d_ptr(new ErrorPrivate)
 
 }
 
-Error::Error(Type type, Severity severity, const QString &text, const QVariant &data, QObject *parent) :
+Error::Error(Type type, Severity severity, const QString &text, QObject *parent) :
     QObject(parent), d_ptr(new ErrorPrivate)
 {
     Q_D(Error);
     d->type = type;
     d->severity = severity;
     d->text = text;
-    d->data = data;
 
     d->printOut();
 }
@@ -51,144 +50,142 @@ Error::Error(QNetworkReply *reply, QObject *parent) : QObject(parent), d_ptr(new
 
         switch(reply->error()) {
         case QNetworkReply::ConnectionRefusedError:
-            //% "The remote server at %1 refused the connection."
+            //% "The remote server at %1 refused the connection. (Code N1)"
             d->text = qtTrId("libintfuorit-err-net-reply-1").arg(reply->request().url().host());
             break;
         case QNetworkReply::RemoteHostClosedError:
-            //% "The remote server at %1 closed the connection prematurely, before the entire reply was received and processed."
+            //% "The remote server at %1 closed the connection prematurely, before the entire reply was received and processed. (Code N2)"
             d->text = qtTrId("libintfuorit-err-net-reply-2").arg(reply->request().url().host());
             break;
         case QNetworkReply::HostNotFoundError:
-            //% "The remote host name %1 was not found."
+            //% "The remote host name %1 was not found. (Code N3)"
             d->text = qtTrId("libintfuorit-err-net-reply-3").arg(reply->request().url().host());
             break;
         case QNetworkReply::TimeoutError:
-            //% "The connection to the server at %1 timed out."
+            //% "The connection to the server at %1 timed out. (Code N4)"
             d->text = qtTrId("libintfuorit-err-net-reply-4").arg(reply->request().url().host());
             break;
         case QNetworkReply::OperationCanceledError:
-            //% "The operation was canceled before it was finished."
+            //% "The operation was canceled before it was finished. (Code N5)"
             d->text = qtTrId("libintfuorit-err-net-reply-5");
             break;
         case QNetworkReply::SslHandshakeFailedError:
-            //% "The SSL/TLS handshake failed and the encrypted channel could not be established."
+            //% "The SSL/TLS handshake failed and the encrypted channel could not be established. (Code N6)"
             d->text = qtTrId("libintfuorit-err-net-reply-6");
             break;
         case QNetworkReply::TemporaryNetworkFailureError:
-            //% "The connection was broken due to disconnection from the network."
+            //% "The connection was broken due to disconnection from the network. (Code N7)"
             d->text = qtTrId("libintfuorit-err-net-reply-7");
             break;
         case QNetworkReply::NetworkSessionFailedError:
-            //% "The connection was broken due to disconnection from the network or failure to start the network."
+            //% "The connection was broken due to disconnection from the network or failure to start the network. (Code N8)"
             d->text = qtTrId("libintfuorit-err-net-reply-8");
             break;
         case QNetworkReply::BackgroundRequestNotAllowedError:
-            //% "The background request is not currently allowed due to platform policy."
+            //% "The background request is not currently allowed due to platform policy. (Code N9)"
             d->text = qtTrId("libintfuorit-err-net-reply-9");
             break;
         case QNetworkReply::TooManyRedirectsError:
-            //% "While following redirects, the maximum limit was reached."
+            //% "While following redirects, the maximum limit was reached. (Code N10)"
             d->text = qtTrId("libintfuorit-err-net-reply-10");
             break;
         case QNetworkReply::InsecureRedirectError:
-            //% "While following redirects, the network access API detected a redirect from an encrypted protocol (https) to an unencrypted one (http)."
+            //% "While following redirects, the network access API detected a redirect from an encrypted protocol (https) to an unencrypted one (http). (Code N11)"
             d->text = qtTrId("libintfuorit-err-net-reply-11");
             break;
         case QNetworkReply::ProxyConnectionRefusedError:
-            //% "The connection to the proxy server was refused (the proxy server is not accepting requests)."
+            //% "The connection to the proxy server was refused (the proxy server is not accepting requests). (Code N101)"
             d->text = qtTrId("libintfuorit-err-net-reply-101");
             break;
         case QNetworkReply::ProxyConnectionClosedError:
-            //% "The proxy server closed the connection prematurely, before the entire reply was received and processed."
+            //% "The proxy server closed the connection prematurely, before the entire reply was received and processed. (Code N102)"
             d->text = qtTrId("libintfuorit-err-net-reply-102");
             break;
         case QNetworkReply::ProxyNotFoundError:
-            //% "The proxy host name was not found (invalid proxy hostname)."
+            //% "The proxy host name was not found (invalid proxy hostname). (Code N103)"
             d->text = qtTrId("libintfuorit-err-net-reply-103");
             break;
         case QNetworkReply::ProxyTimeoutError:
-            //% "The connection to the proxy timed out or the proxy did not reply in time to the request sent"
+            //% "The connection to the proxy timed out or the proxy did not reply in time to the request sent. (Code N104)"
             d->text = qtTrId("libintfuorit-err-net-reply-104");
             break;
         case QNetworkReply::ProxyAuthenticationRequiredError:
-            //% "The proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)."
+            //% "The proxy requires authentication in order to honour the request but did not accept any credentials offered (if any). (Code N105)"
             d->text = qtTrId("libintfuorit-err-net-reply-105");
             break;
         case QNetworkReply::ContentAccessDenied:
-            //% "The access to the remote content was denied."
+            //% "The access to the remote content was denied. (Code N201)"
             d->text = qtTrId("libintfuorit-err-net-reply-201");
             break;
         case QNetworkReply::ContentOperationNotPermittedError:
-            //% "The operation requested on the remote content is not permitted."
+            //% "The operation requested on the remote content is not permitted. (Code N202)"
             d->text = qtTrId("libintfuorit-err-net-reply-202");
             break;
         case QNetworkReply::ContentNotFoundError:
-            //% "The remote content was not found at the server."
+            //% "The remote content was not found at the server. (Code N203)"
             d->text = qtTrId("libintfuorit-err-net-reply-203");
             break;
         case QNetworkReply::AuthenticationRequiredError:
-            //% "The remote server requires authentication to serve the content but the credentials provided were not accepted (if any)."
+            //% "The remote server requires authentication to serve the content but the credentials provided were not accepted (if any). (Code N204)"
             d->text = qtTrId("libintfuorit-err-net-reply-204");
             break;
         case QNetworkReply::ContentReSendError:
-            //% "The request needed to be sent again, but this failed for example because the upload data could not be read a second time."
+            //% "The request needed to be sent again, but this failed for example because the upload data could not be read a second time. (Code N205)"
             d->text = qtTrId("libintfuorit-err-net-reply-205");
             break;
         case QNetworkReply::ContentConflictError:
-            //% "The request could not be completed due to a conflict with the current state of the resource."
+            //% "The request could not be completed due to a conflict with the current state of the resource. (Code N206)"
             d->text = qtTrId("libintfuorit-err-net-reply-206");
             break;
         case QNetworkReply::ContentGoneError:
-            //% "The requested resource is no longer available at the server."
+            //% "The requested resource is no longer available at the server. (Code N207)"
             d->text = qtTrId("libintfuorit-err-net-reply-207");
             break;
         case QNetworkReply::InternalServerError:
-            //% "The server encountered an unexpected condition which prevented it from fulfilling the request."
+            //% "The server encountered an unexpected condition which prevented it from fulfilling the request. (Code N401)"
             d->text = qtTrId("libintfuorit-err-net-reply-401");
             break;
         case QNetworkReply::OperationNotImplementedError:
-            //% "The server does not support the functionality required to fulfill the request."
+            //% "The server does not support the functionality required to fulfill the request. (Code N402)"
             d->text = qtTrId("libintfuorit-err-net-reply-402");
             break;
         case QNetworkReply::ServiceUnavailableError:
-            //% "The server is unable to handle the request at this time."
+            //% "The server is unable to handle the request at this time. (Code N403)"
             d->text = qtTrId("libintfuorit-err-net-reply-403");
             break;
         case QNetworkReply::ProtocolUnknownError:
-            //% "The Network Access API cannot honor the request because the protocol is not known."
+            //% "The Network Access API cannot honor the request because the protocol is not known. (Code N301)"
             d->text = qtTrId("libintfuorit-err-net-reply-301");
             break;
         case QNetworkReply::ProtocolInvalidOperationError:
-            //% "The requested operation is invalid for this protocol."
+            //% "The requested operation is invalid for this protocol. (Code N302)"
             d->text = qtTrId("libintfuorit-err-net-reply-302");
             break;
         case QNetworkReply::UnknownNetworkError:
-            //% "An unknown network-related error was detected."
+            //% "An unknown network-related error was detected. (Code N99)"
             d->text = qtTrId("libintfuorit-err-net-reply-99");
             break;
         case QNetworkReply::UnknownProxyError:
-            //% "An unknown proxy-related error was detected."
+            //% "An unknown proxy-related error was detected. (Code N199)"
             d->text = qtTrId("libintfuorit-err-net-reply-199");
             break;
         case QNetworkReply::UnknownContentError:
-            //% "An unknown error related to the remote content was detected."
+            //% "An unknown error related to the remote content was detected. (Code N299)"
             d->text = qtTrId("libintfuorit-err-net-reply-299");
             break;
         case QNetworkReply::ProtocolFailure:
-            //% "A breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)."
+            //% "A breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.). (Code N399)"
             d->text = qtTrId("libintfuorit-err-net-reply-399");
             break;
         case QNetworkReply::UnknownServerError:
-            //% "An unknown error related to the server response was detected."
+            //% "An unknown error related to the server response was detected. (Code N499)"
             d->text = qtTrId("libintfuorit-err-net-reply-499");
             break;
         default:
-            //% "An unknown error related to the server response was detected."
+            //% "An unknown error related to the server response was detected. (Code N499)"
             d->text = qtTrId("libintfuorit-err-net-reply-499");
             break;
         }
-
-        d->data = QVariant::fromValue(reply->request().url().toString());
 
         d->printOut();
 
@@ -196,15 +193,16 @@ Error::Error(QNetworkReply *reply, QObject *parent) : QObject(parent), d_ptr(new
 }
 
 
-Error::Error(QJsonParseError jsonError, QObject *parent) :
+Error::Error(const QJsonParseError jsonError, QObject *parent) :
     QObject(parent), d_ptr(new ErrorPrivate)
 {
     Q_D(Error);
 
     if (jsonError.error != QJsonParseError::NoError) {
-        d->type = OutputError;
+        d->type = JSONParsingError;
         d->severity = Critical;
         d->text = jsonError.errorString();
+        d->text = QString("%1 Code(J%2)").arg(jsonError.errorString(), QString::number(jsonError.error));
     }
 
     d->printOut();
@@ -219,51 +217,30 @@ Error::~Error()
 
 Error::Type Error::type() const { Q_D(const Error); return d->type; }
 
-void Error::setType(Type nType)
-{
-    Q_D(Error);
-    if (nType != d->type) {
-        d->type = nType;
-        qDebug("Error type changed to %i.", nType);
-        Q_EMIT typeChanged(nType);
-    }
-}
-
 
 Error::Severity Error::severity() const { Q_D(const Error); return d->severity; }
-
-void Error::setSeverity(Severity nSeverity)
-{
-    Q_D(Error);
-    if (nSeverity != d->severity) {
-        d->severity = nSeverity;
-        qDebug("Error severity changed to %i.", nSeverity);
-        Q_EMIT severityChanged(nSeverity);
-    }
-}
 
 
 QString Error::text() const { Q_D(const Error); return d->text; }
 
-void Error::setText(const QString &nText)
+
+bool Error::operator!=(const Error &other) const
 {
-    Q_D(Error);
-    if (nText != d->text) {
-        d->text = nText;
-        qDebug("Error text changed to \"%s\"", qUtf8Printable(nText));
-        Q_EMIT textChanged(nText);
-    }
+    Q_D(const Error);
+    return ((d->type != other.type()) || (d->severity != other.severity()) || (d->text != other.text()));
 }
 
 
-QVariant Error::data() const { Q_D(const Error); return d->data; }
-
-void Error::setData(const QVariant &nData)
+bool Error::operator==(const Error &other) const
 {
-    Q_D(Error);
-    if (nData != d->data) {
-        d->data = nData;
-        qDebug("Error data has been changed.");
-        Q_EMIT dataChanged(nData);
-    }
+    Q_D(const Error);
+    return ((d->type == other.type()) && (d->severity == other.severity()) && (d->text == other.text()));
 }
+
+
+Error* Error::clone(Error *other, QObject *parent)
+{
+    return new Error(other->type(), other->severity(), other->text(), parent);
+}
+
+#include "moc_error.cpp"

@@ -32,9 +32,10 @@ namespace Intfuorit {
 class ErrorPrivate;
 
 /*!
- * \brief Provides information about occurred errors.
+ * Provides information about occurred errors.
  *
  * \headerfile "" <Intfuorit/Error>
+ * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT Error : public QObject
 {
@@ -42,44 +43,29 @@ class INTFUORITSHARED_EXPORT Error : public QObject
     Q_DISABLE_COPY(Error)
     Q_DECLARE_PRIVATE(Error)
     /*!
-     * \brief Text describing the error in a human readable way.
+     * This property holds the human readable error description.
      *
      * \par Access functions:
      * \li QString text() const
-     * \par Notifier signal:
-     * \li void textChanged(const QString &text)
      */
-    Q_PROPERTY(QString text READ text NOTIFY textChanged)
+    Q_PROPERTY(QString text READ text CONSTANT)
     /*!
-     * \brief Type of the error.
+     * This property holds the error type.
      *
      * \par Access functions:
      * \li Error::Type type() const
-     * \par Notifier signal:
-     * \li void typeChanged(Error::Type type)
      */
-    Q_PROPERTY(Intfuorit::Error::Type type READ type NOTIFY typeChanged)
+    Q_PROPERTY(Intfuorit::Error::Type type READ type CONSTANT)
     /*!
-     * \brief Additional error data.
-     *
-     * \par Access functions:
-     * \li QVariant() data() const
-     * \par Notifier signal:
-     * \li void dataChanged(const QVariant &data)
-     */
-    Q_PROPERTY(QVariant data READ data NOTIFY dataChanged)
-    /*!
-     * \brief The severity of the error.
+     * This property hold the error severity.
      *
      * \par Access functions:
      * \li Error::Severity severity() const
-     * \par Notifier signal:
-     * \li void severityChanged(Error::Severity severity)
      */
-    Q_PROPERTY(Intfuorit::Error::Severity severity READ severity NOTIFY severityChanged)
+    Q_PROPERTY(Intfuorit::Error::Severity severity READ severity CONSTANT)
 public:
     /*!
-     * \brief Defines the error type.
+     * Defines the error type.
      */
     enum Type {
         NoError             = 0,    /**< No error has occurred. */
@@ -89,11 +75,12 @@ public:
         OutputError         = 4,    /**< An error occurred while processing the returned data from the API. */
         ServerError         = 5,    /**< An error occurred on the server. */
         ApplicationError    = 6,    /**< An error occurred in the local application. */
+        FileError           = 7     /**< Failed to open, read or write a file. */
     };
     Q_ENUM(Type)
 
     /*!
-     * \brief Defines the severity of the error.
+     * Defines the severity of the error.
      */
     enum Severity {
         Nothing     = 0,    /**< No error has occurred */
@@ -104,112 +91,61 @@ public:
     Q_ENUM(Severity)
 
     /*!
-     * \brief Constructs a new empty Error object with the given \a parent.
+     * Constructs a new empty Error object with the given \a parent.
      */
     explicit Error(QObject *parent = nullptr);
 
     /*!
-     * \brief Constructs a new Error object with the given parameters.
-     * \param type      The Type of the error.
-     * \param severity  The Severity of the error.
-     * \param text      The human readable text to describe the error.
-     * \param data      Optinal additional error data.
-     * \param parent    Parent object.
+     * \brief Constructs a new Error object with the given parameters and \a parent.
+     * Use appropriate values for \a type and \a severity and set a descriptive humand readable
+     * error \a text.
      */
-    Error(Type type, Severity severity, const QString &text, const QVariant &data = QVariant(), QObject *parent = nullptr);
+    Error(Type type, Severity severity, const QString &text, QObject *parent = nullptr);
 
     /*!
-     * \brief Constructs a new Error object from a QNetworkReply.
-     * \param reply     The network reply to construct the error from.
-     * \param parent    The parent object.
+     * Constructs a new Error object from QNetworkReply \a reply with the given \a parent.
      */
     explicit Error(QNetworkReply *reply, QObject *parent = nullptr);
 
     /*!
-     * \brief Constructs a new Error object from a QJsonParseError.
-     * \param jsonError The JSON parse error data.
-     * \param parent    The parent object.
+     * Constructs a new Error object from QJsonError \a jsonError with the given \a parent.
      */
-    explicit Error(QJsonParseError jsonError, QObject *parent = nullptr);
+    explicit Error(const QJsonParseError jsonError, QObject *parent = nullptr);
 
     /*!
-     * \brief Deconstructs the Error object.
+     * Deconstructs the Error object.
      */
     ~Error();
 
     /*!
-     * \brief Getter function for the \link Error::type type \endlink property.
-     * \sa Error::setType() Error::typeChanged()
+     * Getter function for the \link Error::type type \endlink property.
      */
     Type type() const;
 
     /*!
-     * \brief Getter function for the \link Error::severity severity \endlink property.
-     * \sa Error::setSeverity() Error::severityChanged()
+     * Getter function for the \link Error::severity severity \endlink property.
      */
     Severity severity() const;
 
     /*!
-     * \brief Getter function for the \link Error::text text \endlink property.
-     * \sa Error::setText() Error::textChanged()
+     * Getter function for the \link Error::text text \endlink property.
      */
     QString text() const;
 
     /*!
-     * \brief Getter function for the \link Error::data data \endlink property.
-     * \sa Error::setData() Error::dataChanged()
+     * Compare the \a other error's values to this error and returns \c true if it is equal.
      */
-    QVariant data() const;
-
+    bool operator==(const Error &other) const;
 
     /*!
-     * \brief Sets the Type of this error.
-     * \sa Error::type() Error::typeChanged()
+     * Compare the \a other error's values to this error and returns \c true if it is not equal.
      */
-    void setType(Type nType);
+    bool operator!=(const Error &other) const;
 
     /*!
-     * \brief Sets the Severity of this error.
-     * \sa Error::severity() Error::severityChanged()
+     * Clones \a other error by creating a new Error object with \a other error's values and the given \a parent.
      */
-    void setSeverity(Severity nSeverity);
-
-    /*!
-     * \brief Sets the humand readable error string of this error
-     * \sa Error::text() Error::textChanged()
-     */
-    void setText(const QString &nText);
-
-    /*!
-     * \brief Sets the optional additional data for this error.
-     * \sa Error::data() Error::dataChanged()
-     */
-    void setData(const QVariant &nData);
-
-Q_SIGNALS:
-    /*!
-     * \brief Notifier function for the \link Error::type type \endlink property.
-     * \sa Error::setType() Error::type()
-     */
-    void typeChanged(Type type);
-
-    /*!
-     * \brief Notifier function for the \link Error::severity severity \endlink property.
-     * \sa Error::setSeverity() Error::severity()
-     */
-    void severityChanged(Severity severity);
-
-    /*!
-     * \brief Notifier function for the \link Error::text text \endlink property.
-     * \sa Error::setText() Error::text()
-     */
-    void textChanged(const QString &text);
-
-    /*!
-     * \brief Notifier function for the \link Error::data data \endlink property.
-     * \sa Error::setData() Error::data()
-     */
-    void dataChanged(const QVariant &data);
+    static Error* clone(Error *other, QObject *parent = nullptr);
 
 protected:
     const QScopedPointer<ErrorPrivate> d_ptr;

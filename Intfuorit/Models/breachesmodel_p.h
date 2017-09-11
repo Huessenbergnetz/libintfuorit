@@ -17,38 +17,35 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTFUORITERROR_P_H
-#define INTFUORITERROR_P_H
+#ifndef LIBINTFUORITBREACHESMODEL_P_H
+#define LIBINTFUORITBREACHESMODEL_P_H
 
-#include "error.h"
+#include "breachesmodel.h"
+#include "basemodel_p.h"
+#include "../API/getallbreaches.h"
+#include "../Objects/breach.h"
+#include <QJsonDocument>
 
 namespace Intfuorit {
 
-class ErrorPrivate
+class BreachesModelPrivate : public BaseModelPrivate
 {
+    Q_DISABLE_COPY(BreachesModelPrivate)
+    Q_DECLARE_PUBLIC(BreachesModel)
 public:
-    Error::Type type = Error::NoError;
-    Error::Severity severity = Error::Nothing;
-    QString text;
+    explicit BreachesModelPrivate(BreachesModel *parent);
 
-    void printOut()
-    {
-        switch(severity) {
-        case Error::Warning:
-            qWarning("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Critical:
-            qCritical("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Fatal:
-            qFatal("Error type %i, %s", type, qUtf8Printable(text));
-            break;
-        default:
-            break;
-        }
-    }
+    ~BreachesModelPrivate();
+
+    void gotBreaches(const QJsonDocument &json);
+
+    void clearModel();
+
+    std::vector<Breach*> list;
+
+    GetAllBreaches *gab = nullptr;
 };
 
 }
 
-#endif // INTFUORITERROR_P_H
+#endif // LIBINTFUORITBREACHESMODEL_P_H

@@ -17,38 +17,35 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTFUORITERROR_P_H
-#define INTFUORITERROR_P_H
+#ifndef LIBINTFUORITBASEMODEL_P_H
+#define LIBINTFUORITBASEMODEL_P_H
 
-#include "error.h"
+#include "basemodel.h"
+#include "../error.h"
 
 namespace Intfuorit {
 
-class ErrorPrivate
+class BaseModelPrivate
 {
+    Q_DISABLE_COPY(BaseModelPrivate)
+    Q_DECLARE_PUBLIC(BaseModel)
 public:
-    Error::Type type = Error::NoError;
-    Error::Severity severity = Error::Nothing;
-    QString text;
+    explicit BaseModelPrivate(BaseModel *parent);
 
-    void printOut()
-    {
-        switch(severity) {
-        case Error::Warning:
-            qWarning("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Critical:
-            qCritical("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Fatal:
-            qFatal("Error type %i, %s", type, qUtf8Printable(text));
-            break;
-        default:
-            break;
-        }
-    }
+    virtual ~BaseModelPrivate();
+
+    void setInOperation(bool nInOperation);
+    void setError(Error *nError);
+
+    bool inOperation = false;
+    Error *error = nullptr;
+    quint32 cachePeriod = 172800;
+    QString userAgent;
+
+protected:
+    BaseModel * const q_ptr;
 };
 
 }
 
-#endif // INTFUORITERROR_P_H
+#endif // LIBINTFUORITBASEMODEL_P_H

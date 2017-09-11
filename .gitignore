@@ -1,4 +1,11 @@
 *.qm
+Doxyfile
+Doxyfile.qhp
+Doxyfile.html
+Doxyfile.web
+qtdocs
+htmldocs
+webdocs
 
 # C++ objects and libs
 

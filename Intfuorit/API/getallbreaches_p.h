@@ -17,38 +17,28 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTFUORITERROR_P_H
-#define INTFUORITERROR_P_H
+#ifndef LIBINTFUORITGETALLBREACHES_P_H
+#define LIBINTFUORITGETALLBREACHES_P_H
 
-#include "error.h"
+#include "getallbreaches.h"
+#include "component_p.h"
 
 namespace Intfuorit {
 
-class ErrorPrivate
+class GetAllBreachesPrivate : public ComponentPrivate
 {
+    Q_DISABLE_COPY(GetAllBreachesPrivate)
 public:
-    Error::Type type = Error::NoError;
-    Error::Severity severity = Error::Nothing;
-    QString text;
-
-    void printOut()
+    explicit GetAllBreachesPrivate(GetAllBreaches *parent) :
+        ComponentPrivate(parent)
     {
-        switch(severity) {
-        case Error::Warning:
-            qWarning("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Critical:
-            qCritical("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Fatal:
-            qFatal("Error type %i, %s", type, qUtf8Printable(text));
-            break;
-        default:
-            break;
-        }
+        expectedJSONType = ComponentPrivate::Array;
+        namOperation = QNetworkAccessManager::GetOperation;
     }
+
+    QString domain;
 };
 
 }
 
-#endif // INTFUORITERROR_P_H
+#endif // LIBINTFUORITGETALLBREACHES_P_H

@@ -17,38 +17,36 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTFUORITERROR_P_H
-#define INTFUORITERROR_P_H
+#ifndef LIBINTFUORITBASEFILTERMODEL_P_H
+#define LIBINTFUORITBASEFILTERMODEL_P_H
 
-#include "error.h"
+#include "basefiltermodel.h"
+#include "basemodel.h"
+#include <QStringMatcher>
+
+#define INTFUORIT_GET_MODEL(Class) \
+    inline Class * intf_get_model() { return reinterpret_cast<Class *>(bsm); } \
+    inline const Class * intf_get_model() const { return reinterpret_cast<const Class *>(bsm); }
 
 namespace Intfuorit {
 
-class ErrorPrivate
+class BaseFilterModelPrivate
 {
+    Q_DISABLE_COPY(BaseFilterModelPrivate)
 public:
-    Error::Type type = Error::NoError;
-    Error::Severity severity = Error::Nothing;
-    QString text;
-
-    void printOut()
+    explicit BaseFilterModelPrivate()
     {
-        switch(severity) {
-        case Error::Warning:
-            qWarning("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Critical:
-            qCritical("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Fatal:
-            qFatal("Error type %i, %s", type, qUtf8Printable(text));
-            break;
-        default:
-            break;
-        }
+        search.setCaseSensitivity(Qt::CaseInsensitive);
     }
+
+    virtual ~BaseFilterModelPrivate() {}
+
+    BaseModel *bsm = nullptr;
+
+    QStringMatcher search;
 };
 
 }
 
-#endif // INTFUORITERROR_P_H
+
+#endif // LIBINTFUORITBASEFILTERMODEL_P_H

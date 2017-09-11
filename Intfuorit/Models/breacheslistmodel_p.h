@@ -17,38 +17,23 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTFUORITERROR_P_H
-#define INTFUORITERROR_P_H
+#ifndef LIBINTFUORITBREACHESLISTMODEL_P_H
+#define LIBINTFUORITBREACHESLISTMODEL_P_H
 
-#include "error.h"
+#include "breacheslistmodel.h"
+#include "breachesmodel_p.h"
 
 namespace Intfuorit {
 
-class ErrorPrivate
+class BreachesListModelPrivate : public BreachesModelPrivate
 {
+    Q_DISABLE_COPY(BreachesListModelPrivate)
+    Q_DECLARE_PUBLIC(BreachesListModel)
 public:
-    Error::Type type = Error::NoError;
-    Error::Severity severity = Error::Nothing;
-    QString text;
-
-    void printOut()
-    {
-        switch(severity) {
-        case Error::Warning:
-            qWarning("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Critical:
-            qCritical("Error type %i: %s", type, qUtf8Printable(text));
-            break;
-        case Error::Fatal:
-            qFatal("Error type %i, %s", type, qUtf8Printable(text));
-            break;
-        default:
-            break;
-        }
-    }
+    explicit BreachesListModelPrivate(BreachesListModel *parent) : BreachesModelPrivate(parent) {}
+    ~BreachesListModelPrivate() {}
 };
 
 }
 
-#endif // INTFUORITERROR_P_H
+#endif // LIBINTFUORITBREACHESLISTMODEL_P_H

@@ -22,6 +22,11 @@
 
 #include <QtCore/qglobal.h>
 
+/*!
+ * \namespace Intfuorit
+ * \brief Contains all public Intfuorit API.
+ */
+
 #if defined(INTFUORIT_LIBRARY)
 #  define INTFUORITSHARED_EXPORT Q_DECL_EXPORT
 #else
