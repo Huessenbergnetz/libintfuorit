@@ -35,6 +35,9 @@ class GetBreachesForAccountPrivate;
  *
  * If there are breaches on HIBP the \link GetBreachesForAccount::account account \endlink is part of, gotBreachesForAccount() will
  * be emitted. If there are no breaches, gotNoBreachesForAccount() will be emitted.
+ *
+ * \headerfile "" <Intfuorit/API/GetBreachesForAccount>
+ * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT GetBreachesForAccount : public Component
 {
