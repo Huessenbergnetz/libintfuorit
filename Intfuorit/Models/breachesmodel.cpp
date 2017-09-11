@@ -122,5 +122,44 @@ void BreachesModel::getAllBreaches(const QString &domain, bool reload)
 }
 
 
+void BreachesModel::getBreachesForAccount(const QString &account, const QString &domain, bool includeUnverified, bool reload)
+{
+    Q_D(BreachesModel);
+    if (d->inOperation) {
+        qWarning("Model is still working. Will not reload.");
+        return;
+    }
+
+    d->setInOperation(true);
+
+    d->clearModel();
+
+    if (!d->gbfa) {
+        d->gbfa = new GetBreachesForAccount(this);
+        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](const QString &account, const QJsonDocument &json){Q_UNUSED(account); d->gotBreaches(json);});
+        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](){
+            d->gbfa->deleteLater();
+            d->gbfa = nullptr;
+        });
+        connect(d->gbfa, &GetBreachesForAccount::errorChanged, [d](Error *e){d->setError((e));});
+        connect(d->gbfa, &GetBreachesForAccount::failed, [this, d](){
+            d->setInOperation(false);
+            d->gbfa->deleteLater();
+            d->gbfa = nullptr;
+            Q_EMIT failed(d->error);
+        });
+        connect(d->gbfa, &GetBreachesForAccount::gotNoBreachesForAccount, [this, d](const QString &account){
+            d->setInOperation(false);
+            d->gbfa->deleteLater();
+            d->gbfa = nullptr;
+            Q_EMIT gotNoBreachesForAccount(account);
+        });
+    }
+
+    d->gbfa->setCachePeriod(d->cachePeriod);
+    d->gbfa->setUserAgent(d->userAgent);
+    d->gbfa->execute(account, domain, false, includeUnverified, reload);
+}
+
 
 #include "moc_breachesmodel.cpp"

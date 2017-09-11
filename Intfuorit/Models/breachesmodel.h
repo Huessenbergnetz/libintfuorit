@@ -71,6 +71,22 @@ public:
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
+    /*!
+     * Requests the breaches the given \a account was part in from the HIBP API and populates
+     * the model, optionally filtered by \a domain. By default, no unverified breaches are
+     * included in the response, set \a includeUnverified to \c true to include thos ones as
+     * well. Internally this uses GetBreachesForAccount to request the list of breaches.
+     * If \a reload is \c false, cached data will be loaded if inside the \link BaseModel::cachePeriod cachePeriod \endlink.
+     */
+    Q_INVOKABLE void getBreachesForAccount(const QString &account, const QString &domain = QString(), bool includeUnverified = false, bool reload = false);
+
+Q_SIGNALS:
+    /*!
+     * This signal is emitted when the request started by getBreachesForAccount() did not find
+     * the specified \a account in the breached sites data.
+     */
+    void gotNoBreachesForAccount(const QString &account);
+
 protected:
     BreachesModel(BreachesModelPrivate &dd, QObject *parent);
 };

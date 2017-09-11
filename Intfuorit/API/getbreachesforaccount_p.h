@@ -17,37 +17,31 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBINTFUORITBREACHESMODEL_P_H
-#define LIBINTFUORITBREACHESMODEL_P_H
+#ifndef LIBINTFUORITGETBREACHESFORACCOUNT_P_H
+#define LIBINTFUORITGETBREACHESFORACCOUNT_P_H
 
-#include "breachesmodel.h"
-#include "basemodel_p.h"
-#include "../API/getallbreaches.h"
-#include "../API/getbreachesforaccount.h"
-#include "../Objects/breach.h"
-#include <QJsonDocument>
+#include "getbreachesforaccount.h"
+#include "component_p.h"
 
 namespace Intfuorit {
 
-class BreachesModelPrivate : public BaseModelPrivate
+class GetBreachesForAccountPrivate : public ComponentPrivate
 {
-    Q_DISABLE_COPY(BreachesModelPrivate)
-    Q_DECLARE_PUBLIC(BreachesModel)
+    Q_DISABLE_COPY(GetBreachesForAccountPrivate)
 public:
-    explicit BreachesModelPrivate(BreachesModel *parent);
+    explicit GetBreachesForAccountPrivate(GetBreachesForAccount *parent) :
+        ComponentPrivate(parent)
+    {
+        expectedJSONType = ComponentPrivate::Array;
+        namOperation = QNetworkAccessManager::GetOperation;
+    }
 
-    ~BreachesModelPrivate();
-
-    void gotBreaches(const QJsonDocument &json);
-
-    void clearModel();
-
-    std::vector<Breach*> list;
-
-    GetAllBreaches *gab = nullptr;
-    GetBreachesForAccount *gbfa = nullptr;
+    QString domain;
+    QString account;
+    bool truncateResponse = false;
+    bool includeUnverified = false;
 };
 
 }
 
-#endif // LIBINTFUORITBREACHESMODEL_P_H
+#endif // LIBINTFUORITGETBREACHESFORACCOUNT_P_H

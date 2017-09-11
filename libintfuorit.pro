@@ -38,6 +38,8 @@ isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = $$[QT_INSTALL_TRAN
         Intfuorit/API/component.h \
         Intfuorit/API/getallbreaches.h \
         Intfuorit/API/GetAllBreaches \
+        Intfuorit/API/getbreachesforaccount.h \
+        Intfuorit/API/GetBreachesForAccount \
         Intfuorit/Objects/breach.h \
         Intfuorit/Objects/Breach \
         Intfuorit/Models/basemodel.h \
@@ -140,7 +142,9 @@ HEADERS += \
     Intfuorit/Models/basefiltermodel.h \
     Intfuorit/Models/basefiltermodel_p.h \
     Intfuorit/Models/breacheslistfiltermodel.h \
-    Intfuorit/Models/breacheslistfiltermodel_p.h
+    Intfuorit/Models/breacheslistfiltermodel_p.h \
+    Intfuorit/API/getbreachesforaccount.h \
+    Intfuorit/API/getbreachesforaccount_p.h
 
 SOURCES += \
     Intfuorit/error.cpp \
@@ -151,4 +155,5 @@ SOURCES += \
     Intfuorit/Models/breachesmodel.cpp \
     Intfuorit/Models/breacheslistmodel.cpp \
     Intfuorit/Models/basefiltermodel.cpp \
-    Intfuorit/Models/breacheslistfiltermodel.cpp
+    Intfuorit/Models/breacheslistfiltermodel.cpp \
+    Intfuorit/API/getbreachesforaccount.cpp
