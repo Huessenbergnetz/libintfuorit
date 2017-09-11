@@ -101,7 +101,6 @@ void BaseFilterModel::setSearch(const QString &nSearch)
     Q_D(BaseFilterModel);
     const QString trimmed = nSearch.trimmed();
     if (d->search.pattern() != trimmed) {
-//        setFilterFixedString(trimmed);
         d->search.setPattern(trimmed);
         qDebug("Changed search string to \"%s\".", qUtf8Printable(trimmed));
         Q_EMIT searchChanged(trimmed);
@@ -117,3 +116,5 @@ void BaseFilterModel::setSortOrder(Qt::SortOrder nSortOrder)
         Q_EMIT sortOrderChanged(nSortOrder);
     }
 }
+
+#include "moc_basefiltermodel.cpp"

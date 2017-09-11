@@ -65,3 +65,5 @@ bool BreachesListFilterModel::filterAcceptsRow(int source_row, const QModelIndex
         return ((d->search.indexIn(sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), BreachesListModel::Title).toString()) > -1) || (d->search.indexIn(sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), BreachesListModel::Domain).toString()) > -1));
     }
 }
+
+#include "moc_breacheslistfiltermodel.cpp"
