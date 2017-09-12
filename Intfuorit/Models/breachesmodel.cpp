@@ -40,6 +40,7 @@ void BreachesModelPrivate::clearModel()
 {
     Q_Q(BreachesModel);
     if (!list.empty()) {
+        qDebug("Clearing model data.");
         q->beginRemoveRows(QModelIndex(), 0, list.size() - 1);
         qDeleteAll(list.begin(), list.end());
         list.clear();
@@ -52,6 +53,7 @@ void BreachesModelPrivate::gotBreaches(const QJsonDocument &json)
 {
     const QJsonArray a = json.array();
     if (!a.isEmpty()) {
+        qDebug("Populating model.");
         Q_Q(BreachesModel);
         q->beginInsertRows(QModelIndex(), list.size(), (list.size() + a.size() - 1));
         list.reserve(list.size() + a.size());
