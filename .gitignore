@@ -6,6 +6,8 @@ Doxyfile.web
 qtdocs
 htmldocs
 webdocs
+doxyWebFooter.html
+makeWebDocs.sh
 
 # C++ objects and libs
 
