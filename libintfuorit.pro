@@ -40,15 +40,22 @@ isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = $$[QT_INSTALL_TRAN
         Intfuorit/API/GetAllBreaches \
         Intfuorit/API/getbreachesforaccount.h \
         Intfuorit/API/GetBreachesForAccount \
+        Intfuorit/API/getpastesforaccount.h \
+        Intfuorit/API/GetPastesForAccount \
         Intfuorit/Objects/breach.h \
         Intfuorit/Objects/Breach \
+        Intfuorit/Objects/paste.h \
+        Intfuorit/Objects/Paste \
         Intfuorit/Models/basemodel.h \
         Intfuorit/Models/breachesmodel.h \
         Intfuorit/Models/breacheslistmodel.h \
         Intfuorit/Models/BreachesListModel \
         Intfuorit/Models/basefiltermodel.h \
         Intfuorit/Models/breacheslistfiltermodel.h \
-        Intfuorit/Models/BreachesListFilterModel
+        Intfuorit/Models/BreachesListFilterModel \
+        Intfuorit/Models/pastesmodel.h \
+        Intfuorit/Models/pasteslistmodel.h \
+        Intfuorit/Models/PastesListModel
 
     basePath = $${dirname(PWD)}
     for(header, INSTALL_HEADERS) {
@@ -100,10 +107,10 @@ qhpdocs.commands = sed \'s|@TAGFILES@|$$DOXYGEN_QHP_TAGS|\' $$PWD/Doxyfile | sed
 
 htmldocs.commands = sed \'s|@TAGFILES@|$$DOXYGEN_HTML_TAGS|\' $$PWD/Doxyfile | sed \'s|@OUTPUT_DIR@|$$DOXYGEN_OUTPUT_DIR/htmldocs|\' > $$PWD/Doxyfile.html; doxygen $$PWD/Doxyfile.html
 
-webdocs.commands = sed \'s|@TAGFILES@|$$DOXYGEN_WEB_TAGS|\' $$PWD/Doxyfile | sed \'s|@OUTPUT_DIR@|$$DOXYGEN_OUTPUT_DIR/webdocs|\' | sed \'s|^HTML_TIMESTAMP .*|HTML_TIMESTAMP = YES|\' > $$PWD/Doxyfile.web; doxygen $$PWD/Doxyfile.web
+webdocs.commands = sed \'s|@TAGFILES@|$$DOXYGEN_WEB_TAGS|\' $$PWD/Doxyfile | sed \'s|@OUTPUT_DIR@|$$DOXYGEN_OUTPUT_DIR/webdocs|\' | sed \'s|^HTML_TIMESTAMP .*|HTML_TIMESTAMP = YES|\' > $$PWD/Doxyfile.web
 
 docs.commands = @echo Documentation built
-docs.depends = qhpdocs htmldocs webdocs
+docs.depends = qhpdocs htmldocs
 
 QMAKE_EXTRA_TARGETS += docs qhpdocs htmldocs webdocs
 
@@ -144,7 +151,15 @@ HEADERS += \
     Intfuorit/Models/breacheslistfiltermodel.h \
     Intfuorit/Models/breacheslistfiltermodel_p.h \
     Intfuorit/API/getbreachesforaccount.h \
-    Intfuorit/API/getbreachesforaccount_p.h
+    Intfuorit/API/getbreachesforaccount_p.h \
+    Intfuorit/Objects/paste.h \
+    Intfuorit/Objects/paste_p.h \
+    Intfuorit/API/getpastesforaccount.h \
+    Intfuorit/API/getpastesforaccount_p.h \
+    Intfuorit/Models/pastesmodel.h \
+    Intfuorit/Models/pastesmodel_p.h \
+    Intfuorit/Models/pasteslistmodel.h \
+    Intfuorit/Models/pasteslistmodel_p.h
 
 SOURCES += \
     Intfuorit/error.cpp \
@@ -156,4 +171,8 @@ SOURCES += \
     Intfuorit/Models/breacheslistmodel.cpp \
     Intfuorit/Models/basefiltermodel.cpp \
     Intfuorit/Models/breacheslistfiltermodel.cpp \
-    Intfuorit/API/getbreachesforaccount.cpp
+    Intfuorit/API/getbreachesforaccount.cpp \
+    Intfuorit/Objects/paste.cpp \
+    Intfuorit/API/getpastesforaccount.cpp \
+    Intfuorit/Models/pastesmodel.cpp \
+    Intfuorit/Models/pasteslistmodel.cpp
