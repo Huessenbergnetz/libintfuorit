@@ -50,8 +50,8 @@ void GetPastesForAccount::execute(bool reload)
     Q_D(GetPastesForAccount);
 
     if (d->account.isEmpty()) {
-        //% "Can not request list of breaches for empty account user name/email address."
-        setError(new Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-empty-account"), this));
+        //% "Can not request list of pastes for empty account email address."
+        setError(new Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-get-pastes-empty-account"), this));
         setInOperation(false);
         Q_EMIT failed(error());
         return;

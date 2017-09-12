@@ -203,5 +203,18 @@
         <source>Invalid network operation. Only GET and POST are supported.</source>
         <translation>Ungültige Netzwerkoperation. Es werden nur GET und POST unterstützt.</translation>
     </message>
+    <message id="libintfuorit-err-empty-account">
+        <source>Can not request list of breaches for empty account user name/email address.</source>
+        <translation>Für einen leeren Benutzernamen/eine leere E-Mail-Adresse können keine Datenlecks abgefragt werden.</translation>
+    </message>
+    <message id="libintfuorit-no-title">
+        <source>No title</source>
+        <translation>Kein Titel</translation>
+    </message>
+    <message id="libintfuorit-err-get-pastes-empty-account">
+        <source>Can not request list of pastes for empty account email address.</source>
+        <oldsource>Can not request list of pastes for empty account user name/email address.</oldsource>
+        <translation>Für eine leere E-Mail-Adresse können keine Pastes abgefragt werden.</translation>
+    </message>
 </context>
 </TS>

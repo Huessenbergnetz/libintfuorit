@@ -203,5 +203,18 @@
         <source>Invalid network operation. Only GET and POST are supported.</source>
         <translation type="unfinished"/>
     </message>
+    <message id="libintfuorit-err-empty-account">
+        <source>Can not request list of breaches for empty account user name/email address.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-no-title">
+        <source>No title</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-err-get-pastes-empty-account">
+        <source>Can not request list of pastes for empty account email address.</source>
+        <oldsource>Can not request list of pastes for empty account user name/email address.</oldsource>
+        <translation type="unfinished"/>
+    </message>
 </context>
 </TS>
