@@ -27,6 +27,11 @@ BreachesListModel::BreachesListModel(QObject *parent) : BreachesModel(* new Brea
 
 }
 
+BreachesListModel::BreachesListModel(BreachesListModelPrivate &dd, QObject *parent) : BreachesModel(dd, parent)
+{
+
+}
+
 BreachesListModel::~BreachesListModel()
 {
 
