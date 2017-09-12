@@ -202,7 +202,7 @@ Error::Error(const QJsonParseError jsonError, QObject *parent) :
         d->type = JSONParsingError;
         d->severity = Critical;
         d->text = jsonError.errorString();
-        d->text = QString("%1 Code(J%2)").arg(jsonError.errorString(), QString::number(jsonError.error));
+        d->text = QStringLiteral("%1 Code(J%2)").arg(jsonError.errorString(), QString::number(jsonError.error));
     }
 
     d->printOut();
