@@ -39,7 +39,7 @@ GetBreachesForAccount::~GetBreachesForAccount()
 void GetBreachesForAccount::execute(bool reload)
 {
     if (inOperation()) {
-        qWarning("Geting breaches for acocunt stin in progress. Aborting.");
+        qWarning("Geting breaches for account still in progress. Aborting.");
         return;
     }
 
@@ -57,6 +57,7 @@ void GetBreachesForAccount::execute(bool reload)
     }
 
     QCryptographicHash hash(QCryptographicHash::Sha1);
+    hash.addData(QByteArrayLiteral("getbreachesforaccount"));
     hash.addData(d->account.toUtf8());
 
     QUrlQuery uq;
