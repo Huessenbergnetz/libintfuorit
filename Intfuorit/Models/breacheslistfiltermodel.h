@@ -32,6 +32,7 @@ class BreachesListFilterModelPrivate;
  *
  * \headerfile "" <Intfuorit/Models/BreachesListFilterModel>
  * \since libintfuorit 1.0.0
+ * \sa Breach, BreachesListModel, GetAllBreaches, GetBreachesForAccount
  */
 class BreachesListFilterModel : public BaseFilterModel
 {
@@ -61,10 +62,17 @@ public:
      * set to \c true, the local cache will be circumvented and the data will be requested
      * from the API directly. Internally this will call BreachesListModel::getAllBreaches()
      * from the source model.
+     *
+     * \overload
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
 protected:
+    /*!
+     * Returns \c true if the iten in the row indicated by the given \a source_row and
+     * \a source_parent contains the term set to BaseFilterModel::search in the Breach::title
+     * or Breach::domain property.
+     */
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 };
 

@@ -36,8 +36,12 @@ class BreachPrivate;
 /*!
  * \brief The Breach class contains information about a single breach.
  *
+ * \par HIBP API Docs
+ * <A HREF="https://haveibeenpwned.com/API/v2#BreachModel">The breach model</A>
+ *
  * \headerfile "" <Intfuorit/Objects/Breach>
  * \since libinitfuorit 1.0.0
+ * \sa BreachesListModel, BreachesListFilterModel, GetAllBreaches, GetBreachedSite, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT Breach : public QObject
 {

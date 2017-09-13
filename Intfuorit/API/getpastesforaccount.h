@@ -33,14 +33,18 @@ class GetPastesForAccountPrivate;
  * Set the email address to the \link GetPastesForAccount::account account \endlink property
  * and call execute() to start the request.
  *
- * If there are pastes found on HIBP the \link GetPastesForAccount::account account \endlink is
+ * If there are pastes found on HIBP the \link GetPastesForAccount::account email addres \endlink is
  * part of, the gotPastesForAccount() will be emitted. If there are no pates, gotNoPastesForAccount()
- * will be emitted.
+ * will be emitted. If something failed, the Component::failed() signal will be emitted.
  *
- * If something failed, the Component::failed() signal will be emitted.
+ * For this API call it is mandator to set an \link GetPastesForAccount::account email addres \endlink.
+ *
+ * \par HIBP API Docs
+ * <A HREF="https://haveibeenpwned.com/API/v2#PastesForAccount">Getting all pastes for an account</A>
  *
  * \headerfile "" <Intfuorit/API/GetPastesForAccount>
  * \since libintfuorit 1.0.0
+ * \sa Paste, PastesListModel
  */
 class INTFUORITSHARED_EXPORT GetPastesForAccount : public Component
 {
@@ -72,8 +76,12 @@ public:
     ~GetPastesForAccount();
 
     /*!
-     * Starts the API request. An \link GetPastesForAccount::account account \endlink has to be set.
-     * Set \a reload to \c true to circumvent the cache file and to load directly from the API.
+     * Starts the API request. An \link GetPastesForAccount::account email address \endlink has to be set
+     * before calling this function. Set \a reload to \c true to circumvent the cache file and to load
+     * directly from the API. If something failed, the Component::failed() signal will be emitted. If there
+     * were pastes found the \link GetPastesForAccount::account email address \endlink is part of, the
+     * gotPastesForAccount() signal will be emitted, if no pastes were found the gotNoPastesForAccount()
+     * signal will be emitted.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
@@ -81,6 +89,8 @@ public:
      * Sets the \link GetPastesForAccount::account account \endlink and starts the API request.
      * The \a account has to be an email address. Set \a reload to \c true to circumvent the cache
      * file and to load directly from the API.
+     *
+     * \overload
      */
     Q_INVOKABLE void execute(const QString &account, bool reload = false);
 
@@ -104,13 +114,14 @@ Q_SIGNALS:
     void accountChanged(const QString &account);
 
     /*!
-     * This signal will be emitted when the request has finished and the \link GetPastesForAccount::account account \endlink
+     * This signal will be emitted when the request has finished and the \link GetPastesForAccount::account email address \endlink
      * has been found in one or more pates. It will contain the queried \a account name and the JSON array of \a pastes.
+     * See <A HREF="https://haveibeenpwned.com/API/v2#PasteModel">HIBP API docs</A> for a description of the JSON paste object values.
      */
     void gotPastesForAccount(const QString &account, const QJsonDocument &pastes);
 
     /*!
-     * This signal will be emitted when the request has finished and the  \link GetPastesForAccount::account account \endlink
+     * This signal will be emitted when the request has finished and the  \link GetPastesForAccount::account email address \endlink
      * has not been found in the pastes data of HIBP. It will contain the queried \a account name.
      */
     void gotNoPastesForAccount(const QString &account);

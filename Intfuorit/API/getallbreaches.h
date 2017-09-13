@@ -30,20 +30,15 @@ namespace Intfuorit {
 class GetAllBreachesPrivate;
 
 /*!
- * Implements a request to get all breached sites from the HIBP API. Can optionally filter the result by domain name.
- *
- * \par Usage example
- * \code{.cpp}
- * GetAllBreaches gab;
- * QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, this, &MyClass::gotAllBreaches);
- * gab.execute();
- * \endcode
+ * Implements a request to get all breached sites from the HIBP API. Can optionally filter the result
+ * by \link GetAllBreaches::domain domain \endlink name.
  *
  * \par HIBP API Docs
  * <A HREF="https://haveibeenpwned.com/API/v2#AllBreaches">Getting all breached sites in the system</A>
  *
  * \headerfile "" <Intfuorit/API/GetAllBreaches>
  * \since libintfuorit 1.0.0
+ * \sa Breach, BreachesListModel, BreachesListFilterModel, GetBreachedSite, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT GetAllBreaches : public Component
 {
@@ -53,6 +48,13 @@ class INTFUORITSHARED_EXPORT GetAllBreaches : public Component
     /*!
      * This property holds the \a domain name filter. If not empty, the request URL will have the \a domain
      * filter parameter added and the API will only return breaches for that \a domain.
+     *
+     * \par Access functions
+     * \li QString domain() const
+     * \li void setDomain(const QString &nDomain)
+     *
+     * \par Notifier signal
+     * \li void domainChanged(const QString &domain)
      */
     Q_PROPERTY(QString domain READ domain WRITE setDomain NOTIFY domainChanged)
 public:
@@ -68,13 +70,14 @@ public:
 
     /*!
      * Starts the API request. Set \a reload to \c true to circumvent the cache file and to load directly from the API.
+     * If something failed, the Component::failed() signal will be emitted, on success, the gotAllBreaches() signal will
+     * be emitted containing the JSON array of breached sites data.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
     /*!
-     * Starts the API request filtered by \a domain. Set \a reload to \c true to circumvent the cache file and to load
-     * directly from the API. \a domain will also set the \link GetAllBreaches::domain domain \endlink property. This has
-     * the same effect as setting the \link GetAllBreaches::domain domain \endlink property and than call execute(bool reload).
+     * Sets the filter \link GetAllBreaches::domain domain \endlink and starts the API request. Set \a reload to \c true
+     * to circumvent the local cache file and to load directly from the API.
      *
      * \overload
      */

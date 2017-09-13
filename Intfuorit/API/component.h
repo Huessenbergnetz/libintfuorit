@@ -27,6 +27,7 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
+class QJsonDocument;
 
 namespace Intfuorit {
 
@@ -36,9 +37,13 @@ class ComponentPrivate;
 /*!
  * The Component class is the base class of all Intfuorit objects that request data from the HIBP API.
  * When creating a subclass of Component, you have to reimplement execute() and successCallback() -
- * optionally you can reimplement extractError(). In the implementation of execute() set setInOperation()
- * to \c true and in the end call startRequest() to request the data from the API. In successCallback()
- * you should process the API JSON reply and set setInOperation() to \c false when finished.
+ * optionally you can reimplement extractError(). In the implementation of execute() set
+ * \link Component::inOperation inOperation \endlink to \c true and in the end call startRequest() to
+ * request the data from the API. In successCallback() you should process the API JSON reply and set
+ * \link Component::inOperation inOperation \endlink to \c false when finished. When reimplementing
+ * extractError(), you should emit the failed() signal after extracting the error and set
+ * \link Component::inOperation inOperation \endlink to \c false.
+ *
  * Normally you do not have to create new derived classes, because libintfuorit already provides classes
  * and methods for each HIBP API route.
  *

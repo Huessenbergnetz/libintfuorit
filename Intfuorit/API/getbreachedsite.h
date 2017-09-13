@@ -40,6 +40,7 @@ class GetBreachedSitePrivate;
  *
  * \headerfile "" <Intfuorit/API/GetBreachedSite>
  * \since libintfuorit 1.0.0
+ * \sa Breach, BreachesListMode, BreachesListFilterModel, GetAllBreaches, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT GetBreachedSite : public Component
 {
@@ -80,7 +81,8 @@ public:
     Q_INVOKABLE void execute(bool reload = false) override;
 
     /*!
-     * Sets the name of the breached site and start the API request.
+     * Sets the \link GetBreachedSite::name name \endlink of the breached site to request and start the API call.
+     * Set \a reload to \c true to circumvent the local cache file and to load directly from the API.
      *
      * \overload
      */

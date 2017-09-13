@@ -29,15 +29,21 @@ namespace Intfuorit {
 class GetBreachesForAccountPrivate;
 
 /*!
- * \brief Implements a request to get all breaches sites for a specific \link GetBreachesForAccount::account account \endlink
- * from the HIBP API. Can optionally filter the result by domain name. By default, unverified breaches are not included - use the
- * \link GetBreachesForAccount::includeUnverified includeUnverified \endlink property to include those as well.
+ * Implements a request to get all breached sites for a specific \link GetBreachesForAccount::account account \endlink
+ * from the HIBP API. Can optionally filter the result by \link GetBreachesForAccount::domain domain \endlink name.
+ * By default, unverified breaches are not included - use the \link GetBreachesForAccount::includeUnverified includeUnverified \endlink
+ * property to include those as well. In order to successfully process the request, it is mandatory to set an
+ * \link GetBreachesForAccount::account account \endlink.
  *
  * If there are breaches on HIBP the \link GetBreachesForAccount::account account \endlink is part of, gotBreachesForAccount() will
  * be emitted. If there are no breaches, gotNoBreachesForAccount() will be emitted.
  *
+ * \par HIBP API Docs
+ * <A HREF="https://haveibeenpwned.com/API/v2#BreachesForAccount">Getting all breaches for an account</A>
+ *
  * \headerfile "" <Intfuorit/API/GetBreachesForAccount>
  * \since libintfuorit 1.0.0
+ * \sa Breach, BreachesListModel, BreachesListFilterModel, GetAllBreaches, GetBreachedSite
  */
 class INTFUORITSHARED_EXPORT GetBreachesForAccount : public Component
 {
@@ -82,7 +88,8 @@ class INTFUORITSHARED_EXPORT GetBreachesForAccount : public Component
      */
     Q_PROPERTY(bool includeUnverified READ includeUnverified WRITE setIncludeUnverified NOTIFY includeUnverifiedChanged)
     /*!
-     * This property holds the account name / email address that should be checked.
+     * This property holds the account name / email address that should be checked. Checking for breached sites
+     * an account is part of works with account user names and with email addresses.
      *
      * \par Access functions
      * \li QString account() const

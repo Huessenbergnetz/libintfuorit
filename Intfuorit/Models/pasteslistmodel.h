@@ -31,13 +31,14 @@ class PastesListModelPrivate;
 /*!
  * The PastesListModel class provides a single column list model containing Paste objects
  * requested from the HIBP API. This model is designed to be usable in QML list view, the
- * different data fields are accessible via the \link PastesModel::Roles model data roles \endlink.
+ * different data fields are accessible via the \link PastesListModel::Roles model data roles \endlink.
  *
  * Use PastesModel::getPastesForAccount() to request the list of pates from the HIBP API and
  * to populate the model.
  *
  * \headerfile "" <Intfuorit/Models/PastesListModel>
  * \since libintfuorit 1.0.0
+ * \sa Paste, PastesListFilterModel, GetPastesForAccount
  */
 class INTFUORITSHARED_EXPORT PastesListModel : public PastesModel
 {
@@ -66,7 +67,7 @@ public:
         Title,                      /**< The \link Paste::title title \endlink of the paste, if any. Might be a null string. */
         Date,                       /**< The \link Paste::date date \endlink and time that the paste was posted. */
         EmailCount,                 /**< The \link Paste::emailCount number of emails \endlink taht were found when processing the paste. */
-        Url                         /**< The \link Paste::url url \link the paste is available on, composed of SourceId and the Source service. */
+        Url                         /**< The \link Paste::url url \endlink the paste is available on, composed of SourceId and the Source service. */
     };
 
     /*!

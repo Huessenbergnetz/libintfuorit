@@ -33,10 +33,12 @@ class BreachesListModelPrivate;
  * requested from the HIBP API. This model is designed to be usable in QML list views, the
  * different data fields are accessible via the \link BreachesListModel::Roles model data roles \endlink.
  *
- * Use BreachesModel::getAllBreaches() to request the list of breaches from the HIBP API.
+ * Use BreachesModel::getAllBreaches() to request the list of breaches from the HIBP API. See BreachesListFilterModel
+ * for a model that can filter the API result locally.
  *
  * \headerfile "" <Intfuorit/Models/BreachesListModel>
  * \since libintfuorit 1.0.0
+ * \sa Breach, BreachesListFilterModel, GetAllBreaches, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT BreachesListModel : public BreachesModel
 {

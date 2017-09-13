@@ -47,7 +47,8 @@ class INTFUORITSHARED_EXPORT BreachesModel : public BaseModel
     Q_DISABLE_COPY(BreachesModel)
 public:
     /*!
-     * Constructs a new BreachesModel with the given \a parent.
+     * Constructs a new BreachesModel with the given \a parent. Call getAllBreaches() or
+     * getBreachesForAccount() to populate the model.
      */
     explicit BreachesModel(QObject *parent = nullptr);
 
@@ -59,24 +60,32 @@ public:
     /*!
      * Requests all breaches from the HIBP API. If \a reload is set to \c true, the local
      * cache will be circumvented and the data will be requested from the API directly.
-     * Internally this uses GetAllBreaches to request the list of breached sites.
+     * This will clear the current model data and will use GetAllBreaches to start a new
+     * API request. On success the model will populated with the data from the API reply.
+     * If something failed, the BaseModel::failed() signal will be emitted.
+     *
+     * \sa GetAllBreaches::execute()
      */
     Q_INVOKABLE void getAllBreaches(bool reload = false);
 
     /*!
      * Requests all breaches from the HIBP API, filtered by \a a domain. If \a reload is
      * set to \c true, the local cache will be circumvented and the data will be requested
-     * from the API directly. Internally this uses GetAllBreaches to request the list of
-     * breached sites.
+     * from the API directly.
+     *
+     * \overload
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
     /*!
      * Requests the breaches the given \a account was part in from the HIBP API and populates
-     * the model, optionally filtered by \a domain. By default, no unverified breaches are
-     * included in the response, set \a includeUnverified to \c true to include thos ones as
-     * well. Internally this uses GetBreachesForAccount to request the list of breaches.
-     * If \a reload is \c false, cached data will be loaded if inside the \link BaseModel::cachePeriod cachePeriod \endlink.
+     * the model, optionally filtered by \a domain. The current model data will be cleared.
+     * By default, no unverified breaches are included in the response, set
+     * \a includeUnverified to \c true to include thos ones as well. Internally this uses
+     * GetBreachesForAccount to request the list of breaches. If \a reload is \c false, cached
+     * data will be loaded if inside the \link BaseModel::cachePeriod cachePeriod \endlink.
+     *
+     * \sa GetBreachesForAccount::execute()
      */
     Q_INVOKABLE void getBreachesForAccount(const QString &account, const QString &domain = QString(), bool includeUnverified = false, bool reload = false);
 

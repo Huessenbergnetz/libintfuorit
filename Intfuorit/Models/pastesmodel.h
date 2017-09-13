@@ -73,6 +73,8 @@ public:
      * If pastes were found for the given \a account, the model will be populated with the result,
      * if no pastes were found, the gotNoPastesForAccount() signal will be emitted. If something
      * failed, the BaseModel::failed() signal will be emitted.
+     *
+     * \sa GetPastesForAccount::execute()
      */
     Q_INVOKABLE void getPastesForAccount(const QString &account, bool reload = false);
 

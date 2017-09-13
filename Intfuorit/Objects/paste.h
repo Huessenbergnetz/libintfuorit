@@ -36,8 +36,12 @@ class PastePrivate;
 /*!
  * \brief The Paste class contains information about a single paste.
  *
+ * \par HIBP API Docs
+ * <A HREF="https://haveibeenpwned.com/API/v2#PasteModel"></A>
+ *
  * \headerfile "" <Intfuorit/Objects/Paste>
  * \since libintfuorit 1.0.0
+ * \sa PastesListModel, PastesListFilterModel, GetPastesForAccount
  */
 class INTFUORITSHARED_EXPORT Paste : public QObject
 {
@@ -80,7 +84,7 @@ class INTFUORITSHARED_EXPORT Paste : public QObject
     Q_PROPERTY(QDateTime date READ date CONSTANT)
     /*!
      * This property holds the number of emails that were found when processing the paste.
-     * Emails are extracted by using the regular expression \b+(?!^.{256})[a-zA-Z0-9\.\-_\+]+@[a-zA-Z0-9\.\-_]+\.[a-zA-Z]+\b
+     * Emails are extracted by using a regular expression.
      *
      * \par Access functions
      * \li quint32 emailCount() const
@@ -88,7 +92,7 @@ class INTFUORITSHARED_EXPORT Paste : public QObject
     Q_PROPERTY(quint32 emailCount READ emailCount CONSTANT)
     /*!
      * This property holds the URL to the paste. This will be resolved from the \link Paste::source source \endlink service
-     * and the \link Paste::id id \endlink of the paste. Might be null if the URL could not
+     * and the \link Paste::sourceId sourceId \endlink of the paste. Might be null if the URL could not
      * be resolved.
      *
      * \par Access functions
