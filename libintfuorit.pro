@@ -46,6 +46,8 @@ isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = $$[QT_INSTALL_TRAN
         Intfuorit/API/GetBreachedSite \
         Intfuorit/API/checkpwnedpassword.h \
         Intfuorit/API/CheckPwnedPassword \
+        Intfuorit/API/getalldataclasses.h \
+        Intfuorit/API/GetAllDataClasses \
         Intfuorit/Objects/breach.h \
         Intfuorit/Objects/Breach \
         Intfuorit/Objects/paste.h \
@@ -167,7 +169,9 @@ HEADERS += \
     Intfuorit/API/getbreachedsite_p.h \
     Intfuorit/API/getbreachedsite.h \
     Intfuorit/API/checkpwnedpassword.h \
-    Intfuorit/API/checkpwnedpassword_p.h
+    Intfuorit/API/checkpwnedpassword_p.h \
+    Intfuorit/API/getalldataclasses.h \
+    Intfuorit/API/getalldataclasses_p.h
 
 SOURCES += \
     Intfuorit/error.cpp \
@@ -185,4 +189,5 @@ SOURCES += \
     Intfuorit/Models/pastesmodel.cpp \
     Intfuorit/Models/pasteslistmodel.cpp \
     Intfuorit/API/getbreachedsite.cpp \
-    Intfuorit/API/checkpwnedpassword.cpp
+    Intfuorit/API/checkpwnedpassword.cpp \
+    Intfuorit/API/getalldataclasses.cpp
