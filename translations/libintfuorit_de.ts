@@ -216,5 +216,13 @@
         <oldsource>Can not request list of pastes for empty account user name/email address.</oldsource>
         <translation>Für eine leere E-Mail-Adresse können keine Pastes abgefragt werden.</translation>
     </message>
+    <message id="libintfuorit-err-empty-password">
+        <source>You can not check for a pwned password without specifying a password.</source>
+        <translation>Sie können kein leeres Passwort überprüfen lassen.</translation>
+    </message>
+    <message id="libintfuorit-err-missing-breach-name">
+        <source>You can not request data for a single breached site without specifying a name for it.</source>
+        <translation>Sie können ohne einen HIBP-Seitennamen keine Daten für eine einzelne kompromittierte Seite abfragen.</translation>
+    </message>
 </context>
 </TS>
