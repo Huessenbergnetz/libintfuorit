@@ -33,23 +33,18 @@ using namespace Intfuorit;
  * access to the public class.
  *
  * This constructor will also build the default user agent that will be compiled from
- * QCoreApplication::applicationName() and QCoreApplication::applicationVersion(). If
- * the application name is not set or empty, the user agent will fall back to \a "libintfuorit/<current version>".
+ * QCoreApplication::applicationName() and QCoreApplication::applicationVersion().
  */
 ComponentPrivate::ComponentPrivate(Component *parent) :
     q_ptr(parent)
 {
-    QString app = QCoreApplication::applicationName();
-    QString ver = QCoreApplication::applicationVersion();
-    if (app.isEmpty()) {
-        app = QStringLiteral("libintfuorit");
-        ver = QStringLiteral(LIBINTFUORIT_VERSION_STRING);
+    const QString app = QCoreApplication::applicationName();
+    const QString ver = QCoreApplication::applicationVersion();
+    if (!app.isEmpty() && !ver.isEmpty()) {
+        userAgent = QStringLiteral("%1/%2").arg(app, ver);
+    } else if (!app.isEmpty() && ver.isEmpty()) {
+        userAgent = app;
     }
-    if (ver.isEmpty()) {
-        ver = QStringLiteral(LIBINTFUORIT_VERSION_STRING);
-    }
-
-    userAgent = QStringLiteral("%1/%2").arg(app, ver);
 }
 
 ComponentPrivate::~ComponentPrivate()

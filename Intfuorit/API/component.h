@@ -61,11 +61,12 @@ class INTFUORITSHARED_EXPORT Component : public QObject
     /*!
      * This property holds the descriptive <A HREF="https://en.wikipedia.org/wiki/User_agent#Use_in_HTTP">HTTP User Agent</A>
      * that will be added to the API request. The HIBP API requires to send a user agent header with
-     * every API request. Sou you should set this to some valid value. If not set explicitly, the user
-     * agent will be composed from the settings of QCoreApplication::applicationName() and
-     * QCoreApplication::applicationVersion(). If that are empyt, there is a fallback to "libintfuorit/<current version>".
-     * But if you use libintfuorit in your application, please choose a custom user agent that fits your
-     * application. See also <A HREF="https://haveibeenpwned.com/API/v2#UserAgent">HIBP API docs</A>.
+     * every API request. So you should set this to some valid value. If not set explicitly, the user
+     * agent will be composed from the values of QCoreApplication::applicationName() and
+     * QCoreApplication::applicationVersion().
+     *
+     * \par HIBP API Docs
+     * <A HREF="https://haveibeenpwned.com/API/v2#UserAgent">Specifying the user agent</A>
      *
      * \par Access functions
      * \li QString userAgent() const
