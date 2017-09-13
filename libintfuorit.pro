@@ -44,6 +44,8 @@ isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = $$[QT_INSTALL_TRAN
         Intfuorit/API/GetPastesForAccount \
         Intfuorit/API/getbreachedsite.h \
         Intfuorit/API/GetBreachedSite \
+        Intfuorit/API/checkpwnedpassword.h \
+        Intfuorit/API/CheckPwnedPassword \
         Intfuorit/Objects/breach.h \
         Intfuorit/Objects/Breach \
         Intfuorit/Objects/paste.h \
@@ -163,7 +165,9 @@ HEADERS += \
     Intfuorit/Models/pasteslistmodel.h \
     Intfuorit/Models/pasteslistmodel_p.h \
     Intfuorit/API/getbreachedsite_p.h \
-    Intfuorit/API/getbreachedsite.h
+    Intfuorit/API/getbreachedsite.h \
+    Intfuorit/API/checkpwnedpassword.h \
+    Intfuorit/API/checkpwnedpassword_p.h
 
 SOURCES += \
     Intfuorit/error.cpp \
@@ -180,4 +184,5 @@ SOURCES += \
     Intfuorit/API/getpastesforaccount.cpp \
     Intfuorit/Models/pastesmodel.cpp \
     Intfuorit/Models/pasteslistmodel.cpp \
-    Intfuorit/API/getbreachedsite.cpp
+    Intfuorit/API/getbreachedsite.cpp \
+    Intfuorit/API/checkpwnedpassword.cpp
