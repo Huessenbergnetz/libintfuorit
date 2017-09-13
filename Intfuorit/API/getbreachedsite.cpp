@@ -90,6 +90,7 @@ void GetBreachedSite::successCallback(const QJsonDocument &json)
     qDebug("Got breached site data for %s.", qUtf8Printable(name()));
     const QJsonObject o = json.object();
     Q_EMIT gotBreach(o);
+    setInOperation(false);
 }
 
 #include "moc_getbreachedsite.cpp"
