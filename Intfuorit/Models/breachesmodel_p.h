@@ -38,7 +38,7 @@ public:
 
     ~BreachesModelPrivate();
 
-    void gotBreaches(const QJsonDocument &json);
+    void gotBreaches(const QJsonArray &a);
 
     void clearModel();
 

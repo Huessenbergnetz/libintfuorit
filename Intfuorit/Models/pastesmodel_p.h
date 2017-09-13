@@ -36,7 +36,7 @@ public:
 
     ~PastesModelPrivate();
 
-    void gotPastes(const QJsonDocument &json);
+    void gotPastes(const QJsonArray &a);
 
     void clearModel();
 

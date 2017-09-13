@@ -22,6 +22,7 @@
 #include <QCryptographicHash>
 #include <QUrlQuery>
 #include <QStringBuilder>
+#include <QJsonArray>
 
 using namespace Intfuorit;
 
@@ -161,7 +162,8 @@ void GetBreachesForAccount::setIncludeUnverified(bool nIncludeUnverified)
 
 void GetBreachesForAccount::successCallback(const QJsonDocument &json)
 {
-    Q_EMIT gotBreachesForAccount(account(), json);
+    const QJsonArray array = json.array();
+    Q_EMIT gotBreachesForAccount(account(), array);
     qDebug("Account %s is part of breaches.", qUtf8Printable(account()));
     setInOperation(false);
 }

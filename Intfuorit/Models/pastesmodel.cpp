@@ -50,9 +50,8 @@ void PastesModelPrivate::clearModel()
 }
 
 
-void PastesModelPrivate::gotPastes(const QJsonDocument &json)
+void PastesModelPrivate::gotPastes(const QJsonArray &a)
 {
-    const QJsonArray a = json.array();
     if (!a.isEmpty()) {
         qDebug("Populating model.");
         Q_Q(PastesModel);
@@ -98,7 +97,7 @@ void PastesModel::getPastesForAccount(const QString &account, bool reload)
 
     if (!d->gpfa) {
         d->gpfa = new GetPastesForAccount(this);
-        connect(d->gpfa, &GetPastesForAccount::gotPastesForAccount, [d](const QString &account, const QJsonDocument &json){
+        connect(d->gpfa, &GetPastesForAccount::gotPastesForAccount, [d](const QString &account, const QJsonArray &json){
             Q_UNUSED(account);
             d->gotPastes(json);
         });

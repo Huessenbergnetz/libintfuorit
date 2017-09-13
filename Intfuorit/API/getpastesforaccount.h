@@ -24,6 +24,9 @@
 #include "component.h"
 #include "../intfuorit_global.h"
 
+class QJsonDocument;
+class QJsonArray;
+
 namespace Intfuorit {
 
 class GetPastesForAccountPrivate;
@@ -44,7 +47,7 @@ class GetPastesForAccountPrivate;
  *
  * \headerfile "" <Intfuorit/API/GetPastesForAccount>
  * \since libintfuorit 1.0.0
- * \sa Paste, PastesListModel
+ * \sa Paste, PastesListModel, PastesListFilterModel
  */
 class INTFUORITSHARED_EXPORT GetPastesForAccount : public Component
 {
@@ -115,10 +118,10 @@ Q_SIGNALS:
 
     /*!
      * This signal will be emitted when the request has finished and the \link GetPastesForAccount::account email address \endlink
-     * has been found in one or more pates. It will contain the queried \a account name and the JSON array of \a pastes.
+     * has been found in one or more pastes. It will contain the queried \a account name and the JSON array of \a pastes.
      * See <A HREF="https://haveibeenpwned.com/API/v2#PasteModel">HIBP API docs</A> for a description of the JSON paste object values.
      */
-    void gotPastesForAccount(const QString &account, const QJsonDocument &pastes);
+    void gotPastesForAccount(const QString &account, const QJsonArray &pastes);
 
     /*!
      * This signal will be emitted when the request has finished and the  \link GetPastesForAccount::account email address \endlink
@@ -127,7 +130,16 @@ Q_SIGNALS:
     void gotNoPastesForAccount(const QString &account);
 
 protected:
+    /*!
+     * Extracts the pastes \a json array data from the reply, sets Component::inOperation to \c false and
+     * emit the gotPastesForAccount() signal.
+     */
     void successCallback(const QJsonDocument &json) override;
+    /*!
+     * Checks the HTTP status code of the API reply. If the status code is \c 404, the
+     * gotNoPastesForAccount() signal will be emitted, otherwise it calls Component::extractError().
+     * At the end it sets Component::inOperation to \c false.
+     */
     void extractError(QNetworkReply *reply) override;
 };
 

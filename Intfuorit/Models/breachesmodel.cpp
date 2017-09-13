@@ -49,9 +49,8 @@ void BreachesModelPrivate::clearModel()
 }
 
 
-void BreachesModelPrivate::gotBreaches(const QJsonDocument &json)
+void BreachesModelPrivate::gotBreaches(const QJsonArray &a)
 {
-    const QJsonArray a = json.array();
     if (!a.isEmpty()) {
         qDebug("Populating model.");
         Q_Q(BreachesModel);
@@ -104,7 +103,7 @@ void BreachesModel::getAllBreaches(const QString &domain, bool reload)
 
     if (!d->gab) {
         d->gab = new GetAllBreaches(this);
-        connect(d->gab, &GetAllBreaches::gotAllBreaches, [d](const QJsonDocument &json){d->gotBreaches(json);});
+        connect(d->gab, &GetAllBreaches::gotAllBreaches, [d](const QJsonArray &json){d->gotBreaches(json);});
         connect(d->gab, &GetAllBreaches::gotAllBreaches, [d](){
             d->gab->deleteLater();
             d->gab = nullptr;
@@ -138,7 +137,7 @@ void BreachesModel::getBreachesForAccount(const QString &account, const QString 
 
     if (!d->gbfa) {
         d->gbfa = new GetBreachesForAccount(this);
-        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](const QString &account, const QJsonDocument &json){Q_UNUSED(account); d->gotBreaches(json);});
+        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](const QString &account, const QJsonArray &json){Q_UNUSED(account); d->gotBreaches(json);});
         connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](){
             d->gbfa->deleteLater();
             d->gbfa = nullptr;

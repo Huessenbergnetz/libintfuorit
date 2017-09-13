@@ -25,6 +25,7 @@
 #include "../intfuorit_global.h"
 
 class QJsonObject;
+class QJsonDocument;
 
 namespace Intfuorit {
 
@@ -119,7 +120,7 @@ protected:
      * Extracts the breach \a json object data from the reply, set Component::inOperation to \c false and
      * emit the gotBreach() signal.
      */
-    void successCallback(const QJsonDocument &json);
+    void successCallback(const QJsonDocument &json) override;
 };
 
 }

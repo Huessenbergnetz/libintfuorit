@@ -24,6 +24,9 @@
 #include "component.h"
 #include "../intfuorit_global.h"
 
+class QJsonDocument;
+class QJsonArray;
+
 namespace Intfuorit {
 
 class GetBreachesForAccountPrivate;
@@ -189,7 +192,7 @@ Q_SIGNALS:
      * This signal will be emitted when the request has been finished and the \link GetBreachesForAccount::account account \endlink
      * has been found in one ore more breaches. It will contain the queried \a account name and the JSON array of \a breaches.
      */
-    void gotBreachesForAccount(const QString &account, const QJsonDocument &breaches);
+    void gotBreachesForAccount(const QString &account, const QJsonArray &breaches);
     /*!
      * This signal will be emitted when the request has been finished and the \link GetBreachesForAccount::account account \endlink
      * has not been found in the breaches data of HIBP. It will contain the queried \a account name.
@@ -197,7 +200,16 @@ Q_SIGNALS:
     void gotNoBreachesForAccount(const QString &account);
 
 protected:
+    /*!
+     * Extracts the breaches \a json array data from the reply, sets Component::inOperation to \c false and
+     * emits the gotBreachesForAccount() signal.
+     */
     void successCallback(const QJsonDocument &json) override;
+    /*!
+     * Checks the HTTP status code of the API reply. If the status code is \c 404, the
+     * gotNoBreachesForAccount() signal will be emitted, otherwise it calls Component::extractError().
+     * At the end it sets Component::inOperation to \c false.
+     */
     void extractError(QNetworkReply *reply) override;
 };
 

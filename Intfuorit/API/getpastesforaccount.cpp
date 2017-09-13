@@ -21,6 +21,7 @@
 #include "../error.h"
 #include <QCryptographicHash>
 #include <QStringBuilder>
+#include <QJsonArray>
 
 using namespace Intfuorit;
 
@@ -99,7 +100,8 @@ void GetPastesForAccount::setAccount(const QString &nAccount)
 
 void GetPastesForAccount::successCallback(const QJsonDocument &json)
 {
-    Q_EMIT gotPastesForAccount(account(), json);
+    const QJsonArray array = json.array();
+    Q_EMIT gotPastesForAccount(account(), array);
     qDebug("Account %s is part of pastes.", qUtf8Printable(account()));
     setInOperation(false);
 }

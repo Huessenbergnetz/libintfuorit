@@ -19,6 +19,7 @@
 
 #include "getallbreaches_p.h"
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QUrlQuery>
 #include <QStringBuilder>
 
@@ -68,7 +69,8 @@ void GetAllBreaches::execute(const QString &domain, bool reload)
 
 void GetAllBreaches::successCallback(const QJsonDocument &json)
 {
-    Q_EMIT gotAllBreaches(json);
+    const QJsonArray a = json.array();
+    Q_EMIT gotAllBreaches(a);
     setInOperation(false);
 }
 

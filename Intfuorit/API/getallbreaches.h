@@ -25,6 +25,9 @@
 #include "../error.h"
 #include "component.h"
 
+class QJsonDocument;
+class QJsonArray;
+
 namespace Intfuorit {
 
 class GetAllBreachesPrivate;
@@ -106,7 +109,7 @@ Q_SIGNALS:
      * breached sites. See the <A HREF="https://haveibeenpwned.com/API/v2#BreachModel">HIBP API docs</A> for a
      * description of the JSON breach object values.
      */
-    void gotAllBreaches(const QJsonDocument &breaches);
+    void gotAllBreaches(const QJsonArray &breaches);
 
 protected:
     /*!
