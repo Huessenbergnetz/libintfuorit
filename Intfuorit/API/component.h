@@ -162,7 +162,7 @@ public:
      *     setError(nullptr);
      *
      *     QUrl url = buildUrl(QStringLiteral("breaches"), QString());
-     *     if (m_domain.isEmpty()) {
+     *     if (!d->domain.isEmpty()) {
      *         setCacheFileName(QLatin1String("allbreaches-") % d->domain % QLatin1String(".json"));
      *         QUrlQuery uq;
      *         uq.addQueryItem(QStringLiteral("domain"), d->domain);
