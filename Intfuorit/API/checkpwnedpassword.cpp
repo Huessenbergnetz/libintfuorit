@@ -133,3 +133,5 @@ void CheckPwnedPassword::setOriginalPasswordIsHash(bool nOriginalPasswordIsHash)
         Q_EMIT originalPasswordIsHashChanged(nOriginalPasswordIsHash);
     }
 }
+
+#include "moc_checkpwnedpassword.cpp"
