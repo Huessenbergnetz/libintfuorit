@@ -162,5 +162,10 @@ void BreachesModel::getBreachesForAccount(const QString &account, const QString 
     d->gbfa->execute(account, domain, false, includeUnverified, reload);
 }
 
+void BreachesModel::clear()
+{
+    Q_D(BreachesModel);
+    d->clearModel();
+}
 
 #include "moc_breachesmodel.cpp"

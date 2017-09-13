@@ -78,6 +78,11 @@ public:
      */
     Q_INVOKABLE void getPastesForAccount(const QString &account, bool reload = false);
 
+    /*!
+     * Clears the model data and destroys all Paste objects in the model.
+     */
+    Q_INVOKABLE void clear();
+
 Q_SIGNALS:
     /*!
      * This signal will be emitted when the request to the HIBP API was successful and no pastes

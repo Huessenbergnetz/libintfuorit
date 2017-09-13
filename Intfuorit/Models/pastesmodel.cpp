@@ -125,4 +125,10 @@ void PastesModel::getPastesForAccount(const QString &account, bool reload)
     d->gpfa->execute(account, reload);
 }
 
+void PastesModel::clear()
+{
+    Q_D(PastesModel);
+    d->clearModel();
+}
+
 #include "moc_pastesmodel.cpp"

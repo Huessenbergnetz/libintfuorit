@@ -67,6 +67,12 @@ public:
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
+    /*!
+     * Clears all data in the source BreachesListModel and destroys the Breach objects in
+     * the source model.
+     */
+    Q_INVOKABLE void clear();
+
 protected:
     /*!
      * Returns \c true if the iten in the row indicated by the given \a source_row and

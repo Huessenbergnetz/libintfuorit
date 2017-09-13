@@ -89,6 +89,11 @@ public:
      */
     Q_INVOKABLE void getBreachesForAccount(const QString &account, const QString &domain = QString(), bool includeUnverified = false, bool reload = false);
 
+    /*!
+     * Clears the model data and destroys all Breach objects in the model.
+     */
+    Q_INVOKABLE void clear();
+
 Q_SIGNALS:
     /*!
      * This signal is emitted when the request started by getBreachesForAccount() did not find

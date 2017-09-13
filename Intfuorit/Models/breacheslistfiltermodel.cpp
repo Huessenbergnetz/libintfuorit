@@ -66,4 +66,11 @@ bool BreachesListFilterModel::filterAcceptsRow(int source_row, const QModelIndex
     }
 }
 
+void BreachesListFilterModel::clear()
+{
+    Q_D(BreachesListFilterModel);
+    INTF_MODEL(BreachesListModel);
+    model->clear();
+}
+
 #include "moc_breacheslistfiltermodel.cpp"
