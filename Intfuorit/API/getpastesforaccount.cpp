@@ -20,6 +20,7 @@
 #include "getpastesforaccount_p.h"
 #include "../error.h"
 #include <QCryptographicHash>
+#include <QStringBuilder>
 
 using namespace Intfuorit;
 
@@ -63,7 +64,7 @@ void GetPastesForAccount::execute(bool reload)
 
     const QUrl url = buildUrl(QStringLiteral("pasteaccount"), d->account);
 
-    setCacheFileName(QString::fromLatin1(hash.result().toHex()));
+    setCacheFileName(QString::fromLatin1(hash.result().toHex()) % QLatin1String(".json"));
 
     sendRequest(url, reload);
 }

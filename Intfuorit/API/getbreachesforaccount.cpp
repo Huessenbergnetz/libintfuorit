@@ -21,6 +21,7 @@
 #include "../error.h"
 #include <QCryptographicHash>
 #include <QUrlQuery>
+#include <QStringBuilder>
 
 using namespace Intfuorit;
 
@@ -83,7 +84,7 @@ void GetBreachesForAccount::execute(bool reload)
         url.setQuery(uq);
     }
 
-    setCacheFileName(QString::fromLatin1(hash.result().toHex()));
+    setCacheFileName(QString::fromLatin1(hash.result().toHex()) % QLatin1String(".json"));
 
     sendRequest(url, reload);
 }
