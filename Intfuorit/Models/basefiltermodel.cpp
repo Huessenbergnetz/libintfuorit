@@ -18,7 +18,6 @@
  */
 
 #include "basefiltermodel_p.h"
-#include "../error.h"
 
 using namespace Intfuorit;
 

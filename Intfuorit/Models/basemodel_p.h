@@ -21,7 +21,6 @@
 #define LIBINTFUORITBASEMODEL_P_H
 
 #include "basemodel.h"
-#include "../error.h"
 
 namespace Intfuorit {
 

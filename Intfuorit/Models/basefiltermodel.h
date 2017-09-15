@@ -23,12 +23,12 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 #include "../intfuorit_global.h"
+#include "../error.h"
 
 #define INTF_MODEL(Class) Class * const model = d->intf_get_model()
 
 namespace Intfuorit {
 
-class Error;
 class BaseFilterModelPrivate;
 
 /*!

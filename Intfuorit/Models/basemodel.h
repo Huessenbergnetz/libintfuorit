@@ -23,11 +23,11 @@
 #include <QObject>
 #include <QAbstractItemModel>
 #include "../intfuorit_global.h"
+#include "../error.h"
 
 namespace Intfuorit {
 
 class BaseModelPrivate;
-class Error;
 
 /*!
  * The BaseModel class is the base class of all Intfuorit data models.
