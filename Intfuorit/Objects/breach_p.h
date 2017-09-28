@@ -17,8 +17,8 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBINTFUORITBREACHE_P_H
-#define LIBINTFUORITBREACHE_P_H
+#ifndef LIBINTFUORITBREACH_P_H
+#define LIBINTFUORITBREACH_P_H
 
 #include "breach.h"
 
@@ -85,4 +85,4 @@ public:
 
 }
 
-#endif // LIBINTFUORITBREACHE_P_H
+#endif // LIBINTFUORITBREACH_P_H

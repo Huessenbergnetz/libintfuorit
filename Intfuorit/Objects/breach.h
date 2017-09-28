@@ -17,8 +17,8 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LIBINTFUORITBREACHE_H
-#define LIBINTFUORITBREACHE_H
+#ifndef LIBINTFUORITBREACH_H
+#define LIBINTFUORITBREACH_H
 
 #include <QObject>
 #include <QDate>
@@ -127,6 +127,16 @@ class INTFUORITSHARED_EXPORT Breach : public QObject
      * \li QStringList dataClasses() const
      */
     Q_PROPERTY(QStringList dataClasses READ dataClasses CONSTANT)
+    /*!
+     * This property holds translated names of the values available in the \link Breach::dataClasses dataClasse \endlink
+     * property.
+     *
+     * \par Access functions
+     * \li QStringList dataClassesTranslated() const
+     *
+     * \sa Breach::dataClasses
+     */
+    Q_PROPERTY(QStringList dataClassesTranslated READ dataClassesTranslated CONSTANT)
     /*!
      * This property indicates that the breach is considered unverified. An unverified breach may not have been
      * hacked from the indicated website. An unverified breach is still loaded into HIBP when there's sufficient
@@ -255,6 +265,10 @@ public:
      */
     QStringList dataClasses() const;
     /*!
+     * Getter function for the \link Breach::dataClassesTranslated dataClassesTranslated \endlink property.
+     */
+    QStringList dataClassesTranslated() const;
+    /*!
      * Getter function for the \link Breach::isVerified isVerified \endlink property.
      */
     bool isVerified() const;
@@ -299,4 +313,4 @@ protected:
 
 }
 
-#endif // LIBINTFUORITBREACHE_H
+#endif // LIBINTFUORITBREACH_H

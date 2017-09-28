@@ -229,5 +229,397 @@
         <source>You can not request data for a single breached site without specifying a name for it.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="libintfuorit-account-balances">
+        <source>Account balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-age-groups">
+        <source>Age groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-ages">
+        <source>Ages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-astrological-signs">
+        <source>Astrological signs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-auth-tokens">
+        <source>Auth tokens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-avatars">
+        <source>Avatars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-bank-account-numbers">
+        <source>Bank account numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-banking-pins">
+        <source>Banking PINs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-beauty-ratings">
+        <source>Beauty ratings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-biometric-data">
+        <source>Biometric data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-browser-user-agent-details">
+        <source>Browser user agent details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-buying-preferences">
+        <source>Buying preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-car-ownership-statuses">
+        <source>Car ownership statuses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-career-levels">
+        <source>Career levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-charitable-donations">
+        <source>Charitable donations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-chat-logs">
+        <source>Chat logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-credit-card-cvv">
+        <source>Credit card CVV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-credit-cards">
+        <source>Credit cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-credit-status-information">
+        <source>Credit status information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-customer-feedback">
+        <source>Customer feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-customer-interactions">
+        <source>Customer interactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-dates-of-birth">
+        <source>Dates of birth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-deceased-date">
+        <source>Deceased date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-device-information">
+        <source>Device information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-device-usage-tracking-data">
+        <source>Device usage tracking data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-drinking-habits">
+        <source>Drinking habits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-drug-habits">
+        <source>Drug habits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-education-levels">
+        <source>Education levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-email-addresses">
+        <source>Email addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-email-messages">
+        <source>Email messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-employers">
+        <source>Employers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-ethnicities">
+        <source>Ethnicities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-family-members'-names">
+        <source>Family members&apos; names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-family-plans">
+        <source>Family plans</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-family-structure">
+        <source>Family structure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-financial-investments">
+        <source>Financial investments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-financial-transactions">
+        <source>Financial transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-fitness-levels">
+        <source>Fitness levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-genders">
+        <source>Genders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-geographic-locations">
+        <source>Geographic locations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-government-issued-ids">
+        <source>Government issued IDs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-health-insurance-information">
+        <source>Health insurance information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-historical-passwords">
+        <source>Historical passwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-home-ownership-statuses">
+        <source>Home ownership statuses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-homepage-urls">
+        <source>Homepage URLs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-income-levels">
+        <source>Income levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-instant-messenger-identities">
+        <source>Instant messenger identities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-ip-addresses">
+        <source>IP addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-job-titles">
+        <source>Job titles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-mac-addresses">
+        <source>MAC addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-marital-statuses">
+        <source>Marital statuses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-names">
+        <source>Names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-net-worths">
+        <source>Net worths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-nicknames">
+        <source>Nicknames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-parenting-plans">
+        <source>Parenting plans</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-partial-credit-card-data">
+        <source>Partial credit card data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-passport-numbers">
+        <source>Passport numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-password-hints">
+        <source>Password hints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-passwords">
+        <source>Passwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-payment-histories">
+        <source>Payment histories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-payment-methods">
+        <source>Payment methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-personal-descriptions">
+        <source>Personal descriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-personal-health-data">
+        <source>Personal health data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-personal-interests">
+        <source>Personal interests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-phone-numbers">
+        <source>Phone numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-physical-addresses">
+        <source>Physical addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-physical-attributes">
+        <source>Physical attributes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-political-donations">
+        <source>Political donations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-political-views">
+        <source>Political views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-private-messages">
+        <source>Private messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-professional-skills">
+        <source>Professional skills</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-purchases">
+        <source>Purchases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-purchasing-habits">
+        <source>Purchasing habits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-races">
+        <source>Races</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-recovery-email-addresses">
+        <source>Recovery email addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-relationship-statuses">
+        <source>Relationship statuses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-religions">
+        <source>Religions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-reward-program-balances">
+        <source>Reward program balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-salutations">
+        <source>Salutations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-security-questions-and-answers">
+        <source>Security questions and answers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-sexual-fetishes">
+        <source>Sexual fetishes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-sexual-orientations">
+        <source>Sexual orientations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-smoking-habits">
+        <source>Smoking habits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-sms-messages">
+        <source>SMS messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-social-connections">
+        <source>Social connections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-spoken-languages">
+        <source>Spoken languages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-survey-results">
+        <source>Survey results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-time-zones">
+        <source>Time zones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-travel-habits">
+        <source>Travel habits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-user-statuses">
+        <source>User statuses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-user-website-urls">
+        <source>User website URLs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-usernames">
+        <source>Usernames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-utility-bills">
+        <source>Utility bills</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-vehicle-details">
+        <source>Vehicle details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-website-activity">
+        <source>Website activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-work-habits">
+        <source>Work habits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-years-of-birth">
+        <source>Years of birth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="libintfuorit-years-of-professional-experience">
+        <source>Years of professional experience</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

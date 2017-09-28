@@ -224,5 +224,397 @@
         <source>You can not request data for a single breached site without specifying a name for it.</source>
         <translation>Sie können ohne einen HIBP-Seitennamen keine Daten für eine einzelne kompromittierte Seite abfragen.</translation>
     </message>
+    <message id="libintfuorit-account-balances">
+        <source>Account balances</source>
+        <translation>Kontostände</translation>
+    </message>
+    <message id="libintfuorit-age-groups">
+        <source>Age groups</source>
+        <translation>Altersgruppen</translation>
+    </message>
+    <message id="libintfuorit-ages">
+        <source>Ages</source>
+        <translation>Alter</translation>
+    </message>
+    <message id="libintfuorit-astrological-signs">
+        <source>Astrological signs</source>
+        <translation>Sternzeichen</translation>
+    </message>
+    <message id="libintfuorit-auth-tokens">
+        <source>Auth tokens</source>
+        <translation>Authentifizierungs-Tokens</translation>
+    </message>
+    <message id="libintfuorit-avatars">
+        <source>Avatars</source>
+        <translation>Avatare</translation>
+    </message>
+    <message id="libintfuorit-bank-account-numbers">
+        <source>Bank account numbers</source>
+        <translation>Bankkontonummern</translation>
+    </message>
+    <message id="libintfuorit-banking-pins">
+        <source>Banking PINs</source>
+        <translation>Bank-PINs</translation>
+    </message>
+    <message id="libintfuorit-beauty-ratings">
+        <source>Beauty ratings</source>
+        <translation>Schönheitsbewertungen</translation>
+    </message>
+    <message id="libintfuorit-biometric-data">
+        <source>Biometric data</source>
+        <translation>Biometrische Daten</translation>
+    </message>
+    <message id="libintfuorit-browser-user-agent-details">
+        <source>Browser user agent details</source>
+        <translation>Details über Browser User Agents</translation>
+    </message>
+    <message id="libintfuorit-buying-preferences">
+        <source>Buying preferences</source>
+        <translation>Einkaufsvorlieben</translation>
+    </message>
+    <message id="libintfuorit-car-ownership-statuses">
+        <source>Car ownership statuses</source>
+        <translation>Kfz-Besitzerstatus</translation>
+    </message>
+    <message id="libintfuorit-career-levels">
+        <source>Career levels</source>
+        <translation>Karrierestufen</translation>
+    </message>
+    <message id="libintfuorit-charitable-donations">
+        <source>Charitable donations</source>
+        <translation>Gemeinnützige Spenden</translation>
+    </message>
+    <message id="libintfuorit-chat-logs">
+        <source>Chat logs</source>
+        <translation>Chat-Protokolle</translation>
+    </message>
+    <message id="libintfuorit-credit-card-cvv">
+        <source>Credit card CVV</source>
+        <translation>Kreditkarten CVV</translation>
+    </message>
+    <message id="libintfuorit-credit-cards">
+        <source>Credit cards</source>
+        <translation>Kreditkarten</translation>
+    </message>
+    <message id="libintfuorit-credit-status-information">
+        <source>Credit status information</source>
+        <translation>Bonität</translation>
+    </message>
+    <message id="libintfuorit-customer-feedback">
+        <source>Customer feedback</source>
+        <translation>Kundenresonanz</translation>
+    </message>
+    <message id="libintfuorit-customer-interactions">
+        <source>Customer interactions</source>
+        <translation>Kundeninteraktionen</translation>
+    </message>
+    <message id="libintfuorit-dates-of-birth">
+        <source>Dates of birth</source>
+        <translation>Geburtstage</translation>
+    </message>
+    <message id="libintfuorit-deceased-date">
+        <source>Deceased date</source>
+        <translation>Todesdaten</translation>
+    </message>
+    <message id="libintfuorit-device-information">
+        <source>Device information</source>
+        <translation>Geräteinformationen</translation>
+    </message>
+    <message id="libintfuorit-device-usage-tracking-data">
+        <source>Device usage tracking data</source>
+        <translation>Daten zur Verfolgung der Gerätenutzung</translation>
+    </message>
+    <message id="libintfuorit-drinking-habits">
+        <source>Drinking habits</source>
+        <translation>Trinkgewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-drug-habits">
+        <source>Drug habits</source>
+        <translation>Drogengewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-education-levels">
+        <source>Education levels</source>
+        <translation>Bildungsgrade</translation>
+    </message>
+    <message id="libintfuorit-email-addresses">
+        <source>Email addresses</source>
+        <translation>E-Mail-Adresse</translation>
+    </message>
+    <message id="libintfuorit-email-messages">
+        <source>Email messages</source>
+        <translation>E-Mail-Nachrichten</translation>
+    </message>
+    <message id="libintfuorit-employers">
+        <source>Employers</source>
+        <translation>Angestellte</translation>
+    </message>
+    <message id="libintfuorit-ethnicities">
+        <source>Ethnicities</source>
+        <translation>Ethnien</translation>
+    </message>
+    <message id="libintfuorit-family-members'-names">
+        <source>Family members&apos; names</source>
+        <translation>Namen der Familienangehörigen</translation>
+    </message>
+    <message id="libintfuorit-family-plans">
+        <source>Family plans</source>
+        <translation>Familienpläne</translation>
+    </message>
+    <message id="libintfuorit-family-structure">
+        <source>Family structure</source>
+        <translation>Familienstruktur</translation>
+    </message>
+    <message id="libintfuorit-financial-investments">
+        <source>Financial investments</source>
+        <translation>Geldanlagen</translation>
+    </message>
+    <message id="libintfuorit-financial-transactions">
+        <source>Financial transactions</source>
+        <translation>Finanztransaktionen</translation>
+    </message>
+    <message id="libintfuorit-fitness-levels">
+        <source>Fitness levels</source>
+        <translation>Fitnessniveaus</translation>
+    </message>
+    <message id="libintfuorit-genders">
+        <source>Genders</source>
+        <translation>Geschlechter</translation>
+    </message>
+    <message id="libintfuorit-geographic-locations">
+        <source>Geographic locations</source>
+        <translation>Geographische Standorte</translation>
+    </message>
+    <message id="libintfuorit-government-issued-ids">
+        <source>Government issued IDs</source>
+        <translation>Amtliche Ausweise</translation>
+    </message>
+    <message id="libintfuorit-health-insurance-information">
+        <source>Health insurance information</source>
+        <translation>Informationen zur Krankenversicherung</translation>
+    </message>
+    <message id="libintfuorit-historical-passwords">
+        <source>Historical passwords</source>
+        <translation>Bisherige Passwörter</translation>
+    </message>
+    <message id="libintfuorit-home-ownership-statuses">
+        <source>Home ownership statuses</source>
+        <translation>Wohneigentumsstatus</translation>
+    </message>
+    <message id="libintfuorit-homepage-urls">
+        <source>Homepage URLs</source>
+        <translation>Homepage URLs</translation>
+    </message>
+    <message id="libintfuorit-income-levels">
+        <source>Income levels</source>
+        <translation>Einkommensverhältnisse</translation>
+    </message>
+    <message id="libintfuorit-instant-messenger-identities">
+        <source>Instant messenger identities</source>
+        <translation>Instant Messenger-Identitäten</translation>
+    </message>
+    <message id="libintfuorit-ip-addresses">
+        <source>IP addresses</source>
+        <translation>IP-Adressen</translation>
+    </message>
+    <message id="libintfuorit-job-titles">
+        <source>Job titles</source>
+        <translation>Berufsbezeichnungen</translation>
+    </message>
+    <message id="libintfuorit-mac-addresses">
+        <source>MAC addresses</source>
+        <translation>MAC-Adressen</translation>
+    </message>
+    <message id="libintfuorit-marital-statuses">
+        <source>Marital statuses</source>
+        <translation>Familienstände</translation>
+    </message>
+    <message id="libintfuorit-names">
+        <source>Names</source>
+        <translation>Namen</translation>
+    </message>
+    <message id="libintfuorit-net-worths">
+        <source>Net worths</source>
+        <translation>Nettovermögen</translation>
+    </message>
+    <message id="libintfuorit-nicknames">
+        <source>Nicknames</source>
+        <translation>Spitznamen</translation>
+    </message>
+    <message id="libintfuorit-parenting-plans">
+        <source>Parenting plans</source>
+        <translation>Mutterschaftspläne</translation>
+    </message>
+    <message id="libintfuorit-partial-credit-card-data">
+        <source>Partial credit card data</source>
+        <translation>Teilweise Kreditkartendaten</translation>
+    </message>
+    <message id="libintfuorit-passport-numbers">
+        <source>Passport numbers</source>
+        <translation>Passnummern</translation>
+    </message>
+    <message id="libintfuorit-password-hints">
+        <source>Password hints</source>
+        <translation>Passworthinweise</translation>
+    </message>
+    <message id="libintfuorit-passwords">
+        <source>Passwords</source>
+        <translation>Passwörter</translation>
+    </message>
+    <message id="libintfuorit-payment-histories">
+        <source>Payment histories</source>
+        <translation>Zahlungshistorie</translation>
+    </message>
+    <message id="libintfuorit-payment-methods">
+        <source>Payment methods</source>
+        <translation>Zahlungsmethoden</translation>
+    </message>
+    <message id="libintfuorit-personal-descriptions">
+        <source>Personal descriptions</source>
+        <translation>Private Beschreibungen</translation>
+    </message>
+    <message id="libintfuorit-personal-health-data">
+        <source>Personal health data</source>
+        <translation>Private Gesundheitsdaten</translation>
+    </message>
+    <message id="libintfuorit-personal-interests">
+        <source>Personal interests</source>
+        <translation>Private Interessen</translation>
+    </message>
+    <message id="libintfuorit-phone-numbers">
+        <source>Phone numbers</source>
+        <translation>Telefonnummern</translation>
+    </message>
+    <message id="libintfuorit-physical-addresses">
+        <source>Physical addresses</source>
+        <translation>Physikalische Adresse</translation>
+    </message>
+    <message id="libintfuorit-physical-attributes">
+        <source>Physical attributes</source>
+        <translation>Physikalische Attribute</translation>
+    </message>
+    <message id="libintfuorit-political-donations">
+        <source>Political donations</source>
+        <translation>Politische Spenden</translation>
+    </message>
+    <message id="libintfuorit-political-views">
+        <source>Political views</source>
+        <translation>Politische Ansichten</translation>
+    </message>
+    <message id="libintfuorit-private-messages">
+        <source>Private messages</source>
+        <translation>Private Nachrichten</translation>
+    </message>
+    <message id="libintfuorit-professional-skills">
+        <source>Professional skills</source>
+        <translation>Fachliche Kompetenzen</translation>
+    </message>
+    <message id="libintfuorit-purchases">
+        <source>Purchases</source>
+        <translation>Einkäufe</translation>
+    </message>
+    <message id="libintfuorit-purchasing-habits">
+        <source>Purchasing habits</source>
+        <translation>Einkaufsgewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-races">
+        <source>Races</source>
+        <translation>Rassen</translation>
+    </message>
+    <message id="libintfuorit-recovery-email-addresses">
+        <source>Recovery email addresses</source>
+        <translation>E-Mail-Adressen zur Wiederherstellung</translation>
+    </message>
+    <message id="libintfuorit-relationship-statuses">
+        <source>Relationship statuses</source>
+        <translation>Beziehungsstatus</translation>
+    </message>
+    <message id="libintfuorit-religions">
+        <source>Religions</source>
+        <translation>Religionen</translation>
+    </message>
+    <message id="libintfuorit-reward-program-balances">
+        <source>Reward program balances</source>
+        <translation>Belohnungsprogramme</translation>
+    </message>
+    <message id="libintfuorit-salutations">
+        <source>Salutations</source>
+        <translation>Anreden</translation>
+    </message>
+    <message id="libintfuorit-security-questions-and-answers">
+        <source>Security questions and answers</source>
+        <translation>Sicherheitsfragen und Antworten</translation>
+    </message>
+    <message id="libintfuorit-sexual-fetishes">
+        <source>Sexual fetishes</source>
+        <translation>Sexuelle Fetische</translation>
+    </message>
+    <message id="libintfuorit-sexual-orientations">
+        <source>Sexual orientations</source>
+        <translation>Sexuelle Orientierungen</translation>
+    </message>
+    <message id="libintfuorit-smoking-habits">
+        <source>Smoking habits</source>
+        <translation>Rauchgewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-sms-messages">
+        <source>SMS messages</source>
+        <translation>SMS-Nachrichten</translation>
+    </message>
+    <message id="libintfuorit-social-connections">
+        <source>Social connections</source>
+        <translation>Soziale Kontakte</translation>
+    </message>
+    <message id="libintfuorit-spoken-languages">
+        <source>Spoken languages</source>
+        <translation>Gesprochene Sprache</translation>
+    </message>
+    <message id="libintfuorit-survey-results">
+        <source>Survey results</source>
+        <translation>Umfrageergebnisse</translation>
+    </message>
+    <message id="libintfuorit-time-zones">
+        <source>Time zones</source>
+        <translation>Zeitzonen</translation>
+    </message>
+    <message id="libintfuorit-travel-habits">
+        <source>Travel habits</source>
+        <translation>Reisegewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-user-statuses">
+        <source>User statuses</source>
+        <translation>Benutzerstatus</translation>
+    </message>
+    <message id="libintfuorit-user-website-urls">
+        <source>User website URLs</source>
+        <translation>URLs von Benutzer-Websites</translation>
+    </message>
+    <message id="libintfuorit-usernames">
+        <source>Usernames</source>
+        <translation>Benutzernamen</translation>
+    </message>
+    <message id="libintfuorit-utility-bills">
+        <source>Utility bills</source>
+        <translation>Betriebskostenabrechnungen</translation>
+    </message>
+    <message id="libintfuorit-vehicle-details">
+        <source>Vehicle details</source>
+        <translation>Fahrzeugdetails</translation>
+    </message>
+    <message id="libintfuorit-website-activity">
+        <source>Website activity</source>
+        <translation>Website-Aktivitäten</translation>
+    </message>
+    <message id="libintfuorit-work-habits">
+        <source>Work habits</source>
+        <translation>Arbeitsgewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-years-of-birth">
+        <source>Years of birth</source>
+        <translation>Geburtsjahre</translation>
+    </message>
+    <message id="libintfuorit-years-of-professional-experience">
+        <source>Years of professional experience</source>
+        <translation>Jahre der Berufserfahrung</translation>
+    </message>
 </context>
 </TS>

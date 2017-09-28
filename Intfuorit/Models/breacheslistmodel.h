@@ -71,6 +71,7 @@ public:
         PwnCount,                   /**< The number of \link Breach::pwnCount pwned accounts \endlink. */
         Description,                /**< \link Breach::description Description \endlink of the breach. */
         DataClasses,                /**< List of \link Breach::dataClasses classes of data \endlink that were affected by the breach. */
+        DataClassesTranslated,      /**< Translated list of \link Breach::dataClasses classes of data \endlink that were affected by the breach. */
         IsVerified,                 /**< Indicates that the breach is considered \link Breach::isVerified unverified \endlink. */
         IsFabricated,               /**< Indicates that the breach is considered \link Breach::isFabricated fabricated \endlink. */
         IsSensitive,                /**< Indicates if the breach is considered \link Breach::isSensitive sensitive \endlink. */
