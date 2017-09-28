@@ -9,12 +9,12 @@
     <message id="libintfuorit-err-net-reply-2">
         <source>The remote server at %1 closed the connection prematurely, before the entire reply was received and processed. (Code N2)</source>
         <oldsource>The remote server at %1 closed the connection prematurely, before the entire reply was received and processed.</oldsource>
-        <translation>Der entfernte Server unter %1 hat die Verbindung vorzeitig geschlossen, bevor die gesamte Antwort empfangen und verarbeitet wurde. (Code N2)</translation>
+        <translation>Der entfernte Server unter %1 schloss die Verbindung vorzeitig, bevor die gesamte Antwort empfangen und verarbeitet wurde. (Code N2)</translation>
     </message>
     <message id="libintfuorit-err-net-reply-3">
         <source>The remote host name %1 was not found. (Code N3)</source>
         <oldsource>The remote host name %1 was not found.</oldsource>
-        <translation>Der Host-Name %1 wurde nicht gefunden. (Code N3)</translation>
+        <translation>Der entfernte Rechnername %1 wurde nicht gefunden. (Code N3)</translation>
     </message>
     <message id="libintfuorit-err-net-reply-4">
         <source>The connection to the server at %1 timed out. (Code N4)</source>
@@ -226,7 +226,7 @@
     </message>
     <message id="libintfuorit-account-balances">
         <source>Account balances</source>
-        <translation>Kontostände</translation>
+        <translation>Bankkontostände</translation>
     </message>
     <message id="libintfuorit-age-groups">
         <source>Age groups</source>
@@ -266,7 +266,7 @@
     </message>
     <message id="libintfuorit-browser-user-agent-details">
         <source>Browser user agent details</source>
-        <translation>Details über Browser User Agents</translation>
+        <translation>Details zum Browser User Agent</translation>
     </message>
     <message id="libintfuorit-buying-preferences">
         <source>Buying preferences</source>
@@ -274,7 +274,7 @@
     </message>
     <message id="libintfuorit-car-ownership-statuses">
         <source>Car ownership statuses</source>
-        <translation>Kfz-Besitzerstatus</translation>
+        <translation>Fahrzeugbesitzstatus</translation>
     </message>
     <message id="libintfuorit-career-levels">
         <source>Career levels</source>
@@ -290,7 +290,7 @@
     </message>
     <message id="libintfuorit-credit-card-cvv">
         <source>Credit card CVV</source>
-        <translation>Kreditkarten CVV</translation>
+        <translation>Kreditkarten-CVV</translation>
     </message>
     <message id="libintfuorit-credit-cards">
         <source>Credit cards</source>
@@ -314,7 +314,7 @@
     </message>
     <message id="libintfuorit-deceased-date">
         <source>Deceased date</source>
-        <translation>Todesdaten</translation>
+        <translation>Todestage</translation>
     </message>
     <message id="libintfuorit-device-information">
         <source>Device information</source>
@@ -338,7 +338,7 @@
     </message>
     <message id="libintfuorit-email-addresses">
         <source>Email addresses</source>
-        <translation>E-Mail-Adresse</translation>
+        <translation>E-Mail-Adressen</translation>
     </message>
     <message id="libintfuorit-email-messages">
         <source>Email messages</source>
@@ -346,7 +346,7 @@
     </message>
     <message id="libintfuorit-employers">
         <source>Employers</source>
-        <translation>Angestellte</translation>
+        <translation>Arbeitgeber</translation>
     </message>
     <message id="libintfuorit-ethnicities">
         <source>Ethnicities</source>
@@ -446,7 +446,7 @@
     </message>
     <message id="libintfuorit-partial-credit-card-data">
         <source>Partial credit card data</source>
-        <translation>Teilweise Kreditkartendaten</translation>
+        <translation>Unvollständige Kreditkartendaten</translation>
     </message>
     <message id="libintfuorit-passport-numbers">
         <source>Passport numbers</source>
@@ -462,7 +462,7 @@
     </message>
     <message id="libintfuorit-payment-histories">
         <source>Payment histories</source>
-        <translation>Zahlungshistorie</translation>
+        <translation>Zahlungsverläufe</translation>
     </message>
     <message id="libintfuorit-payment-methods">
         <source>Payment methods</source>
@@ -470,7 +470,7 @@
     </message>
     <message id="libintfuorit-personal-descriptions">
         <source>Personal descriptions</source>
-        <translation>Private Beschreibungen</translation>
+        <translation>Persönliche Beschreibungen</translation>
     </message>
     <message id="libintfuorit-personal-health-data">
         <source>Personal health data</source>
@@ -486,11 +486,11 @@
     </message>
     <message id="libintfuorit-physical-addresses">
         <source>Physical addresses</source>
-        <translation>Physikalische Adresse</translation>
+        <translation>Physische Adressen</translation>
     </message>
     <message id="libintfuorit-physical-attributes">
         <source>Physical attributes</source>
-        <translation>Physikalische Attribute</translation>
+        <translation>Physische Merkmale</translation>
     </message>
     <message id="libintfuorit-political-donations">
         <source>Political donations</source>
@@ -566,7 +566,7 @@
     </message>
     <message id="libintfuorit-spoken-languages">
         <source>Spoken languages</source>
-        <translation>Gesprochene Sprache</translation>
+        <translation>Gesprochene Sprachen</translation>
     </message>
     <message id="libintfuorit-survey-results">
         <source>Survey results</source>
@@ -598,7 +598,7 @@
     </message>
     <message id="libintfuorit-vehicle-details">
         <source>Vehicle details</source>
-        <translation>Fahrzeugdetails</translation>
+        <translation>Fahrzeugdaten</translation>
     </message>
     <message id="libintfuorit-website-activity">
         <source>Website activity</source>
