@@ -20,10 +20,13 @@
 
 #include "component_p.h"
 #include "../error.h"
+#include "../networkaccessmanagerfactory.h"
 #include <QUrl>
 #include <QStringBuilder>
 
 using namespace Intfuorit;
+
+NetworkAccessManagerFactory *Component::m_namFactory = nullptr;
 
 /*!
  * \internal
@@ -377,25 +380,6 @@ void Component::setInOperation(bool nInOperation)
     }
 }
 
-
-QNetworkAccessManager* Component::networkManager() const { Q_D(const Component); return d->nam; }
-
-void Component::setNetworkManager(QNetworkAccessManager *nam)
-{
-    Q_D(Component);
-
-    if (Q_UNLIKELY(d->nam && d->inOperation)) {
-        qWarning("Can not change network access manager while network is in operational mode.");
-        return;
-    }
-
-    if (d->nam != nam) {
-        d->nam = nam;
-        qDebug("Changed network access manager to %p.", nam);
-        Q_EMIT networkManagerChanged(nam);
-    }
-}
-
 void Component::setCacheDirPath(const QString &path)
 {
     Q_D(Component);
@@ -464,8 +448,11 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
     QNetworkRequest req = d->buildRequest(url, payload.length());
 
     if (!d->nam) {
-        d->nam = new QNetworkAccessManager(this);
-        Q_EMIT networkManagerChanged(d->nam);
+        if (Component::m_namFactory) {
+            d->nam = Component::m_namFactory->create(this);
+        } else {
+            d->nam = new QNetworkAccessManager(this);
+        }
     }
 
     qDebug("API URL: %s", qUtf8Printable(url.toString()));
@@ -566,5 +553,9 @@ void Component::setUserAgent(const QString &nUserAgent)
 
 }
 
+void Component::setNetworkAccessManagerFactory(NetworkAccessManagerFactory *factory)
+{
+    Component::m_namFactory = factory;
+}
 
 #include "moc_component.cpp"

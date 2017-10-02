@@ -31,6 +31,7 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QFileInfo>
+#include <QNetworkAccessManager>
 
 namespace Intfuorit {
 

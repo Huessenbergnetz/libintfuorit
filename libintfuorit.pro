@@ -35,6 +35,8 @@ isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = $$[QT_INSTALL_TRAN
         Intfuorit/Error \
         Intfuorit/error.h \
         Intfuorit/intfuorit_global.h \
+        Intfuorit/networkaccessmanagerfactory.h \
+        Intfuorit/NetworkAccessManagerFactory \
         Intfuorit/API/component.h \
         Intfuorit/API/getallbreaches.h \
         Intfuorit/API/GetAllBreaches \
@@ -171,7 +173,8 @@ HEADERS += \
     Intfuorit/API/checkpwnedpassword.h \
     Intfuorit/API/checkpwnedpassword_p.h \
     Intfuorit/API/getalldataclasses.h \
-    Intfuorit/API/getalldataclasses_p.h
+    Intfuorit/API/getalldataclasses_p.h \
+    Intfuorit/networkaccessmanagerfactory.h
 
 SOURCES += \
     Intfuorit/error.cpp \
@@ -190,4 +193,5 @@ SOURCES += \
     Intfuorit/Models/pasteslistmodel.cpp \
     Intfuorit/API/getbreachedsite.cpp \
     Intfuorit/API/checkpwnedpassword.cpp \
-    Intfuorit/API/getalldataclasses.cpp
+    Intfuorit/API/getalldataclasses.cpp \
+    Intfuorit/networkaccessmanagerfactory.cpp

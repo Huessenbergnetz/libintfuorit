@@ -22,10 +22,8 @@
 
 #include <QObject>
 #include <QUrl>
-#include <QNetworkAccessManager>
 #include "../intfuorit_global.h"
 
-class QNetworkAccessManager;
 class QNetworkReply;
 class QJsonDocument;
 
@@ -33,6 +31,7 @@ namespace Intfuorit {
 
 class Error;
 class ComponentPrivate;
+class NetworkAccessManagerFactory;
 
 /*!
  * The Component class is the base class of all Intfuorit objects that request data from the HIBP API.
@@ -114,20 +113,6 @@ class INTFUORITSHARED_EXPORT Component : public QObject
      * \li void errorChanged(Error *error)
      */
     Q_PROPERTY(Error* error READ error NOTIFY errorChanged)
-    /*!
-     * \brief This property holds a pointer to the currently used QNetworkAccessManager object. If no network access manager has
-     * been set through this property, one will be created if needed internally and also exposed to this property.
-     *
-     * \note You can not change the network manager while a request is processed (\link Component::inOperation inOperation \endlink is \c true).
-     *
-     * \par Access functions
-     * \li QNetworkAccessManager *networkManager() const
-     * \li void setNetworkManager(QNetworkAccessManager *nam)
-     *
-     * \par Notified signal
-     * \li void networkManagerChanged(QNetworkAccessManager *nam)
-     */
-    Q_PROPERTY(QNetworkAccessManager* networkManager READ networkManager WRITE setNetworkManager NOTIFY networkManagerChanged)
 public:
     /*!
      * Constructs a new Component object with the given \a parent.
@@ -191,12 +176,6 @@ public:
     bool inOperation() const;
 
     /*!
-     * Getter function for the \link Component::networkManager networkManager \endlink property.
-     * \sa setNetworkManager() networkManagerChanged()
-     */
-    QNetworkAccessManager* networkManager() const;
-
-    /*!
      * Getter function for the \link Component::cachePeriod cachePeriod \endlink property.
      * \sa setCachePeriod() cachePeriodChanged()
      */
@@ -215,12 +194,6 @@ public:
     void setCachePeriod(quint32 nCachePeriod);
 
     /*!
-     * Setter function for the \link Component::networkManager networkManager \endlink property.
-     * \sa networkManager() networkManagerChanged()
-     */
-    void setNetworkManager(QNetworkAccessManager *nam);
-
-    /*!
      * Setter function for the \link Component::userAgent userAgent \endlink property.
      * \sa userAgent() userAgentChanged()
      */
@@ -231,6 +204,13 @@ public:
      * returned by QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
      */
     void setCacheDirPath(const QString &path);
+
+    /*!
+     * Sets the network access manager \a factory to create new QNetworkAccessManager objects
+     * to performing the API requests. If no factory is available, a default QNetworkAccessManager
+     * object will be created.
+     */
+    static void setNetworkAccessManagerFactory(NetworkAccessManagerFactory *factory);
 
 Q_SIGNALS:
     /*!
@@ -250,11 +230,6 @@ Q_SIGNALS:
      * \sa Component::error
      */
     void failed(Error *error);
-    /*!
-     * Notifier signal for the \link Component::networkManager networkManager \endlink property.
-     * \sa networkManager() setNetworkManager()
-     */
-    void networkManagerChanged(QNetworkAccessManager *nam);
     /*!
      * Notifier signal for the \link Component::cachePeriod cachePeriod \endlink property.
      * \sa setCachePeriod() cachePeriod()
@@ -340,6 +315,9 @@ protected:
      * function at first. Best place to call setCacheFileName() is your implementation of execute().
      */
     void setCacheFileName(const QString &name);
+
+private:
+    static NetworkAccessManagerFactory *m_namFactory;
 };
 
 }
