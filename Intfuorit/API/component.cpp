@@ -105,6 +105,13 @@ void ComponentPrivate::requestFinished()
         cacheFile.close();
     }
 
+#ifndef QT_NO_DEBUG_OUTPUT
+    const QList<QNetworkReply::RawHeaderPair> rhps = reply->rawHeaderPairs();
+    for (const QNetworkReply::RawHeaderPair &rhp : rhps) {
+        qDebug("%s: %s", rhp.first.constData(), rhp.second.constData());
+    }
+#endif
+
     if (reply->error() == QNetworkReply::NoError) {
         QByteArray result;
         if (useCache) {
@@ -469,6 +476,14 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
     }
 #endif
 
+    if (d->useCache) {
+        d->useCache = d->openCacheFile(QIODevice::WriteOnly);
+        if (!d->useCache) {
+            //% "Failed to open cache file \"%s\" for writing."
+            setError(new Error(Error::FileError, Error::Warning, qtTrId("libintfuorit-err-open-cache-file").arg(d->cacheFile.fileName()), this));
+        }
+    }
+
     if (Q_LIKELY(d->requestTimeout > 0)) {
         if (!d->timeoutTimer) {
             d->timeoutTimer = new QTimer(this);
@@ -481,15 +496,6 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
 
     d->useCache = ((d->cachePeriod > 0) && !d->cacheFile.fileName().isEmpty());
 
-
-    if (d->useCache) {
-        d->useCache = d->openCacheFile(QIODevice::WriteOnly);
-        if (!d->useCache) {
-            //% "Failed to open cache file \"%s\" for writing."
-            setError(new Error(Error::FileError, Error::Warning, qtTrId("libintfuorit-err-open-cache-file").arg(d->cacheFile.fileName()), this));
-        }
-    }
-
     switch(d->namOperation) {
     case QNetworkAccessManager::GetOperation:
         d->reply = d->nam->get(req);
@@ -501,7 +507,8 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
         d->timeoutTimer->stop();
         //% "Invalid network operation. Only GET and POST are supported."
         setError(new Error(Error::ApplicationError, Error::Critical, qtTrId("libintfuorit-err-invalid-net-op"), this));
-        break;
+        Q_EMIT failed(error());
+        return;
     }
 
     if (d->useCache) {
