@@ -43,6 +43,7 @@ namespace Intfuorit {
  */
 class INTFUORITSHARED_EXPORT NetworkAccessManagerFactory
 {
+    Q_DISABLE_COPY(NetworkAccessManagerFactory)
 public:
     /*!
      * Destroys the factory. The default implementation does nothing.
