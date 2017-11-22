@@ -437,7 +437,7 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
                     successCallback(json);
                     return;
                 } else {
-                    qWarning("Failed to read data from cache file with. Will try to reload from API.");
+                    qWarning("Failed to read data from cache file. Will try to reload from API.");
                     d->removeCacheFile();
                 }
             } else {
@@ -476,6 +476,8 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
     }
 #endif
 
+    d->useCache = ((d->cachePeriod > 0) && !d->cacheFile.fileName().isEmpty());
+
     if (d->useCache) {
         d->useCache = d->openCacheFile(QIODevice::WriteOnly);
         if (!d->useCache) {
@@ -494,8 +496,6 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
         d->timeoutTimer->start(d->requestTimeout * 1000);
     }
 
-    d->useCache = ((d->cachePeriod > 0) && !d->cacheFile.fileName().isEmpty());
-
     switch(d->namOperation) {
     case QNetworkAccessManager::GetOperation:
         d->reply = d->nam->get(req);
@@ -504,6 +504,7 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
         d->reply = d->nam->post(req, payload);
         break;
     default:
+        Q_ASSERT_X(false, "send request", "invalid network operation");
         d->timeoutTimer->stop();
         //% "Invalid network operation. Only GET and POST are supported."
         setError(new Error(Error::ApplicationError, Error::Critical, qtTrId("libintfuorit-err-invalid-net-op"), this));
