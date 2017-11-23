@@ -49,7 +49,7 @@ public:
      * \internal
      * \brief Defines the expected JSON type.
      */
-    enum ExpectedJSONType {
+    enum ExpectedJSONType : quint8 {
         Empty   = 0,    /**< Expects an empty body in the reply. */
         Array   = 1,    /**< Expects a JSON array in the reply body. */
         Object  = 2     /**< Expects a JSON object in the reply body. */
@@ -64,22 +64,19 @@ public:
     bool openCacheFile(QIODevice::OpenMode mode);
     bool removeCacheFile();
 
-    QNetworkAccessManager *nam = nullptr;
-    QNetworkAccessManager::Operation namOperation = QNetworkAccessManager::GetOperation;
-    bool inOperation = false;
-    quint8 requestTimeout = 120;
-    Error *error = nullptr;
-    QString userAgent;
-
-    QTimer *timeoutTimer = nullptr;
-    ExpectedJSONType expectedJSONType = Empty;
-    QNetworkReply *reply = nullptr;
-
-    quint32 cachePeriod = 3600*48; // two days
-    bool useCache = false;
-
     QFile cacheFile;
+    QString userAgent;
     QString cacheDirPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QNetworkAccessManager::Operation namOperation = QNetworkAccessManager::GetOperation;
+    QNetworkAccessManager *nam = nullptr;
+    Error *error = nullptr;
+    QTimer *timeoutTimer = nullptr;
+    QNetworkReply *reply = nullptr;
+    quint32 cachePeriod = 3600*48; // two days
+    ExpectedJSONType expectedJSONType = Empty;
+    quint8 requestTimeout = 120;
+    bool inOperation = false;
+    bool useCache = false;
 };
 
 }

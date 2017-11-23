@@ -27,9 +27,9 @@ namespace Intfuorit {
 class ErrorPrivate
 {
 public:
+    QString text;
     Error::Type type = Error::NoError;
     Error::Severity severity = Error::Nothing;
-    QString text;
 
     void printOut()
     {

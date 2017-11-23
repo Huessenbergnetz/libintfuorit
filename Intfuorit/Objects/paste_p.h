@@ -71,12 +71,12 @@ public:
         }
     }
 
+    QUrl url;
     QString source;
     QString sourceId;
     QString title;
     QDateTime date;
     quint32 emailCount;
-    QUrl url;
 };
 
 }

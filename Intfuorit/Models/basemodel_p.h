@@ -36,10 +36,10 @@ public:
     void setInOperation(bool nInOperation);
     void setError(Error *nError);
 
-    bool inOperation = false;
+    QString userAgent;
     Error *error = nullptr;
     quint32 cachePeriod = 172800;
-    QString userAgent;
+    bool inOperation = false;
 
 protected:
     BaseModel * const q_ptr;

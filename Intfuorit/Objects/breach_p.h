@@ -45,42 +45,42 @@ public:
                   bool _isRetired,
                   bool _isSpamList,
                   const QString &_logoType) :
+        dataClasses(_dataClasses),
         title(_title),
         name(_name),
         domain(_domain),
-        breachDate(_breachDate),
+        description(_description),
+        logoType(_logoType),
         addedDate(_addedDate),
         modifiedDate(_modifiedDate),
+        breachDate(_breachDate),
         pwnCount(_pwnCount),
-        description(_description),
-        dataClasses(_dataClasses),
         isVerified(_isVerified),
         isFabricated(_isFabricated),
         isSensitive(_isSensitive),
         isActive(_isActive),
         isRetired(_isRetired),
-        isSpamList(_isSpamList),
-        logoType(_logoType)
+        isSpamList(_isSpamList)
     {}
 
     ~BreachPrivate() {}
 
+    QStringList dataClasses;
     QString title;
     QString name;
     QString domain;
-    QDate breachDate;
+    QString description;
+    QString logoType;
     QDateTime addedDate;
     QDateTime modifiedDate;
+    QDate breachDate;
     quint32 pwnCount = 0;
-    QString description;
-    QStringList dataClasses;
     bool isVerified = false;
     bool isFabricated = false;
     bool isSensitive = false;
     bool isActive = false;
     bool isRetired = false;
     bool isSpamList = false;
-    QString logoType;
 };
 
 }
