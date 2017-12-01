@@ -103,13 +103,13 @@ void BreachesModel::getAllBreaches(const QString &domain, bool reload)
 
     if (!d->gab) {
         d->gab = new GetAllBreaches(this);
-        connect(d->gab, &GetAllBreaches::gotAllBreaches, [d](const QJsonArray &json){d->gotBreaches(json);});
-        connect(d->gab, &GetAllBreaches::gotAllBreaches, [d](){
+        connect(d->gab, &GetAllBreaches::gotAllBreaches, this, [d](const QJsonArray &json){d->gotBreaches(json);});
+        connect(d->gab, &GetAllBreaches::gotAllBreaches, this, [d](){
             d->gab->deleteLater();
             d->gab = nullptr;
         });
-        connect(d->gab, &GetAllBreaches::errorChanged, [d](Error *e){d->setError((e));});
-        connect(d->gab, &GetAllBreaches::failed, [this, d](){
+        connect(d->gab, &GetAllBreaches::errorChanged, this, [d](Error *e){d->setError((e));});
+        connect(d->gab, &GetAllBreaches::failed, this, [this, d](){
             d->setInOperation(false);
             d->gab->deleteLater();
             d->gab = nullptr;
@@ -137,19 +137,19 @@ void BreachesModel::getBreachesForAccount(const QString &account, const QString 
 
     if (!d->gbfa) {
         d->gbfa = new GetBreachesForAccount(this);
-        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](const QString &account, const QJsonArray &json){Q_UNUSED(account); d->gotBreaches(json);});
-        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, [d](){
+        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, this, [d](const QString &account, const QJsonArray &json){Q_UNUSED(account); d->gotBreaches(json);});
+        connect(d->gbfa, &GetBreachesForAccount::gotBreachesForAccount, this, [d](){
             d->gbfa->deleteLater();
             d->gbfa = nullptr;
         });
-        connect(d->gbfa, &GetBreachesForAccount::errorChanged, [d](Error *e){d->setError((e));});
-        connect(d->gbfa, &GetBreachesForAccount::failed, [this, d](){
+        connect(d->gbfa, &GetBreachesForAccount::errorChanged, this, [d](Error *e){d->setError((e));});
+        connect(d->gbfa, &GetBreachesForAccount::failed, this, [this, d](){
             d->setInOperation(false);
             d->gbfa->deleteLater();
             d->gbfa = nullptr;
             Q_EMIT failed(d->error);
         });
-        connect(d->gbfa, &GetBreachesForAccount::gotNoBreachesForAccount, [this, d](const QString &account){
+        connect(d->gbfa, &GetBreachesForAccount::gotNoBreachesForAccount, this, [this, d](const QString &account){
             d->setInOperation(false);
             d->gbfa->deleteLater();
             d->gbfa = nullptr;

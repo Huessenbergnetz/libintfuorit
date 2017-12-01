@@ -105,14 +105,14 @@ void PastesModel::getPastesForAccount(const QString &account, bool reload)
             d->gpfa->deleteLater();
             d->gpfa = nullptr;
         });
-        connect(d->gpfa, &GetPastesForAccount::errorChanged, [d](Error *e){d->setError(e);});
-        connect(d->gpfa, &GetPastesForAccount::failed, [this, d](){
+        connect(d->gpfa, &GetPastesForAccount::errorChanged, this, [d](Error *e){d->setError(e);});
+        connect(d->gpfa, &GetPastesForAccount::failed, this, [this, d](){
             d->setInOperation(false);
             d->gpfa->deleteLater();
             d->gpfa = nullptr;
             Q_EMIT failed(d->error);
         });
-        connect(d->gpfa, &GetPastesForAccount::gotNoPastesForAccount, [this, d](const QString &account){
+        connect(d->gpfa, &GetPastesForAccount::gotNoPastesForAccount, this, [this, d](const QString &account){
             d->setInOperation(false);
             d->gpfa->deleteLater();
             d->gpfa = nullptr;
