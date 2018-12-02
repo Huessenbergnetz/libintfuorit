@@ -44,40 +44,6 @@ public:
                   bool _isActive,
                   bool _isRetired,
                   bool _isSpamList,
-                  const QString &_logoType) :
-        dataClasses(_dataClasses),
-        title(_title),
-        name(_name),
-        domain(_domain),
-        description(_description),
-        logoType(_logoType),
-        addedDate(_addedDate),
-        modifiedDate(_modifiedDate),
-        breachDate(_breachDate),
-        pwnCount(_pwnCount),
-        isVerified(_isVerified),
-        isFabricated(_isFabricated),
-        isSensitive(_isSensitive),
-        isActive(_isActive),
-        isRetired(_isRetired),
-        isSpamList(_isSpamList)
-    {}
-
-    BreachPrivate(const QString &_title,
-                  const QString &_name,
-                  const QString &_domain,
-                  QDate _breachDate,
-                  const QDateTime &_addedDate,
-                  const QDateTime &_modifiedDate,
-                  quint32 _pwnCount,
-                  const QString &_description,
-                  const QStringList &_dataClasses,
-                  bool _isVerified,
-                  bool _isFabricated,
-                  bool _isSensitive,
-                  bool _isActive,
-                  bool _isRetired,
-                  bool _isSpamList,
                   const QUrl &_logoPath) :
         dataClasses(_dataClasses),
         title(_title),
@@ -104,7 +70,6 @@ public:
     QString name;
     QString domain;
     QString description;
-    QString logoType;
     QUrl logoPath;
     QDateTime addedDate;
     QDateTime modifiedDate;

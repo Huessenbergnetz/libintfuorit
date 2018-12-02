@@ -189,15 +189,6 @@ class INTFUORITSHARED_EXPORT Breach : public QObject
      */
     Q_PROPERTY(bool isSpamList READ isSpamList CONSTANT)
     /*!
-     * This property holds the file type of the breaches site's logo.
-     *
-     * \par Access functions
-     * \li QString logoType() const
-     *
-     * \deprecated Not returned by the API anymore, use \link Breach::logoPath logoPath \endlink
-     */
-    Q_PROPERTY(QString logoType READ logoType CONSTANT)
-    /*!
      * This property holds the HTTP URL to the breched site's logo.
      *
      * \par Access functions
@@ -217,31 +208,7 @@ public:
      * All data parameters belong to one of the properties of the Breach class,
      * look at the properties to learn more about the parameters.
      *
-     * \deprecated logoType is not returned by the API anymore. Use the constructor that
-     * has the logoPath argument
-     */
-    Q_DECL_DEPRECATED_X("logoType is not returned anymore by the API, use the constructor that has the logoPath argument") Breach(const QString &title,
-           const QString &name,
-           const QString &domain,
-           QDate breachDate,
-           const QDateTime &addedDate,
-           const QDateTime &modifiedDate,
-           quint32 pwnCount,
-           const QString &description,
-           const QStringList &dataClasses,
-           bool isVerified,
-           bool isFabricated,
-           bool isSensitive,
-           bool isActive,
-           bool isRetired,
-           bool isSpamList,
-           const QString &logoType,
-           QObject *parent = nullptr);
-
-    /*!
-     * Constructs a new Breach with the given parameters and \a parent.
-     * All data parameters belong to one of the properties of the Breach class,
-     * look at the properties to learn more about the parameters.
+     * \since libintfuorit 2.0.0
      */
     Breach(const QString &title,
                const QString &name,
@@ -260,8 +227,6 @@ public:
                bool isSpamList,
                const QUrl &logoPath,
                QObject *parent = nullptr);
-
-
 
     /*!
      * Deconstructs the Breach object.
@@ -333,13 +298,8 @@ public:
      */
     bool isSpamList() const;
     /*!
-     * Getter function for the \link Breach::logoType logoType \endlink property.
-     * \deprecated Not returned by the API anymore, use logoPath()
-     */
-    Q_DECL_DEPRECATED_X("Not returned by the API anymore, use logoPath()") QString logoType() const;
-    /*!
      * Getter function for the \link Breach::logoPath logoPath \endlink property.
-     * \since libintfuorit 1.1.0
+     * \since libintfuorit 2.0.0
      */
     QUrl logoPath() const;
 

@@ -78,7 +78,6 @@ public:
         IsActive,                   /**< ??? */
         IsRetired,                  /**< Indicates if the breach has been \link Breach::isRetired retired \endlink. */
         IsSpamList,                 /**< Indicates if the breach is considered a \link Breach::isSpamList spam list \endlink. */
-        LogoType,                   /**< File \link Breach::logoType type \endlink of the logo image file. This is deprecated, use LogoPath. */
         LogoPath,                   /**< \link Breach::logoPath HTTP URL \endlink to the breached site's logo. */
     };
     Q_ENUM(Roles)
