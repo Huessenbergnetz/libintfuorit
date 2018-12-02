@@ -38,6 +38,13 @@ Breach::Breach(const QString &title, const QString &name, const QString &domain,
 }
 
 
+Breach::Breach(const QString &title, const QString &name, const QString &domain, QDate breachDate, const QDateTime &addedDate, const QDateTime &modifiedDate, quint32 pwnCount, const QString &description, const QStringList &dataClasses, bool isVerified, bool isFabricated, bool isSensitive, bool isActive, bool isRetired, bool isSpamList, const QUrl &logoPath, QObject *parent) :
+    QObject(parent), d_ptr(new BreachPrivate(title, name, domain, breachDate, addedDate, modifiedDate, pwnCount, description, dataClasses, isVerified, isFabricated, isSensitive, isActive, isRetired, isSpamList, logoPath))
+{
+    setObjectName(name);
+}
+
+
 Breach::~Breach()
 {
 
@@ -286,6 +293,7 @@ bool Breach::isSpamList() const { Q_D(const Breach); return d->isSpamList; }
 
 QString Breach::logoType() const { Q_D(const Breach); return d->logoType; }
 
+QUrl Breach::logoPath() const { Q_D(const Breach); return d->logoPath; }
 
 Breach* Breach::fromJson(const QJsonObject &o, QObject *parent)
 {
@@ -315,7 +323,7 @@ Breach* Breach::fromJson(const QJsonObject &o, QObject *parent)
                       o.value(QStringLiteral("IsActive")).toBool(),
                       o.value(QStringLiteral("IsRetired")).toBool(),
                       o.value(QStringLiteral("IsSpamList")).toBool(),
-                      o.value(QStringLiteral("LogoType")).toString(),
+                      QUrl(o.value(QStringLiteral("LogoPath")).toString()),
                       parent);
 }
 
@@ -339,7 +347,7 @@ Breach* Breach::clone(Breach *other, QObject *parent)
                       other->isActive(),
                       other->isRetired(),
                       other->isSpamList(),
-                      other->logoType(),
+                      other->logoPath(),
                       parent);
 }
 

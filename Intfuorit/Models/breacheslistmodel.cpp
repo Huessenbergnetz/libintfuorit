@@ -58,6 +58,7 @@ QHash<int, QByteArray> BreachesListModel::roleNames() const
     roles.insert(IsRetired, QByteArrayLiteral("isRetired"));
     roles.insert(IsSpamList, QByteArrayLiteral("isSpamList"));
     roles.insert(LogoType, QByteArrayLiteral("logoType"));
+    roles.insert(LogoPath, QByteArrayLiteral("logoPath"));
     return roles;
 }
 
@@ -106,6 +107,7 @@ QVariant BreachesListModel::data(const QModelIndex &index, int role) const
         case IsRetired:             var.setValue(b->isRetired());               break;
         case IsSpamList:            var.setValue(b->isSpamList());              break;
         case LogoType:              var.setValue(b->logoType());                break;
+        case LogoPath:              var.setValue(b->logoPath());                break;
         default: break;
         }
     }
