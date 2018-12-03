@@ -23,6 +23,7 @@
 #include <QUrlQuery>
 #include <QCryptographicHash>
 #include <QTextStream>
+#include <QEventLoop>
 
 using namespace Intfuorit;
 
@@ -77,7 +78,6 @@ void CheckPwnedPassword::execute(bool reload)
 void CheckPwnedPassword::execute(const QString &password, bool reload)
 {
     setPassword(password);
-    setOriginalPasswordIsHash(originalPasswordIsHash);
     execute(reload);
 }
 
@@ -132,6 +132,23 @@ void CheckPwnedPassword::setPassword(const QString &nPassword)
         qDebug("Changed password to \"%s\".", qUtf8Printable(nPassword));
         Q_EMIT passwordChanged(nPassword);
     }
+}
+
+int CheckPwnedPassword::check(const QString &password, const QString &userAgent, bool reload)
+{
+    int count = -1;
+    CheckPwnedPassword cpp;
+    cpp.setPassword(password);
+    if (!userAgent.isEmpty()) {
+        cpp.setUserAgent(userAgent);
+    }
+    QEventLoop loop;
+    QObject::connect(&cpp, &CheckPwnedPassword::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&cpp, &CheckPwnedPassword::passwordChecked, &loop, &QEventLoop::quit);
+    QObject::connect(&cpp, &CheckPwnedPassword::passwordChecked, &cpp, [&count](int _count){count = _count;});
+    cpp.execute(reload);
+    loop.exec();
+    return count;
 }
 
 #include "moc_checkpwnedpassword.cpp"

@@ -93,6 +93,24 @@ public:
      */
     void setPassword(const QString &nPassword);
 
+    /*!
+     * Checks if the \a password has been pwned and returns the number of times the \a password has been found.
+     * If \a reload is set to \c false, cached results will be returned where the default cache time (2 days)
+     * will be used.
+     *
+     * If \a userAgent is empty, a default user agent will be created, using QCoreApplication::applicationName()
+     * and QCoreApplication::applicationVersion(). Note that the HIBP API does not allow sending an empty user
+     * agent string.
+     *
+     * If an error occures, \c -1 will be returned.
+     *
+     * This function performs a synchronous request and will block the event loop until the request has finished
+     * or failed.
+     *
+     * \since libintfuorit 2.0.0
+     */
+    static int check(const QString &password, const QString &userAgent = QString(), bool reload = false);
+
 Q_SIGNALS:
     /*!
      * Notifier signal for the \link CheckPwnedPassword::password password \endlink property.
