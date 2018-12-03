@@ -82,13 +82,6 @@ void CheckPwnedPassword::execute(const QString &password, bool reload)
 }
 
 
-void CheckPwnedPassword::successCallback(const QJsonDocument &json)
-{
-    Q_UNUSED(json)
-    Q_ASSERT_X(false, "CheckPwnedPassword::successCallback", "there should be no JSON in the respone");
-}
-
-
 void CheckPwnedPassword::successCallback(const QByteArray &data)
 {
     Q_D(CheckPwnedPassword);
@@ -147,7 +140,9 @@ int CheckPwnedPassword::check(const QString &password, const QString &userAgent,
     QObject::connect(&cpp, &CheckPwnedPassword::passwordChecked, &loop, &QEventLoop::quit);
     QObject::connect(&cpp, &CheckPwnedPassword::passwordChecked, &cpp, [&count](int _count){count = _count;});
     cpp.execute(reload);
-    loop.exec();
+    if (cpp.inOperation()) {
+        loop.exec();
+    }
     return count;
 }
 

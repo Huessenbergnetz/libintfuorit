@@ -127,11 +127,6 @@ Q_SIGNALS:
 
 protected:
     /*!
-     * This does nothing.
-     */
-    void successCallback(const QJsonDocument &json) override;
-
-    /*!
      * Will check the returned list of hashes for occurence of the password to check and
      * emits the passwordChecked() signal.
      */

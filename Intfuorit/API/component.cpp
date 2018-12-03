@@ -432,11 +432,15 @@ void Component::extractError(QNetworkReply *reply)
 void Component::successCallback(const QJsonDocument &json)
 {
     Q_UNUSED(json);
+    setInOperation(false);
+    Q_ASSERT_X(false, "JSON successCallbak in Component base class", "this should not happen");
 }
 
 void Component::successCallback(const QByteArray &data)
 {
     Q_UNUSED(data);
+    setInOperation(false);
+    Q_ASSERT_X(false, "general successCallbak in Component base class", "this should not happen");
 }
 
 void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payload)
