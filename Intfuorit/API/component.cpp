@@ -574,7 +574,7 @@ QString Component::userAgent() const { Q_D(const Component); return d->userAgent
 void Component::setUserAgent(const QString &nUserAgent)
 {
     Q_D(Component);
-    const QString uaTrimmed = nUserAgent;
+    const QString uaTrimmed = nUserAgent.trimmed();
     if (!uaTrimmed.isEmpty()) {
         if (d->userAgent != uaTrimmed) {
             d->userAgent = uaTrimmed;
