@@ -20,13 +20,13 @@
 #ifndef LIBINTFUORITGETALLBREACHES_H
 #define LIBINTFUORITGETALLBREACHES_H
 
-#include <QObject>
 #include "../intfuorit_global.h"
 #include "../error.h"
 #include "component.h"
+#include <QObject>
+#include <QJsonArray>
 
 class QJsonDocument;
-class QJsonArray;
 
 namespace Intfuorit {
 
@@ -96,6 +96,29 @@ public:
      * \sa domain() domainChanged()
      */
     void setDomain(const QString &nDomain);
+
+    /*!
+     * Gets the list of all breaches from the HIBP API, optionally filtered by \a domain.
+     * If \a reload is set to \c false, cached results will be returned where the default
+     * cache time (2 days) will be used.
+     *
+     * If \a userAgent is empty, a default user agent will be created, using QCoreApplication::applicationName()
+     * and QCoreApplication::applicationVersion(). Note that the HIBP API does not allow sending an empty user
+     * agent string.
+     *
+     * If \a ok ist not \c nullptr, failure is reported by setting \a *ok to \c false, and success
+     * by setting \a *ok to \c true.
+     *
+     * This function performs a synchronous request and will block the event loop until the request has finished
+     * or failed.
+     *
+     * The returned JSON array will contain a list of breach objects see
+     * <a href="https://haveibeenpwned.com/API/v2#BreachModel" rel="external noopener">HIBP API Docs</a> to learn
+     * more about the structure.
+     *
+     * \since libintfuorit 2.0.0
+     */
+    static QJsonArray get(const QString &domain = QString(), const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
 
 Q_SIGNALS:
     /*!

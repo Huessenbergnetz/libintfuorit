@@ -19,7 +19,6 @@
 
 #include "getallbreaches_p.h"
 #include <QJsonDocument>
-#include <QJsonArray>
 #include <QUrlQuery>
 #include <QStringBuilder>
 
@@ -87,5 +86,31 @@ void GetAllBreaches::setDomain(const QString &nDomain)
     }
 }
 
+QJsonArray GetAllBreaches::get(const QString &domain, const QString &userAgent, bool reload, bool *ok)
+{
+    QJsonArray a;
+    GetAllBreaches gab;
+    gab.setDomain(domain);
+    if (!userAgent.isEmpty()) {
+        gab.setUserAgent(userAgent);
+    }
+    QEventLoop loop;
+    QObject::connect(&gab, &GetAllBreaches::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, &loop, &QEventLoop::quit);
+    if (ok) {
+        QObject::connect(&gab, &GetAllBreaches::failed, &gab, [ok](){*ok = false;});
+    }
+    QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, &gab, [&a,ok](const QJsonArray &_a){
+        a = _a;
+        if (ok) {
+            *ok = true;
+        }
+    });
+    gab.execute(reload);
+    if (gab.inOperation()) {
+        loop.exec();
+    }
+    return a;
+}
 
 #include "moc_getallbreaches.cpp"
