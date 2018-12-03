@@ -1,5 +1,5 @@
 /* libintfuorit - Qt library to access the API of haveibeenpwned.com
- * Copyright (C) 2017 Hüssenbergnetz / Matthias Fehring
+ * Copyright (C) 2017-2018 Hüssenbergnetz / Matthias Fehring
  * https://github.com/Huessenbergnetz/libintfuorit
  *
  * This library is free software: you can redistribute it and/or
