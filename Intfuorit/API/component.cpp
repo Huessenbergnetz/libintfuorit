@@ -128,7 +128,11 @@ void ComponentPrivate::requestFinished()
         const QJsonDocument json = checkOutput(result, &check);
         if (check) {
             qDebug("Processing response data");
-            q->successCallback(json);
+            if (expectedJSONType != PlainText) {
+                q->successCallback(json);
+            } else {
+                q->successCallback(result);
+            }
         } else {
             q->setInOperation(false);
         }
@@ -200,25 +204,34 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
     Q_Q(Component);
 
     if (expectedJSONType != Empty) {
-        QJsonParseError jsonError;
-        json = QJsonDocument::fromJson(result, &jsonError);
-        if (jsonError.error != QJsonParseError::NoError) {
-            q->setError(new Error(jsonError, q_ptr));
-            Q_EMIT q->failed(error);
-            *checkResult = false;
-            return json;
+        if (expectedJSONType == PlainText) {
+            if (Q_UNLIKELY(result.isEmpty())) {
+                //% "The request replied an empty answer, but there was content expected."
+                q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-empty-answer"), q_ptr));
+                Q_EMIT q->failed(error);
+                *checkResult = false;
+                return json;
+            }
+        } else {
+            QJsonParseError jsonError;
+            json = QJsonDocument::fromJson(result, &jsonError);
+            if (Q_UNLIKELY(jsonError.error != QJsonParseError::NoError)) {
+                q->setError(new Error(jsonError, q_ptr));
+                Q_EMIT q->failed(error);
+                *checkResult = false;
+                return json;
+            }
         }
     }
 
-    if (Q_UNLIKELY((expectedJSONType != Empty) && (json.isNull() || json.isEmpty()))) {
-        //% "The request replied an empty answer, but there was content expected."
+    if (Q_UNLIKELY(expectedJSONType > PlainText && (json.isNull() || json.isEmpty()))) {
         q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-empty-answer"), q_ptr));
         Q_EMIT q->failed(error);
         *checkResult = false;
         return json;
     }
 
-    if (Q_UNLIKELY((expectedJSONType == Array) && !json.isArray())) {
+    if (Q_UNLIKELY(expectedJSONType == Array && !json.isArray())) {
         //% "It was expected that the request returns a JSON array, but it returned something else."
         q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-no-json-array"), q_ptr));
         Q_EMIT q->failed(error);
@@ -226,7 +239,7 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
         return json;
     }
 
-    if (Q_UNLIKELY((expectedJSONType == Object) && !json.isObject())) {
+    if (Q_UNLIKELY(expectedJSONType == Object && !json.isObject())) {
         //% "It was expected that the request returns a JSON object, but it returned something else."
         q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("err-no-json-object"), q_ptr));
         Q_EMIT q->failed(error);
@@ -416,6 +429,15 @@ void Component::extractError(QNetworkReply *reply)
     Q_EMIT failed(error());
 }
 
+void Component::successCallback(const QJsonDocument &json)
+{
+    Q_UNUSED(json);
+}
+
+void Component::successCallback(const QByteArray &data)
+{
+    Q_UNUSED(data);
+}
 
 void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payload)
 {
@@ -434,7 +456,11 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
                 const QJsonDocument json = d->checkOutput(cachedData, &checkResult);
                 if (checkResult) {
                     qDebug("Processing cached data.");
-                    successCallback(json);
+                    if (d->expectedJSONType != ComponentPrivate::PlainText) {
+                        successCallback(json);
+                    } else {
+                        successCallback(cachedData);
+                    }
                     return;
                 } else {
                     qWarning("Failed to read data from cache file. Will try to reload from API.");

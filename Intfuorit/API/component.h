@@ -254,8 +254,12 @@ protected:
 
     /*!
      * Called after a successfull API request to further process the reponse \a json data.
-     * This has to be reimplemented when creating a new derived class. This is also the place to set
-     * \link Component::inOperation inOperation \endlink to \c false after processing the result.
+     * This has to be reimplemented when creating a new derived class that requests JSON data.
+     * This is also the place to set \link Component::inOperation inOperation \endlink to
+     * \c false after processing the result.
+     *
+     * The default implementation only sets \link Component::inOperation inOperation \endlink
+     * to \c false.
      *
      * \par Implementation example
      *
@@ -267,10 +271,34 @@ protected:
      * }
      * \endcode
      */
-    virtual void successCallback(const QJsonDocument &json) = 0;
+    virtual void successCallback(const QJsonDocument &json);
 
     /*!
-     * Sends the request to the HIBP API.Use this in the reimplementation of execute() to finally
+     * Called after a successfull API request to further process the response \a data.
+     * This has to be reimplemented when creating a new derived class that requests data
+     * other than JSON. This is also the place to set \link Component::inOperation inOperation \endlink
+     * to \c false after processing the result.
+     *
+     * The default implementation only sets \link Component::inOperation inOperation \endlink
+     * to \c false.
+     *
+     * \par Implementation example
+     *
+     * \code{.cpp}
+     * void CheckPwnedPassword::successCallback(const QByteArray &data)
+     * {
+     *     QTextStream s(data, QIODevice::ReadOnly|QIODevice::Text);
+     *     s.setCodec("ASCII");
+     *     // further processing ...
+     * }
+     * \endcode
+     *
+     * \since libintfuorit 2.0.0
+     */
+    virtual void successCallback(const QByteArray &data);
+
+    /*!
+     * Sends the request to the HIBP API. Use this in the reimplementation of execute() to finally
      * send the request to the API. You can use buildUrl() to create the API URL, set \a reload
      * to \c true to not use cached data. If you want to use a POST request, use the \a payload
      * parameter to specify the request body.
