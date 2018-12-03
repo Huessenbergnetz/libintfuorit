@@ -29,7 +29,8 @@ namespace Intfuorit {
 class PastesListModelPrivate;
 
 /*!
- * The PastesListModel class provides a single column list model containing Paste objects
+ * \ingroup models
+ * The %PastesListModel class provides a single column list model containing Paste objects
  * requested from the HIBP API. This model is designed to be usable in QML list view, the
  * different data fields are accessible via the \link PastesListModel::Roles model data roles \endlink.
  *
@@ -37,7 +38,6 @@ class PastesListModelPrivate;
  * to populate the model.
  *
  * \headerfile "" <Intfuorit/Models/PastesListModel>
- * \since libintfuorit 1.0.0
  * \sa Paste, PastesListFilterModel, GetPastesForAccount
  */
 class INTFUORITSHARED_EXPORT PastesListModel : public PastesModel
@@ -47,12 +47,12 @@ class INTFUORITSHARED_EXPORT PastesListModel : public PastesModel
     Q_DISABLE_COPY(PastesListModel)
 public:
     /*!
-     * Constructs a new PastesListModel with the given \a parent.
+     * Constructs a new %PastesListModel with the given \a parent.
      */
     explicit PastesListModel(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the PastesListModel.
+     * Deconstructs the %PastesListModel.
      */
     ~PastesListModel();
 
@@ -66,7 +66,7 @@ public:
         SourceId,                   /**< The \link Paste::sourceId ID \endlink of the paste as it was given at the source service. */
         Title,                      /**< The \link Paste::title title \endlink of the paste, if any. Might be a null string. */
         Date,                       /**< The \link Paste::date date \endlink and time that the paste was posted. */
-        EmailCount,                 /**< The \link Paste::emailCount number of emails \endlink taht were found when processing the paste. */
+        EmailCount,                 /**< The \link Paste::emailCount number of emails \endlink that were found when processing the paste. */
         Url                         /**< The \link Paste::url url \endlink the paste is available on, composed of SourceId and the Source service. */
     };
 

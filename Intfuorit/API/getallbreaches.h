@@ -33,14 +33,14 @@ namespace Intfuorit {
 class GetAllBreachesPrivate;
 
 /*!
+ * \ingroup api
  * Implements a request to get all breached sites from the HIBP API. Can optionally filter the result
  * by \link GetAllBreaches::domain domain \endlink name.
  *
- * \par HIBP API Docs
- * <A HREF="https://haveibeenpwned.com/API/v2#AllBreaches">Getting all breached sites in the system</A>
+ * \par HIBP API docs
+ * <a href="https://haveibeenpwned.com/API/v2#AllBreaches" rel="external noopener">Getting all breached sites in the system</a>
  *
  * \headerfile "" <Intfuorit/API/GetAllBreaches>
- * \since libintfuorit 1.0.0
  * \sa Breach, BreachesListModel, BreachesListFilterModel, GetBreachedSite, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT GetAllBreaches : public Component
@@ -62,12 +62,12 @@ class INTFUORITSHARED_EXPORT GetAllBreaches : public Component
     Q_PROPERTY(QString domain READ domain WRITE setDomain NOTIFY domainChanged)
 public:
     /*!
-     * Constructs a new GetAllBreaches object with the given \a parent.
+     * Constructs a new %GetAllBreaches object with the given \a parent.
      */
     explicit GetAllBreaches(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the GetAllBreaches object.
+     * Deconstructs the %GetAllBreaches object.
      */
     ~GetAllBreaches();
 
@@ -115,8 +115,6 @@ public:
      * The returned JSON array will contain a list of breach objects see
      * <a href="https://haveibeenpwned.com/API/v2#BreachModel" rel="external noopener">HIBP API Docs</a> to learn
      * more about the structure.
-     *
-     * \since libintfuorit 2.0.0
      */
     static QJsonArray get(const QString &domain = QString(), const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
 

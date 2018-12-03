@@ -32,15 +32,15 @@ namespace Intfuorit {
 class GetBreachedSitePrivate;
 
 /*!
- * The GetBreachedSite class implements a request to get a single breached site,
+ * \ingroup api
+ * The %GetBreachedSite class implements a request to get a single breached site,
  * identified by the internal HIBP API \link GetBreachedSite::name name \endlink,
  * from the HIBP API.
  *
- * \par HIBP API Docs
- * <A HREF="https://haveibeenpwned.com/API/v2#SingleBreach">Getting a single breached site</A>
+ * \par HIBP API docs
+ * <a href="https://haveibeenpwned.com/API/v2#SingleBreach" rel="external noopener">Getting a single breached site</a>
  *
  * \headerfile "" <Intfuorit/API/GetBreachedSite>
- * \since libintfuorit 1.0.0
  * \sa Breach, BreachesListMode, BreachesListFilterModel, GetAllBreaches, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT GetBreachedSite : public Component
@@ -63,12 +63,12 @@ class INTFUORITSHARED_EXPORT GetBreachedSite : public Component
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 public:
     /*!
-     * Constructs a new GetBreachedSite object with the given \a parent.
+     * Constructs a new %GetBreachedSite object with the given \a parent.
      */
     explicit GetBreachedSite(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the GetBreachedSite object.
+     * Deconstructs the %GetBreachedSite object.
      */
     ~GetBreachedSite();
 

@@ -32,6 +32,7 @@ namespace Intfuorit {
 class GetPastesForAccountPrivate;
 
 /*!
+ * \ingroup api
  * Implements a request to get all pastes an email address occures in from the HIBP API.
  * Set the email address to the \link GetPastesForAccount::account account \endlink property
  * and call execute() to start the request.
@@ -42,11 +43,10 @@ class GetPastesForAccountPrivate;
  *
  * For this API call it is mandator to set an \link GetPastesForAccount::account email addres \endlink.
  *
- * \par HIBP API Docs
- * <A HREF="https://haveibeenpwned.com/API/v2#PastesForAccount">Getting all pastes for an account</A>
+ * \par HIBP API docs
+ * <a href="https://haveibeenpwned.com/API/v2#PastesForAccount" rel="external noopener">Getting all pastes for an account</a>
  *
  * \headerfile "" <Intfuorit/API/GetPastesForAccount>
- * \since libintfuorit 1.0.0
  * \sa Paste, PastesListModel, PastesListFilterModel
  */
 class INTFUORITSHARED_EXPORT GetPastesForAccount : public Component
@@ -55,7 +55,7 @@ class INTFUORITSHARED_EXPORT GetPastesForAccount : public Component
     Q_DECLARE_PRIVATE(GetPastesForAccount)
     Q_DISABLE_COPY(GetPastesForAccount)
     /*!
-     * This property holds the email addres used for an account to search the pastes for.
+     * This property holds the email addres used for an \a account to search the pastes for.
      * Other than with GetBreachesForAccount, this has to be a valid email address, the API
      * does not work with account user names when searching for pastes.
      *
@@ -69,12 +69,12 @@ class INTFUORITSHARED_EXPORT GetPastesForAccount : public Component
     Q_PROPERTY(QString account READ account WRITE setAccount NOTIFY accountChanged)
 public:
     /*!
-     * Constructs a new GetPastesForAccount with the given \a parent.
+     * Constructs a new %GetPastesForAccount with the given \a parent.
      */
     explicit GetPastesForAccount(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the GetPastesForAccount object.
+     * Deconstructs the %GetPastesForAccount object.
      */
     ~GetPastesForAccount();
 

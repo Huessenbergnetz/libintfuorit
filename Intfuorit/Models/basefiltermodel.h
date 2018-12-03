@@ -32,7 +32,8 @@ namespace Intfuorit {
 class BaseFilterModelPrivate;
 
 /*!
- * \brief The BaseFilterModel class is the base class for all Intfuorit sort and filter proxy models.
+ * \ingroup models
+ * \brief The %BaseFilterModel class is the base class for all %Intfuorit sort and filter proxy models.
  *
  * Do not use this class directly, use one of the derived classes.
  *
@@ -40,7 +41,6 @@ class BaseFilterModelPrivate;
  * <a href="https://techbase.kde.org/Policies/Library_Code_Policy/Shared_D-Pointer_Example">shared D-pointer</a>.
  *
  * \headerfile "" <Intfuorit/Model/basefiltermodel.h>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT BaseFilterModel : public QSortFilterProxyModel
 {
@@ -112,12 +112,12 @@ class INTFUORITSHARED_EXPORT BaseFilterModel : public QSortFilterProxyModel
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
 public:
     /*!
-     * Constructs a new BaseFilterModel with the given \a parent.
+     * Constructs a new %BaseFilterModel with the given \a parent.
      */
     explicit BaseFilterModel(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the BaseFilterModel object.
+     * Deconstructs the %BaseFilterModel object.
      */
     ~BaseFilterModel();
 

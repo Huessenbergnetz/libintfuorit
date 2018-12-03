@@ -32,16 +32,16 @@ namespace Intfuorit {
 class CheckPwnedPasswordPrivate;
 
 /*!
+ * \ingroup api
  * The %CheckPwnedPassword class implements a request to the HIBP API to check if a password
  * has been pwned and is part of the HIBP database. The password itself will not be send
  * to the HIBP API. Only the first 5 characters of a SHA1 hash of the password will be send
  * to the API.
  *
- * \par HIBP API Docs
- * <A HREF="https://haveibeenpwned.com/API/v2#PwnedPasswords">Pwned Passwords</A>
+ * \par HIBP API docs
+ * <a href="https://haveibeenpwned.com/API/v2#PwnedPasswords" rel="external noopener">Pwned Passwords overview</a>
  *
  * \headerfile "" <Intfuorit/API/CheckPwnedPassword>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT CheckPwnedPassword : public Component
 {
@@ -61,12 +61,12 @@ class INTFUORITSHARED_EXPORT CheckPwnedPassword : public Component
     Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 public:
     /*!
-     * Constructs a new CheckPwnedPassword object with the given \a parent.
+     * Constructs a new %CheckPwnedPassword object with the given \a parent.
      */
     explicit CheckPwnedPassword(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the CheckPwnedPassword object.
+     * Deconstructs the %CheckPwnedPassword object.
      */
     ~CheckPwnedPassword();
 

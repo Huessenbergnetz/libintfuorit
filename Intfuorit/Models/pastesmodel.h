@@ -29,7 +29,8 @@ namespace Intfuorit {
 class PastesModelPrivate;
 
 /*!
- * The PastesModel class is the base class for all Intfuorit Paste data model.
+ * \ingroup models
+ * The %PastesModel class is the base class for all %Intfuorit Paste data models.
  * It contains a std::vector of pointers to Paste objects taht are children of
  * the PastesModel. Destroying the PastesModel will also destroy the Paste objects
  * in it. Internally this model uses GetPastesForAccount to request a list of pastes
@@ -42,7 +43,6 @@ class PastesModelPrivate;
  * not implement all functions from QAbstractItemModel that are needed.
  *
  * \headerfile "" <Intfuorit/Models/pastesmode.h>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT PastesModel : public BaseModel
 {
@@ -51,13 +51,13 @@ class INTFUORITSHARED_EXPORT PastesModel : public BaseModel
     Q_DISABLE_COPY(PastesModel)
 public:
     /*!
-     * Constructs a new empty PastesModel with the given \a parent. Call getPastesForAccount()
+     * Constructs a new empty %PastesModel with the given \a parent. Call getPastesForAccount()
      * to start an API request and populate the model.
      */
     explicit PastesModel(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the PastesModel and destroys all Paste objects in the model.
+     * Deconstructs the %PastesModel and destroys all Paste objects in the model.
      */
     ~PastesModel();
 

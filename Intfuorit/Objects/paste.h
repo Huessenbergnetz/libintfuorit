@@ -40,7 +40,6 @@ class PastePrivate;
  * <A HREF="https://haveibeenpwned.com/API/v2#PasteModel"></A>
  *
  * \headerfile "" <Intfuorit/Objects/Paste>
- * \since libintfuorit 1.0.0
  * \sa PastesListModel, PastesListFilterModel, GetPastesForAccount
  */
 class INTFUORITSHARED_EXPORT Paste : public QObject

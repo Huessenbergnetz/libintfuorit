@@ -26,12 +26,13 @@
 namespace Intfuorit {
 
 class BreachesListFilterModelPrivate;
+
 /*!
- * \brief The BreachesListFilterModel class provides a dynamically sorted list model of Breach data objects. Internally it
+ * \ingroup models
+ * The %BreachesListFilterModel class provides a dynamically sorted list model of Breach data objects. Internally it
  * uses BreachesListModel to get and store the data.
  *
  * \headerfile "" <Intfuorit/Models/BreachesListFilterModel>
- * \since libintfuorit 1.0.0
  * \sa Breach, BreachesListModel, GetAllBreaches, GetBreachesForAccount
  */
 class BreachesListFilterModel : public BaseFilterModel
@@ -41,7 +42,7 @@ class BreachesListFilterModel : public BaseFilterModel
     Q_DISABLE_COPY(BreachesListFilterModel)
 public:
     /*!
-     * Constructs a new BreachesListFilterModel with the given \a parent.
+     * Constructs a new %BreachesListFilterModel with the given \a parent.
      */
     explicit BreachesListFilterModel(QObject *parent = nullptr);
 

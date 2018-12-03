@@ -33,15 +33,15 @@ namespace Intfuorit {
 class GetAllDataClassesPrivate;
 
 /*!
- * The GetAllDataClasses class implements a request to get all data classes from the HIBP API.
+ * \ingroup api
+ * The %GetAllDataClasses class implements a request to get all data classes from the HIBP API.
  * A "data class" is an attribute of a record compromised in a breach. For example, many breaches
  * expose data classes such as "Email addresses" and "Passwords".
  *
- * \par HIBP API Docs
- * <A HREF="https://haveibeenpwned.com/API/v2#AllDataClasses">Getting all data classes in the system</A>
+ * \par HIBP API docs
+ * <a href="https://haveibeenpwned.com/API/v2#AllDataClasses" rel="external noopener">Getting all data classes in the system</a>
  *
  * \headerfile "" <Intfuorit/API/GetAllDataClasses>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT GetAllDataClasses : public Component
 {
@@ -50,12 +50,12 @@ class INTFUORITSHARED_EXPORT GetAllDataClasses : public Component
     Q_DISABLE_COPY(GetAllDataClasses)
 public:
     /*!
-     * Constructs a new GetAllDataClasses object with the given \a parent.
+     * Constructs a new %GetAllDataClasses object with the given \a parent.
      */
     explicit GetAllDataClasses(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the GetAllDataClasses object.
+     * Deconstructs the %GetAllDataClasses object.
      */
     ~GetAllDataClasses();
 

@@ -32,6 +32,7 @@ namespace Intfuorit {
 class GetBreachesForAccountPrivate;
 
 /*!
+ * \ingroup api
  * Implements a request to get all breached sites for a specific \link GetBreachesForAccount::account account \endlink
  * from the HIBP API. Can optionally filter the result by \link GetBreachesForAccount::domain domain \endlink name.
  * By default, unverified breaches are not included - use the \link GetBreachesForAccount::includeUnverified includeUnverified \endlink
@@ -41,11 +42,10 @@ class GetBreachesForAccountPrivate;
  * If there are breaches on HIBP the \link GetBreachesForAccount::account account \endlink is part of, gotBreachesForAccount() will
  * be emitted. If there are no breaches, gotNoBreachesForAccount() will be emitted.
  *
- * \par HIBP API Docs
- * <A HREF="https://haveibeenpwned.com/API/v2#BreachesForAccount">Getting all breaches for an account</A>
+ * \par HIBP API docs
+ * <a href="https://haveibeenpwned.com/API/v2#BreachesForAccount" rel="external noopener">Getting all breaches for an account</a>
  *
  * \headerfile "" <Intfuorit/API/GetBreachesForAccount>
- * \since libintfuorit 1.0.0
  * \sa Breach, BreachesListModel, BreachesListFilterModel, GetAllBreaches, GetBreachedSite
  */
 class INTFUORITSHARED_EXPORT GetBreachesForAccount : public Component
@@ -104,12 +104,12 @@ class INTFUORITSHARED_EXPORT GetBreachesForAccount : public Component
     Q_PROPERTY(QString account READ account WRITE setAccount NOTIFY accountChanged)
 public:
     /*!
-     * Constructs a new GetBreachesForAccount with the given \a parent.
+     * Constructs a new %GetBreachesForAccount with the given \a parent.
      */
     explicit GetBreachesForAccount(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the GetBreachesForAccount object.
+     * Deconstructs the %GetBreachesForAccount object.
      */
     ~GetBreachesForAccount();
 

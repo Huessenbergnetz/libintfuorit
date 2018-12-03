@@ -29,7 +29,8 @@ namespace Intfuorit {
 class BreachesModelPrivate;
 
 /*!
- * The BreachesModel class is the base class for all Intfuorit Breach data models.
+ * \ingroup models
+ * The %BreachesModel class is the base class for all %Intfuorit Breach data models.
  * It contains a std::vector of pointers to Breach objects that are children of the
  * BreachesModel. Destroying the BreachesModel will also destroy all Breach objects
  * in it. Internally this model uses GetAllBreaches to request a list of breached
@@ -38,7 +39,6 @@ class BreachesModelPrivate;
  * Do not use this class directly, use one of the derived classes.
  *
  * \headerfile "" <Intfuorit/Models/breachesmodel.h>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT BreachesModel : public BaseModel
 {
@@ -47,13 +47,13 @@ class INTFUORITSHARED_EXPORT BreachesModel : public BaseModel
     Q_DISABLE_COPY(BreachesModel)
 public:
     /*!
-     * Constructs a new BreachesModel with the given \a parent. Call getAllBreaches() or
+     * Constructs a new %BreachesModel with the given \a parent. Call getAllBreaches() or
      * getBreachesForAccount() to populate the model.
      */
     explicit BreachesModel(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the BreachesModel and destroys the Breach objects in the model.
+     * Deconstructs the %BreachesModel and destroys the Breach objects in the model.
      */
     ~BreachesModel();
 

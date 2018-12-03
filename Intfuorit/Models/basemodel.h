@@ -27,10 +27,16 @@
 
 namespace Intfuorit {
 
+/*!
+ * \defgroup models Data Models
+ * \brief Classes in this module are used to present requested data in data models..
+ */
+
 class BaseModelPrivate;
 
 /*!
- * The BaseModel class is the base class of all Intfuorit data models.
+ * \ingroup models
+ * The %BaseModel class is the base class of all %Intfuorit data models.
  *
  * Do not use this class directly, use one of the derived classes.
  *
@@ -38,7 +44,6 @@ class BaseModelPrivate;
  * <a href="https://techbase.kde.org/Policies/Library_Code_Policy/Shared_D-Pointer_Example">shared D-pointer</a>.
  *
  * \headerfile "" <Intfuorit/Models/basemodel.h>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT BaseModel : public QAbstractItemModel
 {
@@ -91,12 +96,12 @@ class INTFUORITSHARED_EXPORT BaseModel : public QAbstractItemModel
     Q_PROPERTY(QString userAgent READ userAgent WRITE setUserAgent NOTIFY userAgentChanged)
 public:
     /*!
-     * Constructs a new BaseModel with the given \a parent.
+     * Constructs a new %BaseModel with the given \a parent.
      */
     explicit BaseModel(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the BaseModel.
+     * Deconstructs the %BaseModel.
      */
     ~BaseModel();
 

@@ -30,16 +30,23 @@ class QJsonDocument;
 
 namespace Intfuorit {
 
+/*!
+ * \defgroup api API Requests
+ * \brief Classes in this module are used to request data from the
+ * <a href="https://haveibeenpwned.com/API/v2" rel="external noopener">haveibeenpwned.com API</a>.
+ */
+
 class Error;
 class ComponentPrivate;
 class NetworkAccessManagerFactory;
 
 /*!
- * The Component class is the base class of all Intfuorit objects that request data from the HIBP API.
- * When creating a subclass of Component, you have to reimplement execute() and successCallback() -
+ * \ingroup api
+ * The %Component class is the base class of all %Intfuorit objects that request data from the HIBP API.
+ * When creating a subclass of %Component, you have to reimplement execute() and successCallback() -
  * optionally you can reimplement extractError(). In the implementation of execute() set
- * \link Component::inOperation inOperation \endlink to \c true and in the end call startRequest() to
- * request the data from the API. In successCallback() you should process the API JSON reply and set
+ * \link Component::inOperation inOperation \endlink to \c true and in the end call sendRequest() to
+ * request the data from the API. In successCallback() you should process the replied data and set
  * \link Component::inOperation inOperation \endlink to \c false when finished. When reimplementing
  * extractError(), you should emit the failed() signal after extracting the error and set
  * \link Component::inOperation inOperation \endlink to \c false.
@@ -47,11 +54,10 @@ class NetworkAccessManagerFactory;
  * Normally you do not have to create new derived classes, because libintfuorit already provides classes
  * and methods for each HIBP API route.
  *
- * Component and its subclasses in libintfuorit use a
+ * %Component and its subclasses in libintfuorit use a
  * <a href="https://techbase.kde.org/Policies/Library_Code_Policy/Shared_D-Pointer_Example">shared D-pointer</a>.
  *
  * \headerfile "" <Intfuorit/API/component.h>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT Component : public QObject
 {
@@ -59,14 +65,14 @@ class INTFUORITSHARED_EXPORT Component : public QObject
     Q_DISABLE_COPY(Component)
     Q_DECLARE_PRIVATE(Component)
     /*!
-     * This property holds the descriptive <A HREF="https://en.wikipedia.org/wiki/User_agent#Use_in_HTTP">HTTP User Agent</A>
+     * This property holds the descriptive <a href="https://en.wikipedia.org/wiki/User_agent#Use_in_HTTP" rel="external noopener">HTTP User Agent</a>
      * that will be added to the API request. The HIBP API requires to send a user agent header with
      * every API request. So you should set this to some valid value. If not set explicitly, the user
      * agent will be composed from the values of QCoreApplication::applicationName() and
      * QCoreApplication::applicationVersion().
      *
      * \par HIBP API Docs
-     * <A HREF="https://haveibeenpwned.com/API/v2#UserAgent">Specifying the user agent</A>
+     * <a href="https://haveibeenpwned.com/API/v2#UserAgent" rel="external noopener">Specifying the user agent</a>
      *
      * \par Access functions
      * \li QString userAgent() const
@@ -102,26 +108,25 @@ class INTFUORITSHARED_EXPORT Component : public QObject
      */
     Q_PROPERTY(quint32 cachePeriod READ cachePeriod WRITE setCachePeriod NOTIFY cachePeriodChanged)
     /*!
-     * This property holds a pointer to the last occured Error. If no error has occured, it holds a \c nullptr. Derived classes
-     * can use setError() to set error objects.
+     * This property holds the last occured Error. Derived classes can use setError() to set error objects.
      *
-     * \note Setting a new Error object will not automatically emit the failed() signal.
+     * \note Setting a new Error object will \b not automatically emit the failed() signal.
      *
      * \par Access functions
-     * \li Error *error() const;
+     * \li Error error() const;
      *
      * \par Notifier signal
-     * \li void errorChanged(Error *error)
+     * \li void errorChanged(const Error &error)
      */
     Q_PROPERTY(Intfuorit::Error error READ error NOTIFY errorChanged)
 public:
     /*!
-     * Constructs a new Component object with the given \a parent.
+     * Constructs a new %Component object with the given \a parent.
      */
     explicit Component(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the Component object.
+     * Deconstructs the %Component object.
      */
     ~Component();
 
@@ -145,7 +150,7 @@ public:
      *         return;
      *     }
      *     setInOpeartion(true);
-     *     setError(nullptr);
+     *     setError(Error());
      *
      *     QUrl url = buildUrl(QStringLiteral("breaches"), QString());
      *     if (!d->domain.isEmpty()) {
@@ -208,7 +213,7 @@ public:
 
     /*!
      * Sets the network access manager \a factory to create new QNetworkAccessManager objects
-     * to performing the API requests. If no factory is available, a default QNetworkAccessManager
+     * to perform the API requests. If no factory is available, a default QNetworkAccessManager
      * object will be created.
      */
     static void setNetworkAccessManagerFactory(NetworkAccessManagerFactory *factory);
@@ -293,8 +298,6 @@ protected:
      *     // further processing ...
      * }
      * \endcode
-     *
-     * \since libintfuorit 2.0.0
      */
     virtual void successCallback(const QByteArray &data);
 
@@ -304,29 +307,32 @@ protected:
      * to \c true to not use cached data. If you want to use a POST request, use the \a payload
      * parameter to specify the request body.
      *
-     * \internal
-     * Calling this function will reset the last error by setting a \c nullptr to the \link Component::error error \endlink property.
-     * If \a reload is \c false or if \link Component::cachePeriod cachePeriod \endlink is set to \c 0, the cache will be ommited.
+     * Calling this function will reset the last error by setting an empty Error object to the
+     * \link Component::error error \endlink property. If \a reload is \c false or if
+     * \link Component::cachePeriod cachePeriod \endlink is set to \c 0, the cache will be ommited.
      *
-     * When no \link Component::networkManager networkManager \endlink has been set, this will also create a new QNetworkManager object
-     * to perform the API request. If a timeout has been set greater than \c 0, the timeout timer will be started.
+     * When no \link Component::networkManager networkManager \endlink has been set, this will also
+     * create a new QNetworkManager object to perform the API request. If a timeout has been set
+     * greater than \c 0, the timeout timer will be started.
      *
-     * In the end, the QNetworkReply::finished() signal will be connected to the ComponentPrivate::requestFinished() function and the
-     * QNetworkReply::readyRead() signal will be connected to the ComponentPrivate::requestReadyRead() function if a cachefile should be
+     * In the end, the QNetworkReply::finished() signal will be connected to the
+     * ComponentPrivate::requestFinished() function and the QNetworkReply::readyRead() signal will
+     * be connected to the ComponentPrivate::requestReadyRead() function if a cachefile should be
      * used.
-     * \endinternal
      */
     void sendRequest(const QUrl &url, bool reload = false, const QByteArray &payload = QByteArray());
 
     /*!
      * Builds an API URL for the given \a service and \a parameter.
+     * Will construct the following URL: https://haveibeenpwned.com/api/{service}/{parameter}
+     * where \a parameter is optional.
      */
-    QUrl buildUrl(const QString &service, const QString &parameter) const;
+    QUrl buildUrl(const QString &service, const QString &parameter = QString()) const;
 
     /*!
-     * Sets a new pointer to an Error object for the \link Component::error error \endlink property.     *
-     * This will be used internally and should also be used by derived classes to set a pointer to the last Error object.
-     * To reset the error, simply set a \c nullptr.
+     * Sets a new Error object for the \link Component::error error \endlink property.
+     * This will be used internally and should also be used by derived classes to set the last Error object.
+     * To reset the error, simply set an empty Error object.
      */
     void setError(const Error &error);
 

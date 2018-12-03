@@ -29,7 +29,7 @@ namespace Intfuorit {
 class BreachesListModelPrivate;
 
 /*!
- * The BreachesListModel class provides a single column list model containing Breach objects
+ * The %BreachesListModel class provides a single column list model containing Breach objects
  * requested from the HIBP API. This model is designed to be usable in QML list views, the
  * different data fields are accessible via the \link BreachesListModel::Roles model data roles \endlink.
  *
@@ -37,7 +37,6 @@ class BreachesListModelPrivate;
  * for a model that can filter the API result locally.
  *
  * \headerfile "" <Intfuorit/Models/BreachesListModel>
- * \since libintfuorit 1.0.0
  * \sa Breach, BreachesListFilterModel, GetAllBreaches, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT BreachesListModel : public BreachesModel
@@ -47,12 +46,12 @@ class INTFUORITSHARED_EXPORT BreachesListModel : public BreachesModel
     Q_DISABLE_COPY(BreachesListModel)
 public:
     /*!
-     * Constructs a new BreachesListModel with the given \a parent.
+     * Constructs a new %BreachesListModel with the given \a parent.
      */
     explicit BreachesListModel(QObject *parent = nullptr);
 
     /*!
-     * Deconstructs the BreachesListModel.
+     * Deconstructs the %BreachesListModel.
      */
     ~BreachesListModel();
 

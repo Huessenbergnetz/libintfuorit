@@ -35,13 +35,12 @@ namespace Intfuorit {
 class BreachPrivate;
 
 /*!
- * \brief The Breach class contains information about a single breach.
+ * \brief The %Breach class contains information about a single breach.
  *
  * \par HIBP API Docs
  * <A HREF="https://haveibeenpwned.com/API/v2#BreachModel">The breach model</A>
  *
  * \headerfile "" <Intfuorit/Objects/Breach>
- * \since libinitfuorit 1.0.0
  * \sa BreachesListModel, BreachesListFilterModel, GetAllBreaches, GetBreachedSite, GetBreachesForAccount
  */
 class INTFUORITSHARED_EXPORT Breach : public QObject
@@ -193,18 +192,16 @@ class INTFUORITSHARED_EXPORT Breach : public QObject
      *
      * \par Access functions
      * \li QUrl logoPath() const
-     *
-     * \since libintfuorit 1.1.0
      */
     Q_PROPERTY(QUrl logoPath READ logoPath CONSTANT)
 public:
     /*!
-     * \brief Constructs a new empty Breach object.
+     * \brief Constructs a new empty %Breach object.
      */
     explicit Breach(QObject *parent = nullptr);
 
     /*!
-     * Constructs a new Breach with the given parameters and \a parent.
+     * Constructs a new %Breach object with the given parameters and \a parent.
      * All data parameters belong to one of the properties of the Breach class,
      * look at the properties to learn more about the parameters.
      *
@@ -299,7 +296,6 @@ public:
     bool isSpamList() const;
     /*!
      * Getter function for the \link Breach::logoPath logoPath \endlink property.
-     * \since libintfuorit 2.0.0
      */
     QUrl logoPath() const;
 

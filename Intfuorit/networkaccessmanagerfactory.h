@@ -28,18 +28,17 @@ class QNetworkAccessManager;
 namespace Intfuorit {
 
 /*!
- * The NetworkAccessManagerFactory class create QNetworkAccessManager instances for the
+ * The %NetworkAccessManagerFactory class create QNetworkAccessManager instances for the
  * requests to the HIBP API.
  *
  * The Intfuorit API request classes use QNetworkAccessManager for all network access. By
  * implementing a factory, it is possible to provide the request classes with custom
  * QNetworkAccessManager instances with specialized caching, proxy and cookies support.
  *
- * To implement a factory, subclass NetworkAccessManagerFactory and implement virtual create()
+ * To implement a factory, subclass NetworkAccessManagerFactory and implement the virtual create()
  * method, then assign it global to the API request classes by using Component::setNetworkAccessManagerFactory().
  *
  * \headerfile "" <Intfuorit/NetworkAccessManagerFactory>
- * \since libintfuorit 1.0.0
  */
 class INTFUORITSHARED_EXPORT NetworkAccessManagerFactory
 {
