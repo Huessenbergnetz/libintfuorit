@@ -46,7 +46,7 @@ void GetAllDataClasses::execute(bool reload)
     }
 
     setInOperation(true);
-    setError(nullptr);
+    setError(Error());
 
     const QUrl url = buildUrl(QStringLiteral("dataclasses"), QString());
 

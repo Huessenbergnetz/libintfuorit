@@ -45,45 +45,14 @@ void BaseModelPrivate::setInOperation(bool nInOperation)
 }
 
 
-void BaseModelPrivate::setError(Error *nError)
+void BaseModelPrivate::setError(const Error &nError)
 {
     Q_Q(BaseModel);
-    Error *old = nullptr;
-    if (error && nError) {
-        if (*error != *nError) {
-            old = error;
-            if (nError->parent() == q_ptr) {
-                error = nError;
-            } else if ((nError->parent() == nullptr) && (nError->thread() == q_ptr->thread())) {
-                error = nError;
-                error->setParent(q_ptr);
-            } else {
-                error = Error::clone(nError, q_ptr);
-                if (nError->parent() == nullptr) {
-                    delete nError;
-                }
-            }
-            Q_EMIT q->errorChanged(error);
-        } else {
-            if ((nError->parent() == q_ptr) || (nError->parent() == nullptr)) {
-                delete nError;
-            }
-        }
-    } else if (error && !nError) {
-        old = error;
+    if (error != nError) {
         error = nError;
-        Q_EMIT q->errorChanged(nError);
-    } else if (!error && nError) {
-        if (nError->parent() == q_ptr) {
-            error = nError;
-        } else {
-            error = Error::clone(nError, q_ptr);
-        }
+        qDebug("%s", "error has been changed.");
+        Q_Q(BaseModel);
         Q_EMIT q->errorChanged(error);
-    }
-
-    if (old && ((old->parent() == q_ptr) || (old->parent() == nullptr))) {
-        delete old;
     }
 }
 
@@ -113,7 +82,7 @@ bool BaseModel::inOperation() const
 }
 
 
-Error* BaseModel::error() const
+Error BaseModel::error() const
 {
     Q_D(const BaseModel);
     return d->error;

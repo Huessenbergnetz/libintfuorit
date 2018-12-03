@@ -47,13 +47,13 @@ void GetPastesForAccount::execute(bool reload)
     }
 
     setInOperation(true);
-    setError(nullptr);
+    setError(Error());
 
     Q_D(GetPastesForAccount);
 
     if (d->account.isEmpty()) {
         //% "Can not request list of pastes for empty account email address."
-        setError(new Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-get-pastes-empty-account"), this));
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-get-pastes-empty-account")));
         setInOperation(false);
         Q_EMIT failed(error());
         return;

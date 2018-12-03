@@ -19,7 +19,6 @@
 
 
 #include "component_p.h"
-#include "../error.h"
 #include "../networkaccessmanagerfactory.h"
 #include <QUrl>
 #include <QStringBuilder>
@@ -174,7 +173,7 @@ void ComponentPrivate::requestTimedOut()
     Q_Q(Component);
 
     //% "The connection to the server timed out after %n second(s)."
-    q->setError(new Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-conn-timeout", requestTimeout), q_ptr));
+    q->setError(Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-conn-timeout", requestTimeout)));
 
     QNetworkReply *nr = reply;
     reply = nullptr;
@@ -207,7 +206,7 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
         if (expectedJSONType == PlainText) {
             if (Q_UNLIKELY(result.isEmpty())) {
                 //% "The request replied an empty answer, but there was content expected."
-                q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-empty-answer"), q_ptr));
+                q->setError(Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-empty-answer")));
                 Q_EMIT q->failed(error);
                 *checkResult = false;
                 return json;
@@ -216,7 +215,7 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
             QJsonParseError jsonError;
             json = QJsonDocument::fromJson(result, &jsonError);
             if (Q_UNLIKELY(jsonError.error != QJsonParseError::NoError)) {
-                q->setError(new Error(jsonError, q_ptr));
+                q->setError(Error(jsonError));
                 Q_EMIT q->failed(error);
                 *checkResult = false;
                 return json;
@@ -225,7 +224,7 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
     }
 
     if (Q_UNLIKELY(expectedJSONType > PlainText && (json.isNull() || json.isEmpty()))) {
-        q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-empty-answer"), q_ptr));
+        q->setError(Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-empty-answer")));
         Q_EMIT q->failed(error);
         *checkResult = false;
         return json;
@@ -233,7 +232,7 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
 
     if (Q_UNLIKELY(expectedJSONType == Array && !json.isArray())) {
         //% "It was expected that the request returns a JSON array, but it returned something else."
-        q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-no-json-array"), q_ptr));
+        q->setError(Error(Error::OutputError, Error::Critical, qtTrId("libintfuorit-err-no-json-array")));
         Q_EMIT q->failed(error);
         *checkResult = false;
         return json;
@@ -241,7 +240,7 @@ QJsonDocument ComponentPrivate::checkOutput(const QByteArray &result, bool *chec
 
     if (Q_UNLIKELY(expectedJSONType == Object && !json.isObject())) {
         //% "It was expected that the request returns a JSON object, but it returned something else."
-        q->setError(new Error(Error::OutputError, Error::Critical, qtTrId("err-no-json-object"), q_ptr));
+        q->setError(Error(Error::OutputError, Error::Critical, qtTrId("err-no-json-object")));
         Q_EMIT q->failed(error);
         *checkResult = false;
         return json;
@@ -316,7 +315,7 @@ bool ComponentPrivate::removeCacheFile()
         if (!cacheFile.remove()) {
             Q_Q(Component);
             //% "Failed to remove cache file \"%s\"."
-            q->setError(new Error(Error::FileError, Error::Critical, qtTrId("libintfuorit-err-remove-cache-file").arg(cacheFile.fileName()), q_ptr));
+            q->setError(Error(Error::FileError, Error::Critical, qtTrId("libintfuorit-err-remove-cache-file").arg(cacheFile.fileName())));
             Q_EMIT q->failed(error);
             q->setInOperation(false);
             ret = false;
@@ -363,30 +362,17 @@ QUrl Component::buildUrl(const QString &service, const QString &parameter) const
 }
 
 
-Error* Component::error() const { Q_D(const Component); return d->error; }
+Error Component::error() const { Q_D(const Component); return d->error; }
 
-void Component::setError(Error *nError)
+void Component::setError(const Error &error)
 {
     Q_D(Component);
-    if (d->error) {
-        if (*nError != *d->error) {
-            Error *oldError = d->error;
-            d->error = nError;
-            delete oldError;
-            qDebug("Changed error to %p.", nError);
-            Q_EMIT errorChanged(nError);
-        } else if (nError != d->error) {
-            delete nError;
-        }
-    } else {
-        if (nError) {
-            d->error = nError;
-            qDebug("Changed error to %p.", nError);
-            Q_EMIT errorChanged(nError);
-        }
+    if (d->error != error) {
+        d->error = error;
+        qDebug("%s", "Changed error object.");
+        Q_EMIT errorChanged(error);
     }
 }
-
 
 bool Component::inOperation() const { Q_D(const Component); return d->inOperation; }
 
@@ -416,14 +402,14 @@ void Component::extractError(QNetworkReply *reply)
     switch(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()) {
     case 403:
         //% "No user agent has been specified in the request. HIBP API requires a user agent header."
-        setError(new Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-forbidden-req"), this));
+        setError(Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-forbidden-req")));
         break;
     case 429:
         //% "Too many requests, the rate limit has been exceeded."
-        setError(new Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-too-many-reqs"), this));
+        setError(Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-too-many-reqs")));
         break;
     default:
-        setError(new Error(reply, this));
+        setError(Error(reply));
         break;
     }
     Q_EMIT failed(error());
@@ -448,7 +434,7 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
     Q_ASSERT_X(url.isValid(), "send request", "invalid API URL");
     Q_D(Component);
 
-    setError(nullptr);
+    setError(Error());
 
     if (!reload && d->isInCache()) {
         qDebug("Loading data from cache file \"%s\".", qUtf8Printable(d->cacheFile.fileName()));
@@ -512,7 +498,7 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
         d->useCache = d->openCacheFile(QIODevice::WriteOnly);
         if (!d->useCache) {
             //% "Failed to open cache file \"%s\" for writing."
-            setError(new Error(Error::FileError, Error::Warning, qtTrId("libintfuorit-err-open-cache-file").arg(d->cacheFile.fileName()), this));
+            setError(Error(Error::FileError, Error::Warning, qtTrId("libintfuorit-err-open-cache-file").arg(d->cacheFile.fileName())));
         }
     }
 
@@ -537,7 +523,7 @@ void Component::sendRequest(const QUrl &url, bool reload, const QByteArray &payl
         Q_ASSERT_X(false, "send request", "invalid network operation");
         d->timeoutTimer->stop();
         //% "Invalid network operation. Only GET and POST are supported."
-        setError(new Error(Error::ApplicationError, Error::Critical, qtTrId("libintfuorit-err-invalid-net-op"), this));
+        setError(Error(Error::ApplicationError, Error::Critical, qtTrId("libintfuorit-err-invalid-net-op")));
         Q_EMIT failed(error());
         return;
     }

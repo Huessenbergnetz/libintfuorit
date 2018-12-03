@@ -20,28 +20,26 @@
 #ifndef INTFUORITERROR_H
 #define INTFUORITERROR_H
 
+#include "intfuorit_global.h"
 #include <QObject>
 #include <QVariant>
-#include "intfuorit_global.h"
+#include <QSharedDataPointer>
 
 class QNetworkReply;
 struct QJsonParseError;
 
 namespace Intfuorit {
 
-class ErrorPrivate;
+class ErrorData;
 
 /*!
  * Provides information about occurred errors.
  *
  * \headerfile "" <Intfuorit/Error>
- * \since libintfuorit 1.0.0
  */
-class INTFUORITSHARED_EXPORT Error : public QObject
+class INTFUORITSHARED_EXPORT Error
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(Error)
-    Q_DECLARE_PRIVATE(Error)
+    Q_GADGET
     /*!
      * This property holds the human readable error description.
      *
@@ -91,31 +89,56 @@ public:
     Q_ENUM(Severity)
 
     /*!
-     * Constructs a new empty Error object with the given \a parent.
+     * Constructs a new empty %Error object of Type NoError.
      */
-    explicit Error(QObject *parent = nullptr);
+    explicit Error();
 
     /*!
      * \brief Constructs a new Error object with the given parameters and \a parent.
      * Use appropriate values for \a type and \a severity and set a descriptive humand readable
      * error \a text.
      */
-    Error(Type type, Severity severity, const QString &text, QObject *parent = nullptr);
+    Error(Type type, Severity severity, const QString &text);
 
     /*!
      * Constructs a new Error object from QNetworkReply \a reply with the given \a parent.
      */
-    explicit Error(QNetworkReply *reply, QObject *parent = nullptr);
+    explicit Error(QNetworkReply *reply);
 
     /*!
      * Constructs a new Error object from QJsonError \a jsonError with the given \a parent.
      */
-    explicit Error(const QJsonParseError jsonError, QObject *parent = nullptr);
+    explicit Error(const QJsonParseError jsonError);
 
     /*!
-     * Deconstructs the Error object.
+     * Constructs a copy of \a other.
+     */
+    Error(const Error &other);
+
+//    /*!
+//     * Move-constructs an %Error instance, making it point at the same object \a other is pointing to.
+//     */
+//    Error(Error &&error) noexcept;
+
+    /*!
+     * Assings \a other to this %Error and returns a reference to this error.
+     */
+    Error &operator=(const Error &other);
+
+    /*!
+     * Move-assigns \a other to this %Error instance.
+     */
+    Error &operator=(Error &&other) noexcept;
+
+    /*!
+     * Deconstructs the %Error object.
      */
     ~Error();
+
+    /*!
+     * Swaps this %Error instance with \a other.
+     */
+    void swap(Error &other) noexcept;
 
     /*!
      * Getter function for the \link Error::type type \endlink property.
@@ -142,15 +165,12 @@ public:
      */
     bool operator!=(const Error &other) const;
 
-    /*!
-     * Clones \a other error by creating a new Error object with \a other error's values and the given \a parent.
-     */
-    static Error* clone(Error *other, QObject *parent = nullptr);
-
 protected:
-    const QScopedPointer<ErrorPrivate> d_ptr;
+    QSharedDataPointer<ErrorData> d;
 };
 
 }
+
+Q_DECLARE_TYPEINFO(Intfuorit::Error, Q_MOVABLE_TYPE);
 
 #endif // INTFUORITERROR_H

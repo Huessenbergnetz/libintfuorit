@@ -23,27 +23,20 @@
 
 using namespace Intfuorit;
 
-Error::Error(QObject *parent) : QObject(parent), d_ptr(new ErrorPrivate)
+Error::Error() : d(new ErrorData)
 {
 
 }
 
-Error::Error(Type type, Severity severity, const QString &text, QObject *parent) :
-    QObject(parent), d_ptr(new ErrorPrivate)
+Error::Error(Type type, Severity severity, const QString &text) :
+    d(new ErrorData(type, severity, text))
 {
-    Q_D(Error);
-    d->type = type;
-    d->severity = severity;
-    d->text = text;
-
     d->printOut();
 }
 
-Error::Error(QNetworkReply *reply, QObject *parent) : QObject(parent), d_ptr(new ErrorPrivate)
+Error::Error(QNetworkReply *reply) : d(new ErrorData)
 {
     if (reply && reply->error() != QNetworkReply::NoError) {
-
-        Q_D(Error);
 
         d->type = RequestError;
         d->severity = Critical;
@@ -188,16 +181,13 @@ Error::Error(QNetworkReply *reply, QObject *parent) : QObject(parent), d_ptr(new
         }
 
         d->printOut();
-
     }
 }
 
 
-Error::Error(const QJsonParseError jsonError, QObject *parent) :
-    QObject(parent), d_ptr(new ErrorPrivate)
+Error::Error(const QJsonParseError jsonError) :
+    d(new ErrorData)
 {
-    Q_D(Error);
-
     if (jsonError.error != QJsonParseError::NoError) {
         d->type = JSONParsingError;
         d->severity = Critical;
@@ -209,38 +199,64 @@ Error::Error(const QJsonParseError jsonError, QObject *parent) :
 }
 
 
+Error::Error(const Error &other) :
+    d(other.d)
+{
+
+}
+
+
+//Error::Error(Error &&error) noexcept :
+//    d(std::move(other.d))
+//{
+
+//}
+
+
+Error& Error::operator=(const Error &other)
+{
+    d = other.d;
+    return *this;
+}
+
+
+Error& Error::operator=(Error &&other) noexcept
+{
+    swap(other);
+    return *this;
+}
+
+
 Error::~Error()
 {
 
 }
 
 
-Error::Type Error::type() const { Q_D(const Error); return d->type; }
+void Error::swap(Error &other) noexcept
+{
+    std::swap(d, other.d);
+}
 
 
-Error::Severity Error::severity() const { Q_D(const Error); return d->severity; }
+Error::Type Error::type() const { return d->type; }
 
 
-QString Error::text() const { Q_D(const Error); return d->text; }
+Error::Severity Error::severity() const { return d->severity; }
+
+
+QString Error::text() const { return d->text; }
 
 
 bool Error::operator!=(const Error &other) const
 {
-    Q_D(const Error);
     return ((d->type != other.type()) || (d->severity != other.severity()) || (d->text != other.text()));
 }
 
 
 bool Error::operator==(const Error &other) const
 {
-    Q_D(const Error);
     return ((d->type == other.type()) && (d->severity == other.severity()) && (d->text == other.text()));
-}
-
-
-Error* Error::clone(Error *other, QObject *parent)
-{
-    return new Error(other->type(), other->severity(), other->text(), parent);
 }
 
 #include "moc_error.cpp"

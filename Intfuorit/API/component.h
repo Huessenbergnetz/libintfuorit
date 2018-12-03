@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include "../error.h"
 #include "../intfuorit_global.h"
 
 class QNetworkReply;
@@ -112,7 +113,7 @@ class INTFUORITSHARED_EXPORT Component : public QObject
      * \par Notifier signal
      * \li void errorChanged(Error *error)
      */
-    Q_PROPERTY(Error* error READ error NOTIFY errorChanged)
+    Q_PROPERTY(Intfuorit::Error error READ error NOTIFY errorChanged)
 public:
     /*!
      * Constructs a new Component object with the given \a parent.
@@ -167,7 +168,7 @@ public:
      * Getter function for the \link Component::error error \endlink property.
      * \sa setError() errorChanged()
      */
-    Error* error() const;
+    Error error() const;
 
     /*!
      * Getter function for the \link Component::inOperation inOperation \endlink property.
@@ -217,7 +218,7 @@ Q_SIGNALS:
      * Notifier signal for the \link Component::error error \endlink property.
      * \sa setError() error()
      */
-    void errorChanged(Error *error);
+    void errorChanged(const Error &error);
     /*!
      * Notifier signal for the \link Component::inOperation inOperation \endlink property.
      * \sa setInOperation() inOperation()
@@ -229,7 +230,7 @@ Q_SIGNALS:
      *
      * \sa Component::error
      */
-    void failed(Error *error);
+    void failed(const Error &error);
     /*!
      * Notifier signal for the \link Component::cachePeriod cachePeriod \endlink property.
      * \sa setCachePeriod() cachePeriod()
@@ -327,7 +328,7 @@ protected:
      * This will be used internally and should also be used by derived classes to set a pointer to the last Error object.
      * To reset the error, simply set a \c nullptr.
      */
-    void setError(Error *nError);
+    void setError(const Error &error);
 
     /*!
      * Sets the value of the \link Component::inOperation inOperation \endlink property.

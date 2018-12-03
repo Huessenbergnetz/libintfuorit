@@ -50,11 +50,11 @@ void CheckPwnedPassword::execute(bool reload)
     }
 
     setInOperation(true);
-    setError(nullptr);
+    setError(Error());
 
     if (d->password.isEmpty()) {
         //% "You can not check for a pwned password without specifying a password."
-        setError(new Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-empty-password"), this));
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-empty-password")));
         setInOperation(false);
         Q_EMIT failed(error());
         return;

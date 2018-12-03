@@ -24,12 +24,29 @@
 
 namespace Intfuorit {
 
-class ErrorPrivate
+class ErrorData : public QSharedData
 {
 public:
-    QString text;
-    Error::Type type = Error::NoError;
-    Error::Severity severity = Error::Nothing;
+    inline ErrorData() : QSharedData() {}
+    inline ErrorData(Error::Type _type, Error::Severity _severity, const QString &_text) :
+        QSharedData(),
+        text{_text},
+        type{_type},
+        severity{_severity}
+    {}
+
+    inline ErrorData(const ErrorData &copy) :
+        QSharedData(copy),
+        text{copy.text},
+        type{copy.type},
+        severity{copy.severity}
+    {}
+
+    inline void clear() {
+        text.clear();
+        type = Error::NoError;
+        severity = Error::Nothing;
+    }
 
     void printOut()
     {
@@ -47,6 +64,10 @@ public:
             break;
         }
     }
+
+    QString text;
+    Error::Type type = Error::NoError;
+    Error::Severity severity = Error::Nothing;
 };
 
 }

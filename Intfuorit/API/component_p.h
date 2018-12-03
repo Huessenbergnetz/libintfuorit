@@ -70,7 +70,7 @@ public:
     QString cacheDirPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     QNetworkAccessManager::Operation namOperation = QNetworkAccessManager::GetOperation;
     QNetworkAccessManager *nam = nullptr;
-    Error *error = nullptr;
+    Error error;
     QTimer *timeoutTimer = nullptr;
     QNetworkReply *reply = nullptr;
     quint32 cachePeriod = 3600*48; // two days

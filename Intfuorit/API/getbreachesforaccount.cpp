@@ -46,13 +46,13 @@ void GetBreachesForAccount::execute(bool reload)
     }
 
     setInOperation(true);
-    setError(nullptr);
+    setError(Error());
 
     Q_D(GetBreachesForAccount);
 
     if (d->account.isEmpty()) {
         //% "Can not request list of breaches for empty account user name/email address."
-        setError(new Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-empty-account"), this));
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-empty-account")));
         setInOperation(false);
         Q_EMIT failed(error());
         return;

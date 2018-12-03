@@ -34,10 +34,10 @@ public:
     virtual ~BaseModelPrivate();
 
     void setInOperation(bool nInOperation);
-    void setError(Error *nError);
+    void setError(const Error &nError);
 
     QString userAgent;
-    Error *error = nullptr;
+    Error error;
     quint32 cachePeriod = 172800;
     bool inOperation = false;
 

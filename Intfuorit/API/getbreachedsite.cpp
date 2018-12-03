@@ -46,11 +46,11 @@ void GetBreachedSite::execute(bool reload)
     }
 
     setInOperation(true);
-    setError(nullptr);
+    setError(Error());
 
     if (d->name.isEmpty()) {
         //% "You can not request data for a single breached site without specifying a name for it."
-        setError(new Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-missing-breach-name"), this));
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-missing-breach-name")));
         setInOperation(false);
         Q_EMIT failed(error());
         return;

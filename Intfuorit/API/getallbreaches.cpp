@@ -44,7 +44,7 @@ void GetAllBreaches::execute(bool reload)
         return;
     }
     setInOperation(true);
-    setError(nullptr);
+    setError(Error());
 
     QUrl url = buildUrl(QStringLiteral("breaches"), QString());
     if (!d->domain.isEmpty()) {

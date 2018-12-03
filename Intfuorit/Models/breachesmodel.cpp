@@ -108,7 +108,7 @@ void BreachesModel::getAllBreaches(const QString &domain, bool reload)
             d->gab->deleteLater();
             d->gab = nullptr;
         });
-        connect(d->gab, &GetAllBreaches::errorChanged, this, [d](Error *e){d->setError((e));});
+        connect(d->gab, &GetAllBreaches::errorChanged, this, [d](const Error &e){d->setError((e));});
         connect(d->gab, &GetAllBreaches::failed, this, [this, d](){
             d->setInOperation(false);
             d->gab->deleteLater();
@@ -142,7 +142,7 @@ void BreachesModel::getBreachesForAccount(const QString &account, const QString 
             d->gbfa->deleteLater();
             d->gbfa = nullptr;
         });
-        connect(d->gbfa, &GetBreachesForAccount::errorChanged, this, [d](Error *e){d->setError((e));});
+        connect(d->gbfa, &GetBreachesForAccount::errorChanged, this, [d](const Error &e){d->setError((e));});
         connect(d->gbfa, &GetBreachesForAccount::failed, this, [this, d](){
             d->setInOperation(false);
             d->gbfa->deleteLater();

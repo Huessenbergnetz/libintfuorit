@@ -66,7 +66,7 @@ class INTFUORITSHARED_EXPORT BaseFilterModel : public QSortFilterProxyModel
      * \par Notifier signal
      * \li void errorChanged(Error *error)
      */
-    Q_PROPERTY(Error* error READ error NOTIFY errorChanged)
+    Q_PROPERTY(Intfuorit::Error error READ error NOTIFY errorChanged)
     /*!
      * This property holds the cache time in seconds. For more information see Component::cachePeriod.
      * The default value of this property is \c 172800 seconds (2 days).
@@ -131,7 +131,7 @@ public:
      * Getter function fro the \link BaseFilterModel::error error \endlink property.
      * \sa errorChanged() const;
      */
-    Error* error() const;
+    Error error() const;
 
     /*!
      * Getter function for the \link BaseFilterModel::cachePeriod cachePeriod \endlink property.
@@ -185,13 +185,13 @@ Q_SIGNALS:
      * Notifier signal for the \link BaseFilterModel::error error \endlink property.
      * \sa error()
      */
-    void errorChanged(Error *error);
+    void errorChanged(const Error &error);
     /*!
      * This signal is emitted when loading the data into the model failed. It will contain
      * the pointer to an Error object providing further information about the occured error.
      * \sa Component::error
      */
-    void failed(Error *error);
+    void failed(const Error &error);
     /*!
      * Notifier signal for the \link BaseFilterModel::cachePeriod cachePeriod \endlink property.
      * \sa setCachePeriod() cachePeriod()
