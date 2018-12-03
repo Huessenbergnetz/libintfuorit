@@ -18,8 +18,10 @@
  */
 
 #include "getalldataclasses_p.h"
+#include "../error.h"
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QEventLoop>
 
 using namespace Intfuorit;
 
@@ -59,8 +61,41 @@ void GetAllDataClasses::successCallback(const QJsonDocument &json)
     qDebug("Got all data classes.");
     qDebug("%s", json.toJson().constData());
     const QJsonArray a = json.array();
-    Q_EMIT gotAllDataClasses(a);
+    QStringList lst;
+    if (!a.empty()) {
+        lst.reserve(a.size());
+        for (const QJsonValue &v : a) {
+            lst.push_back(v.toString());
+        }
+    }
+    Q_EMIT gotAllDataClasses(lst);
     setInOperation(false);
+}
+
+QStringList GetAllDataClasses::get(const QString &userAgent, bool reload, bool *ok)
+{
+    QStringList lst;
+    GetAllDataClasses gad;
+    if (!userAgent.isEmpty()) {
+        gad.setUserAgent(userAgent);
+    }
+    QEventLoop loop;
+    QObject::connect(&gad, &GetAllDataClasses::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&gad, &GetAllDataClasses::gotAllDataClasses, &loop, &QEventLoop::quit);
+    if (ok) {
+        QObject::connect(&gad, &GetAllDataClasses::failed, &gad, [ok](){*ok = false;});
+    }
+    QObject::connect(&gad, &GetAllDataClasses::gotAllDataClasses, &gad, [&lst,ok](const QStringList &_lst){
+        lst = _lst;
+        if (ok) {
+            *ok = true;
+        }
+    });
+    gad.execute(reload);
+    if (gad.inOperation()) {
+        loop.exec();
+    }
+    return lst;
 }
 
 #include "moc_getalldataclasses.cpp"

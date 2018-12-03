@@ -20,9 +20,10 @@
 #ifndef LIBINTFUORITGETALLDATACLASSES_H
 #define LIBINTFUORITGETALLDATACLASSES_H
 
-#include <QObject>
 #include "component.h"
 #include "../intfuorit_global.h"
+#include <QObject>
+#include <QStringList>
 
 class QJsonDocument;
 class QJsonArray;
@@ -66,13 +67,30 @@ public:
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
+    /*!
+     * Gets the list of available data classes from the HIBP API. If \a reload is set to
+     * \c false, cached results will be returned where the default cache time (2 days) will
+     * be used.
+     *
+     * f \a userAgent is empty, a default user agent will be created, using QCoreApplication::applicationName()
+     * and QCoreApplication::applicationVersion(). Note that the HIBP API does not allow sending an empty user
+     * agent string.
+     *
+     * If \a ok ist not \c nullptr, failure is reported by setting \a *ok to \c false, and success
+     * by setting \a *ok to \c true.
+     *
+     * This function performs a synchronous request and will block the event loop until the request has finished
+     * or failed.
+     */
+    static QStringList get(const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
+
 Q_SIGNALS:
     /*!
      * This signal will be emitted when the API request was successful and returned the
-     * list of data classes in the HIBP system. The \a dataClasses JSON array will contain
-     * a simple array of strings.
+     * list of data classes in the HIBP system. The \a dataClasses string list will
+     * contain the list of data classes.
      */
-    void gotAllDataClasses(const QJsonArray &dataClasses);
+    void gotAllDataClasses(const QStringList &dataClasses);
 
 protected:
     /*!
