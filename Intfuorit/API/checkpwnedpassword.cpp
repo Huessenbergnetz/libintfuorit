@@ -22,6 +22,7 @@
 #include <QStringBuilder>
 #include <QUrlQuery>
 #include <QCryptographicHash>
+#include <QTextStream>
 
 using namespace Intfuorit;
 
@@ -58,27 +59,22 @@ void CheckPwnedPassword::execute(bool reload)
         return;
     }
 
+    const QByteArray hash = QCryptographicHash::hash(d->password.toUtf8(), QCryptographicHash::Sha1).toHex().toUpper();
+    d->pwPrefix = QString::fromLatin1(hash.left(5));
+    d->pwSuffix = QString::fromLatin1(hash.mid(5));
+
+    setCacheFileName(d->pwPrefix % QStringLiteral(".txt"));
+
     QUrl url;
     url.setScheme(QStringLiteral("https"));
-    url.setHost(QStringLiteral("haveibeenpwned.com"));
-    url.setPath(QStringLiteral("/api/v2/pwnedpassword"));
+    url.setHost(QStringLiteral("api.pwnedpasswords.com"));
+    url.setPath(QStringLiteral("/range/") % d->pwPrefix);
 
-    if (d->originalPasswordIsHash) {
-        QUrlQuery uq;
-        uq.addQueryItem(QStringLiteral("originalPasswordIsHash"), QStringLiteral("true"));
-        url.setQuery(uq);
-    }
-
-    const QString hashedPw = d->originalPasswordIsHash ? d->password : QString::fromLatin1(QCryptographicHash::hash(d->password.toUtf8(), QCryptographicHash::Sha1).toHex());
-
-    QUrlQuery data;
-    data.addQueryItem(QStringLiteral("Password"), hashedPw);
-
-    sendRequest(url, true, data.toString(QUrl::FullyEncoded).toUtf8());
+    sendRequest(url, reload);
 }
 
 
-void CheckPwnedPassword::execute(const QString &password, bool originalPasswordIsHash, bool reload)
+void CheckPwnedPassword::execute(const QString &password, bool reload)
 {
     setPassword(password);
     setOriginalPasswordIsHash(originalPasswordIsHash);
@@ -89,8 +85,27 @@ void CheckPwnedPassword::execute(const QString &password, bool originalPasswordI
 void CheckPwnedPassword::successCallback(const QJsonDocument &json)
 {
     Q_UNUSED(json)
-    qDebug("Password \"%s\" has been pwned.", qUtf8Printable(password()));
-    Q_EMIT passwordPwned(password());
+    Q_ASSERT_X(false, "CheckPwnedPassword::successCallback", "there should be no JSON in the respone");
+}
+
+
+void CheckPwnedPassword::successCallback(const QByteArray &data)
+{
+    Q_D(CheckPwnedPassword);
+    QTextStream s(data, QIODevice::ReadOnly|QIODevice::Text);
+    s.setCodec("ASCII");
+    int count = 0;
+    QString line;
+    line.reserve(45);
+    while (s.readLineInto(&line)) {
+        const QString suffix = line.left(35);
+        if (d->pwSuffix.compare(suffix, Qt::CaseInsensitive) == 0) {
+            count = line.mid(36).toInt();
+            break;
+        }
+    }
+    qDebug("The password \"%s\" has been found %i times.", qUtf8Printable(d->password), count);
+    Q_EMIT passwordChecked(count);
     setInOperation(false);
 }
 
@@ -98,13 +113,7 @@ void CheckPwnedPassword::successCallback(const QJsonDocument &json)
 void CheckPwnedPassword::extractError(QNetworkReply *reply)
 {
     Q_ASSERT_X(reply, "extract error", "invalid QNetworkReply object");
-
-    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 404) {
-        qDebug("Password \"%s\" has not been pwned.", qUtf8Printable(password()));
-        Q_EMIT passwordNotPwned(password());
-    } else {
-        Component::extractError(reply);
-    }
+    Component::extractError(reply);
     setInOperation(false);
 }
 
@@ -114,23 +123,14 @@ QString CheckPwnedPassword::password() const { Q_D(const CheckPwnedPassword); re
 void CheckPwnedPassword::setPassword(const QString &nPassword)
 {
     Q_D(CheckPwnedPassword);
+    if (inOperation()) {
+        qWarning("%s", "Can not change the password to check while operation is running.");
+        return;
+    }
     if (d->password != nPassword) {
         d->password = nPassword;
         qDebug("Changed password to \"%s\".", qUtf8Printable(nPassword));
         Q_EMIT passwordChanged(nPassword);
-    }
-}
-
-
-bool CheckPwnedPassword::originalPasswordIsHash() const { Q_D(const CheckPwnedPassword); return d->originalPasswordIsHash; }
-
-void CheckPwnedPassword::setOriginalPasswordIsHash(bool nOriginalPasswordIsHash)
-{
-    Q_D(CheckPwnedPassword);
-    if (d->originalPasswordIsHash != nOriginalPasswordIsHash) {
-        d->originalPasswordIsHash = nOriginalPasswordIsHash;
-        qDebug("Changed originalPasswordIsHash to %s.", nOriginalPasswordIsHash ? "true" : "false");
-        Q_EMIT originalPasswordIsHashChanged(nOriginalPasswordIsHash);
     }
 }
 

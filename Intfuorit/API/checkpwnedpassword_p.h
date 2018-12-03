@@ -32,12 +32,13 @@ public:
     explicit CheckPwnedPasswordPrivate(CheckPwnedPassword *parent) :
         ComponentPrivate(parent)
     {
-        expectedJSONType = ComponentPrivate::Empty;
-        namOperation = QNetworkAccessManager::PostOperation;
+        expectedJSONType = ComponentPrivate::PlainText;
+        namOperation = QNetworkAccessManager::GetOperation;
     }
 
     QString password;
-    bool originalPasswordIsHash = false;
+    QString pwPrefix;
+    QString pwSuffix;
 };
 
 }
