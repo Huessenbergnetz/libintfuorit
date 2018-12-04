@@ -84,7 +84,7 @@ QVariant BreachesListModel::data(const QModelIndex &index, int role) const
 
     Q_D(const BreachesListModel);
 
-    if (index.isValid() && (static_cast<std::size_t>(index.row()) < d->list.size())) {
+    if (index.isValid() && (index.row() < d->list.size())) {
         const Breach b = d->list.at(index.row());
         switch (role) {
         case Title:                 var.setValue(b.title());                   break;
