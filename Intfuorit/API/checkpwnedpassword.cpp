@@ -130,17 +130,17 @@ void CheckPwnedPassword::setPassword(const QString &nPassword)
 int CheckPwnedPassword::check(const QString &password, const QString &userAgent, bool reload)
 {
     int count = -1;
-    CheckPwnedPassword cpp;
-    cpp.setPassword(password);
-    if (!userAgent.isEmpty()) {
-        cpp.setUserAgent(userAgent);
+    CheckPwnedPassword api;
+    const QString ua = userAgent.trimmed();
+    if (!ua.isEmpty()) {
+        api.setUserAgent(ua);
     }
     QEventLoop loop;
-    QObject::connect(&cpp, &CheckPwnedPassword::failed, &loop, &QEventLoop::quit);
-    QObject::connect(&cpp, &CheckPwnedPassword::passwordChecked, &loop, &QEventLoop::quit);
-    QObject::connect(&cpp, &CheckPwnedPassword::passwordChecked, &cpp, [&count](int _count){count = _count;});
-    cpp.execute(reload);
-    if (cpp.inOperation()) {
+    QObject::connect(&api, &CheckPwnedPassword::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &CheckPwnedPassword::passwordChecked, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &CheckPwnedPassword::passwordChecked, &api, [&count](int _count){count = _count;});
+    api.execute(password, reload);
+    if (api.inOperation()) {
         loop.exec();
     }
     return count;

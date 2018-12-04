@@ -22,6 +22,7 @@
 #include "../Objects/breach.h"
 #include <QStringBuilder>
 #include <QJsonObject>
+#include <QEventLoop>
 
 using namespace Intfuorit;
 
@@ -31,12 +32,10 @@ GetBreachedSite::GetBreachedSite(QObject *parent) :
 
 }
 
-
 GetBreachedSite::~GetBreachedSite()
 {
 
 }
-
 
 void GetBreachedSite::execute(bool reload)
 {
@@ -64,13 +63,11 @@ void GetBreachedSite::execute(bool reload)
     sendRequest(url, reload);
 }
 
-
 void GetBreachedSite::execute(const QString &name, bool reload)
 {
     setName(name);
     execute(reload);
 }
-
 
 QString GetBreachedSite::name() const { Q_D(const GetBreachedSite); return d->name; }
 
@@ -85,12 +82,38 @@ void GetBreachedSite::setName(const QString &nName)
     }
 }
 
-
 void GetBreachedSite::successCallback(const QJsonDocument &json)
 {
     qDebug("Got breached site data for %s.", qUtf8Printable(name()));
     Q_EMIT gotBreach(Breach::fromJson(json.object()));
     setInOperation(false);
+}
+
+Breach GetBreachedSite::get(const QString &name, const QString &userAgent, bool reload, bool *ok)
+{
+    Breach breach;
+    GetBreachedSite api;
+    const QString ua = userAgent.trimmed();
+    if (!ua.isEmpty()) {
+        api.setUserAgent(ua);
+    }
+    QEventLoop loop;
+    QObject::connect(&api, &GetBreachedSite::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetBreachedSite::gotBreach, &loop, &QEventLoop::quit);
+    if (ok) {
+        QObject::connect(&api, &GetBreachedSite::failed, &api, [ok](){*ok = false;});
+    }
+    QObject::connect(&api, &GetBreachedSite::gotBreach, &api, [&breach,ok](const Breach &_breach){
+        breach = _breach;
+        if (ok) {
+            *ok = true;
+        }
+    });
+    api.execute(name, reload);
+    if (api.inOperation()) {
+        loop.exec();
+    }
+    return breach;
 }
 
 #include "moc_getbreachedsite.cpp"

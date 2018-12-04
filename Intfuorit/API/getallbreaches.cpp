@@ -100,25 +100,25 @@ void GetAllBreaches::setDomain(const QString &nDomain)
 QVector<Breach> GetAllBreaches::get(const QString &domain, const QString &userAgent, bool reload, bool *ok)
 {
     QVector<Breach> breaches;
-    GetAllBreaches gab;
-    gab.setDomain(domain);
-    if (!userAgent.isEmpty()) {
-        gab.setUserAgent(userAgent);
+    GetAllBreaches api;
+    const QString ua = userAgent.trimmed();
+    if (!ua.isEmpty()) {
+        api.setUserAgent(ua);
     }
     QEventLoop loop;
-    QObject::connect(&gab, &GetAllBreaches::failed, &loop, &QEventLoop::quit);
-    QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetAllBreaches::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetAllBreaches::gotAllBreaches, &loop, &QEventLoop::quit);
     if (ok) {
-        QObject::connect(&gab, &GetAllBreaches::failed, &gab, [ok](){*ok = false;});
+        QObject::connect(&api, &GetAllBreaches::failed, &api, [ok](){*ok = false;});
     }
-    QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, &gab, [&breaches,ok](const QVector<Breach> &_breaches){
+    QObject::connect(&api, &GetAllBreaches::gotAllBreaches, &api, [&breaches,ok](const QVector<Breach> &_breaches){
         breaches = _breaches;
         if (ok) {
             *ok = true;
         }
     });
-    gab.execute(reload);
-    if (gab.inOperation()) {
+    api.execute(domain, reload);
+    if (api.inOperation()) {
         loop.exec();
     }
     return breaches;

@@ -74,24 +74,25 @@ void GetAllDataClasses::successCallback(const QJsonDocument &json)
 QStringList GetAllDataClasses::get(const QString &userAgent, bool reload, bool *ok)
 {
     QStringList lst;
-    GetAllDataClasses gad;
-    if (!userAgent.isEmpty()) {
-        gad.setUserAgent(userAgent);
+    GetAllDataClasses api;
+    const QString ua = userAgent.trimmed();
+    if (!ua.isEmpty()) {
+        api.setUserAgent(ua);
     }
     QEventLoop loop;
-    QObject::connect(&gad, &GetAllDataClasses::failed, &loop, &QEventLoop::quit);
-    QObject::connect(&gad, &GetAllDataClasses::gotAllDataClasses, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetAllDataClasses::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetAllDataClasses::gotAllDataClasses, &loop, &QEventLoop::quit);
     if (ok) {
-        QObject::connect(&gad, &GetAllDataClasses::failed, &gad, [ok](){*ok = false;});
+        QObject::connect(&api, &GetAllDataClasses::failed, &api, [ok](){*ok = false;});
     }
-    QObject::connect(&gad, &GetAllDataClasses::gotAllDataClasses, &gad, [&lst,ok](const QStringList &_lst){
+    QObject::connect(&api, &GetAllDataClasses::gotAllDataClasses, &api, [&lst,ok](const QStringList &_lst){
         lst = _lst;
         if (ok) {
             *ok = true;
         }
     });
-    gad.execute(reload);
-    if (gad.inOperation()) {
+    api.execute(reload);
+    if (api.inOperation()) {
         loop.exec();
     }
     return lst;

@@ -165,6 +165,25 @@ public:
      */
     void setIncludeUnverified(bool nIncludeUnverified);
 
+    /*!
+     * Gets a list of breaches from the HIBP API the \a account is part of. If \a domain is
+     * not empty, the API will only check for breaches in this \a domain. If \a includeUnverified
+     * is set to \c true, the response will also contain breaches that have not been verified.
+     * If \a reload is set to \c false, cached results will be returned where the default
+     * cache time (2 days) will be used.
+     *
+     * If \a userAgent is empty, a default user agent will be created, using QCoreApplication::applicationName()
+     * and QCoreApplication::applicationVersion(). Note that the HIBP API does not allow sending an empty user
+     * agent string.
+     *
+     * If \a ok ist not \c nullptr, failure is reported by setting \a *ok to \c false, and success
+     * by setting \a *ok to \c true.
+     *
+     * This function performs a synchronous request and will block the event loop until the request has finished
+     * or failed.
+     */
+    static QVector<Breach> get(const QString &account, const QString &domain = QString(), bool includeUnverified = true, const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
+
 Q_SIGNALS:
     /*!
      * Notifier singal for the \link GetBreachesForAccount::domain domain \endlink property.

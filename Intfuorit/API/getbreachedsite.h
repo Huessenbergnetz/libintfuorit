@@ -99,6 +99,23 @@ public:
      */
     void setName(const QString &nName);
 
+    /*!
+     * Gets information about a single %Breach identified by \a name from the HIBP API.
+     * If \a reload is set to \c false, cached results will be returned where the default
+     * cache time (2 days) will be used.
+     *
+     * If \a userAgent is empty, a default user agent will be created, using QCoreApplication::applicationName()
+     * and QCoreApplication::applicationVersion(). Note that the HIBP API does not allow sending an empty user
+     * agent string.
+     *
+     * If \a ok ist not \c nullptr, failure is reported by setting \a *ok to \c false, and success
+     * by setting \a *ok to \c true.
+     *
+     * This function performs a synchronous request and will block the event loop until the request has finished
+     * or failed.
+     */
+    static Breach get(const QString &name, const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
+
 Q_SIGNALS:
     /*!
      * Notifier signal for the \link GetBreachedSite::name name \endlink property.

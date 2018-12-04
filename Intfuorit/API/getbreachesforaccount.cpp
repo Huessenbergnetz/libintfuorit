@@ -190,4 +190,34 @@ void GetBreachesForAccount::extractError(QNetworkReply *reply)
     setInOperation(false);
 }
 
+QVector<Breach> GetBreachesForAccount::get(const QString &account, const QString &domain, bool includeUnverified, const QString &userAgent, bool reload, bool *ok)
+{
+    QVector<Breach> breaches;
+    GetBreachesForAccount api;
+    const QString ua = userAgent.trimmed();
+    if (!ua.isEmpty()) {
+        api.setUserAgent(ua);
+    }
+    QEventLoop loop;
+    QObject::connect(&api, &GetBreachesForAccount::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetBreachesForAccount::gotBreachesForAccount, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetBreachesForAccount::gotNoBreachesForAccount, &loop, &QEventLoop::quit);
+    if (ok) {
+        QObject::connect(&api, &GetBreachesForAccount::failed, &api, [ok](){*ok = false;});
+        QObject::connect(&api, &GetBreachesForAccount::gotNoBreachesForAccount, &api, [ok](){*ok = true;});
+    }
+    QObject::connect(&api, &GetBreachesForAccount::gotBreachesForAccount, &api, [&breaches,ok](const QString &account, const QVector<Breach> &_breaches){
+        Q_UNUSED(account);
+        breaches = _breaches;
+        if (ok) {
+            *ok = true;
+        }
+    });
+    api.execute(account,domain, false, includeUnverified, reload);
+    if (api.inOperation()) {
+        loop.exec();
+    }
+    return breaches;
+}
+
 #include "moc_getbreachesforaccount.cpp"

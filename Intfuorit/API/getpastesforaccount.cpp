@@ -125,5 +125,35 @@ void GetPastesForAccount::extractError(QNetworkReply *reply)
     setInOperation(false);
 }
 
+QVector<Paste> GetPastesForAccount::get(const QString &account, const QString &userAgent, bool reload, bool *ok)
+{
+    QVector<Paste> pastes;
+    GetPastesForAccount api;
+    const QString ua = userAgent.trimmed();
+    if (ua.isEmpty()) {
+        api.setUserAgent(ua);
+    }
+    QEventLoop loop;
+    QObject::connect(&api, &GetPastesForAccount::failed, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetPastesForAccount::gotNoPastesForAccount, &loop, &QEventLoop::quit);
+    QObject::connect(&api, &GetPastesForAccount::gotPastesForAccount, &loop, &QEventLoop::quit);
+    if (ok) {
+        QObject::connect(&api, &GetPastesForAccount::failed, &api, [ok](){*ok = false;});
+        QObject::connect(&api, &GetPastesForAccount::gotNoPastesForAccount, &api, [ok](){*ok = true;});
+    }
+    QObject::connect(&api, &GetPastesForAccount::gotPastesForAccount, &api, [&pastes,ok](const QString &account, const QVector<Paste> &_pastes){
+        Q_UNUSED(account);
+        pastes = _pastes;
+        if (ok) {
+            *ok = true;
+        }
+    });
+    api.execute(account, reload);
+    if (api.inOperation()) {
+        loop.exec();
+    }
+    return pastes;
+}
+
 #include "moc_getpastesforaccount.cpp"
 
