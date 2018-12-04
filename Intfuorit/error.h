@@ -90,7 +90,7 @@ public:
     /*!
      * Constructs a new empty %Error object of Type NoError.
      */
-    explicit Error();
+    Error();
 
     /*!
      * \brief Constructs a new Error object with the given parameters and \a parent.
