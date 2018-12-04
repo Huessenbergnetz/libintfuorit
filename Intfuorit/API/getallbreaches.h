@@ -22,10 +22,9 @@
 
 #include "component.h"
 
-class QJsonArray;
-
 namespace Intfuorit {
 
+class Breach;
 class GetAllBreachesPrivate;
 
 /*!
@@ -107,12 +106,8 @@ public:
      *
      * This function performs a synchronous request and will block the event loop until the request has finished
      * or failed.
-     *
-     * The returned JSON array will contain a list of breach objects see
-     * <a href="https://haveibeenpwned.com/API/v2#BreachModel" rel="external noopener">HIBP API Docs</a> to learn
-     * more about the structure.
      */
-    static QJsonArray get(const QString &domain = QString(), const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
+    static QVector<Breach> get(const QString &domain = QString(), const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
 
 Q_SIGNALS:
     /*!
@@ -122,11 +117,8 @@ Q_SIGNALS:
     void domainChanged(const QString &domain);
     /*!
      * This signal will be emitted when the list of breached sites has been successfully requested from the API.
-     * The \a breaches JSON will contain an array of objects that contain the information about the
-     * breached sites. See the <A HREF="https://haveibeenpwned.com/API/v2#BreachModel">HIBP API docs</A> for a
-     * description of the JSON breach object values.
      */
-    void gotAllBreaches(const QJsonArray &breaches);
+    void gotAllBreaches(const QVector<Breach> &breaches);
 
 protected:
     /*!

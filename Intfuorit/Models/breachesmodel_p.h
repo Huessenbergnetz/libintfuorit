@@ -25,7 +25,7 @@
 #include "../API/getallbreaches.h"
 #include "../API/getbreachesforaccount.h"
 #include "../Objects/breach.h"
-#include <QJsonDocument>
+#include <QVector>
 
 namespace Intfuorit {
 
@@ -38,11 +38,11 @@ public:
 
     ~BreachesModelPrivate();
 
-    void gotBreaches(const QJsonArray &a);
+    void gotBreaches(const QVector<Breach> &breaches);
 
     void clearModel();
 
-    std::vector<Breach> list;
+    QVector<Breach> list;
 
     GetAllBreaches *gab = nullptr;
     GetBreachesForAccount *gbfa = nullptr;

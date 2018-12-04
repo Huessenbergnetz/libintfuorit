@@ -22,10 +22,9 @@
 
 #include "component.h"
 
-class QJsonArray;
-
 namespace Intfuorit {
 
+class Breach;
 class GetBreachesForAccountPrivate;
 
 /*!
@@ -187,12 +186,14 @@ Q_SIGNALS:
     void includeUnverifiedChanged(bool includeUnverified);
     /*!
      * This signal will be emitted when the request has been finished and the \link GetBreachesForAccount::account account \endlink
-     * has been found in one ore more breaches. It will contain the queried \a account name and the JSON array of \a breaches.
+     * has been found in one ore more breaches.
+     * \sa gotNoBreachesForAccount()
      */
-    void gotBreachesForAccount(const QString &account, const QJsonArray &breaches);
+    void gotBreachesForAccount(const QString &account, const QVector<Breach> &breaches);
     /*!
      * This signal will be emitted when the request has been finished and the \link GetBreachesForAccount::account account \endlink
      * has not been found in the breaches data of HIBP. It will contain the queried \a account name.
+     * \sa gotBreachesForAccount()
      */
     void gotNoBreachesForAccount(const QString &account);
 

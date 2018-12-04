@@ -103,8 +103,6 @@ public:
      *
      * This function performs a synchronous request and will block the event loop until the request has finished
      * or failed.
-     *
-     * \since libintfuorit 2.0.0
      */
     static int check(const QString &password, const QString &userAgent = QString(), bool reload = false);
 

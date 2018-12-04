@@ -18,10 +18,6 @@
  */
 
 #include "pastesmodel_p.h"
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QJsonValue>
 
 using namespace Intfuorit;
 

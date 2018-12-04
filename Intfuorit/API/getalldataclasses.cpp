@@ -21,6 +21,7 @@
 #include "../error.h"
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonValue>
 #include <QEventLoop>
 #include <QStringList>
 
@@ -60,14 +61,11 @@ void GetAllDataClasses::execute(bool reload)
 void GetAllDataClasses::successCallback(const QJsonDocument &json)
 {
     qDebug("Got all data classes.");
-    qDebug("%s", json.toJson().constData());
     const QJsonArray a = json.array();
     QStringList lst;
-    if (!a.empty()) {
-        lst.reserve(a.size());
-        for (const QJsonValue &v : a) {
-            lst.push_back(v.toString());
-        }
+    lst.reserve(a.size());
+    for (const QJsonValue &v : a) {
+        lst.push_back(v.toString());
     }
     Q_EMIT gotAllDataClasses(lst);
     setInOperation(false);

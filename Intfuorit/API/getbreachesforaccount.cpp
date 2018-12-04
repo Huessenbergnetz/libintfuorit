@@ -19,10 +19,14 @@
 
 #include "getbreachesforaccount_p.h"
 #include "../error.h"
+#include "../Objects/breach.h"
 #include <QCryptographicHash>
 #include <QUrlQuery>
 #include <QStringBuilder>
 #include <QJsonArray>
+#include <QJsonValue>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 using namespace Intfuorit;
 
@@ -163,7 +167,11 @@ void GetBreachesForAccount::setIncludeUnverified(bool nIncludeUnverified)
 void GetBreachesForAccount::successCallback(const QJsonDocument &json)
 {
     const QJsonArray array = json.array();
-    Q_EMIT gotBreachesForAccount(account(), array);
+    QVector<Breach> breaches;
+    for (const QJsonValue &v : array) {
+        breaches.push_back(Breach::fromJson(v.toObject()));
+    }
+    Q_EMIT gotBreachesForAccount(account(), breaches);
     qDebug("Account %s is part of breaches.", qUtf8Printable(account()));
     setInOperation(false);
 }

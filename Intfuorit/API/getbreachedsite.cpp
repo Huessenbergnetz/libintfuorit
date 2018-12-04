@@ -19,6 +19,7 @@
 
 #include "getbreachedsite_p.h"
 #include "../error.h"
+#include "../Objects/breach.h"
 #include <QStringBuilder>
 #include <QJsonObject>
 
@@ -88,8 +89,7 @@ void GetBreachedSite::setName(const QString &nName)
 void GetBreachedSite::successCallback(const QJsonDocument &json)
 {
     qDebug("Got breached site data for %s.", qUtf8Printable(name()));
-    const QJsonObject o = json.object();
-    Q_EMIT gotBreach(o);
+    Q_EMIT gotBreach(Breach::fromJson(json.object()));
     setInOperation(false);
 }
 

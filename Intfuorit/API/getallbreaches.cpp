@@ -18,8 +18,12 @@
  */
 
 #include "getallbreaches_p.h"
+#include "../Objects/breach.h"
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonValue>
+#include <QJsonObject>
+#include <QVector>
 #include <QUrlQuery>
 #include <QStringBuilder>
 
@@ -69,8 +73,14 @@ void GetAllBreaches::execute(const QString &domain, bool reload)
 
 void GetAllBreaches::successCallback(const QJsonDocument &json)
 {
+    qDebug("%s", "Got all breaches.");
     const QJsonArray a = json.array();
-    Q_EMIT gotAllBreaches(a);
+    QVector<Breach> breaches;
+    breaches.reserve(a.size());
+    for (const QJsonValue &v : a) {
+        breaches.push_back(Breach::fromJson(v.toObject()));
+    }
+    Q_EMIT gotAllBreaches(breaches);
     setInOperation(false);
 }
 
@@ -87,9 +97,9 @@ void GetAllBreaches::setDomain(const QString &nDomain)
     }
 }
 
-QJsonArray GetAllBreaches::get(const QString &domain, const QString &userAgent, bool reload, bool *ok)
+QVector<Breach> GetAllBreaches::get(const QString &domain, const QString &userAgent, bool reload, bool *ok)
 {
-    QJsonArray a;
+    QVector<Breach> breaches;
     GetAllBreaches gab;
     gab.setDomain(domain);
     if (!userAgent.isEmpty()) {
@@ -101,8 +111,8 @@ QJsonArray GetAllBreaches::get(const QString &domain, const QString &userAgent, 
     if (ok) {
         QObject::connect(&gab, &GetAllBreaches::failed, &gab, [ok](){*ok = false;});
     }
-    QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, &gab, [&a,ok](const QJsonArray &_a){
-        a = _a;
+    QObject::connect(&gab, &GetAllBreaches::gotAllBreaches, &gab, [&breaches,ok](const QVector<Breach> &_breaches){
+        breaches = _breaches;
         if (ok) {
             *ok = true;
         }
@@ -111,7 +121,7 @@ QJsonArray GetAllBreaches::get(const QString &domain, const QString &userAgent, 
     if (gab.inOperation()) {
         loop.exec();
     }
-    return a;
+    return breaches;
 }
 
 #include "moc_getallbreaches.cpp"

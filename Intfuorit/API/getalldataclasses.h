@@ -22,9 +22,6 @@
 
 #include "component.h"
 
-class QJsonArray;
-class QStringList;
-
 namespace Intfuorit {
 
 class GetAllDataClassesPrivate;

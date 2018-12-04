@@ -22,8 +22,6 @@
 
 #include "component.h"
 
-class QJsonArray;
-
 namespace Intfuorit {
 
 class Paste;
