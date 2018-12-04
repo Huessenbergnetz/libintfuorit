@@ -32,7 +32,7 @@ class QJsonObject;
 
 namespace Intfuorit {
 
-class BreachPrivate;
+class BreachData;
 
 /*!
  * \brief The %Breach class contains information about a single breach.
@@ -43,11 +43,9 @@ class BreachPrivate;
  * \headerfile "" <Intfuorit/Objects/Breach>
  * \sa BreachesListModel, BreachesListFilterModel, GetAllBreaches, GetBreachedSite, GetBreachesForAccount
  */
-class INTFUORITSHARED_EXPORT Breach : public QObject
+class INTFUORITSHARED_EXPORT Breach
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(Breach)
-    Q_DECLARE_PRIVATE(Breach)
+    Q_GADGET
     /*!
      * This property holds the descriptive title for the breach suitable for displaying to end users.
      * It's unique across all breaches but individual values may change in the future (i.e. if another
@@ -198,14 +196,12 @@ public:
     /*!
      * \brief Constructs a new empty %Breach object.
      */
-    explicit Breach(QObject *parent = nullptr);
+    Breach();
 
     /*!
-     * Constructs a new %Breach object with the given parameters and \a parent.
+     * Constructs a new %Breach object with the given parameters.
      * All data parameters belong to one of the properties of the Breach class,
      * look at the properties to learn more about the parameters.
-     *
-     * \since libintfuorit 2.0.0
      */
     Breach(const QString &title,
                const QString &name,
@@ -222,13 +218,32 @@ public:
                bool isActive,
                bool isRetired,
                bool isSpamList,
-               const QUrl &logoPath,
-               QObject *parent = nullptr);
+               const QUrl &logoPath);
+
+    /*!
+     * Constructs a copy of \a other.
+     */
+    Breach(const Breach &other);
+
+    /*!
+     * Assigns \a other to this %Breach and returns a reference to this %Breach.
+     */
+    Breach &operator=(const Breach &other);
+
+    /*!
+     * Move-assigns \a toher to this %Breach instance.
+     */
+    Breach &operator=(Breach &&other);
 
     /*!
      * Deconstructs the Breach object.
      */
     ~Breach();
+
+    /*!
+     * Swaps this %Breach instance with \a other.
+     */
+    void swap(Breach &other);
 
     /*!
      * Getter function for the \link Breach::title title \endlink property.
@@ -300,19 +315,26 @@ public:
     QUrl logoPath() const;
 
     /*!
-     * \brief Creates a new Breach object from JSON object \a o with the given \a parent and returns the pointer to it.
+     * Compares the \a other %Breach's values to this %Breach and returns \c true if it is equal.
      */
-    static Breach* fromJson(const QJsonObject &o, QObject *parent = nullptr);
+    bool operator==(const Breach &other) const;
 
     /*!
-     * \brief Clones the Breach \a other by creating a new Breach with the given \a parent and \a other's values.
+     * Compares the \a other %Breach's values to this %Breach and returns \c true if it is not equal.
      */
-    static Breach* clone(Breach *other, QObject *parent = nullptr);
+    bool operator!=(const Breach &other) const;
+
+    /*!
+     * \brief Creates a new %Breach object from JSON object \a o.
+     */
+    static Breach fromJson(const QJsonObject &o);
 
 protected:
-    const QScopedPointer<BreachPrivate> d_ptr;
+    QSharedDataPointer<BreachData> d;
 };
 
 }
+
+Q_DECLARE_TYPEINFO(Intfuorit::Breach, Q_MOVABLE_TYPE);
 
 #endif // LIBINTFUORITBREACH_H

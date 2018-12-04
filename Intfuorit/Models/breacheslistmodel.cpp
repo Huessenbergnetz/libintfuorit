@@ -40,7 +40,6 @@ BreachesListModel::~BreachesListModel()
 QHash<int, QByteArray> BreachesListModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractItemModel::roleNames();
-    roles.insert(Item, QByteArrayLiteral("item"));
     roles.insert(Title, QByteArrayLiteral("title"));
     roles.insert(Name, QByteArrayLiteral("name"));
     roles.insert(Domain, QByteArrayLiteral("domain"));
@@ -86,26 +85,25 @@ QVariant BreachesListModel::data(const QModelIndex &index, int role) const
     Q_D(const BreachesListModel);
 
     if (index.isValid() && (static_cast<std::size_t>(index.row()) < d->list.size())) {
-        Breach *b = d->list.at(index.row());
+        const Breach b = d->list.at(index.row());
         switch (role) {
-        case Item:                  var.setValue<Breach*>(b);                   break;
-        case Title:                 var.setValue(b->title());                   break;
-        case Name:                  var.setValue(b->name());                    break;
-        case Domain:                var.setValue(b->domain());                  break;
-        case BreachDate:            var.setValue(b->breachDate());              break;
-        case AddedDate:             var.setValue(b->addedDate());               break;
-        case ModifiedDate:          var.setValue(b->modifiedDate());            break;
-        case PwnCount:              var.setValue(b->pwnCount());                break;
-        case Description:           var.setValue(b->description());             break;
-        case DataClasses:           var.setValue(b->dataClasses());             break;
-        case DataClassesTranslated: var.setValue(b->dataClassesTranslated());   break;
-        case IsVerified:            var.setValue(b->isVerified());              break;
-        case IsFabricated:          var.setValue(b->isFabricated());            break;
-        case IsSensitive:           var.setValue(b->isSensitive());             break;
-        case IsActive:              var.setValue(b->isActive());                break;
-        case IsRetired:             var.setValue(b->isRetired());               break;
-        case IsSpamList:            var.setValue(b->isSpamList());              break;
-        case LogoPath:              var.setValue(b->logoPath());                break;
+        case Title:                 var.setValue(b.title());                   break;
+        case Name:                  var.setValue(b.name());                    break;
+        case Domain:                var.setValue(b.domain());                  break;
+        case BreachDate:            var.setValue(b.breachDate());              break;
+        case AddedDate:             var.setValue(b.addedDate());               break;
+        case ModifiedDate:          var.setValue(b.modifiedDate());            break;
+        case PwnCount:              var.setValue(b.pwnCount());                break;
+        case Description:           var.setValue(b.description());             break;
+        case DataClasses:           var.setValue(b.dataClasses());             break;
+        case DataClassesTranslated: var.setValue(b.dataClassesTranslated());   break;
+        case IsVerified:            var.setValue(b.isVerified());              break;
+        case IsFabricated:          var.setValue(b.isFabricated());            break;
+        case IsSensitive:           var.setValue(b.isSensitive());             break;
+        case IsActive:              var.setValue(b.isActive());                break;
+        case IsRetired:             var.setValue(b.isRetired());               break;
+        case IsSpamList:            var.setValue(b.isSpamList());              break;
+        case LogoPath:              var.setValue(b.logoPath());                break;
         default: break;
         }
     }

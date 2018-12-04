@@ -42,7 +42,7 @@ public:
 
     void clearModel();
 
-    std::vector<Breach*> list;
+    std::vector<Breach> list;
 
     GetAllBreaches *gab = nullptr;
     GetBreachesForAccount *gbfa = nullptr;

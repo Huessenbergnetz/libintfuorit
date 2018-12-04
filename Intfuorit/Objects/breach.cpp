@@ -24,16 +24,34 @@
 
 using namespace Intfuorit;
 
-Breach::Breach(QObject *parent) :
-    QObject(parent), d_ptr(new BreachPrivate)
+Breach::Breach() :
+    d(new BreachData)
 {
 
 }
 
-Breach::Breach(const QString &title, const QString &name, const QString &domain, QDate breachDate, const QDateTime &addedDate, const QDateTime &modifiedDate, quint32 pwnCount, const QString &description, const QStringList &dataClasses, bool isVerified, bool isFabricated, bool isSensitive, bool isActive, bool isRetired, bool isSpamList, const QUrl &logoPath, QObject *parent) :
-    QObject(parent), d_ptr(new BreachPrivate(title, name, domain, breachDate, addedDate, modifiedDate, pwnCount, description, dataClasses, isVerified, isFabricated, isSensitive, isActive, isRetired, isSpamList, logoPath))
+Breach::Breach(const QString &title, const QString &name, const QString &domain, QDate breachDate, const QDateTime &addedDate, const QDateTime &modifiedDate, quint32 pwnCount, const QString &description, const QStringList &dataClasses, bool isVerified, bool isFabricated, bool isSensitive, bool isActive, bool isRetired, bool isSpamList, const QUrl &logoPath) :
+    d(new BreachData(title, name, domain, breachDate, addedDate, modifiedDate, pwnCount, description, dataClasses, isVerified, isFabricated, isSensitive, isActive, isRetired, isSpamList, logoPath))
 {
-    setObjectName(name);
+
+}
+
+Breach::Breach(const Breach &other) :
+    d(other.d)
+{
+
+}
+
+Breach& Breach::operator=(const Breach &other)
+{
+    d = other.d;
+    return *this;
+}
+
+Breach& Breach::operator=(Breach &&other)
+{
+    swap(other);
+    return *this;
 }
 
 Breach::~Breach()
@@ -41,27 +59,31 @@ Breach::~Breach()
 
 }
 
-QString Breach::title() const { Q_D(const Breach); return d->title; }
+void Breach::swap(Breach &other)
+{
+    std::swap(d, other.d);
+}
 
-QString Breach::name() const { Q_D(const Breach); return d->name; }
+QString Breach::title() const { return d->title; }
 
-QString Breach::domain() const { Q_D(const Breach); return d->domain; }
+QString Breach::name() const { return d->name; }
 
-QDate Breach::breachDate() const { Q_D(const Breach); return d->breachDate; }
+QString Breach::domain() const { return d->domain; }
 
-QDateTime Breach::addedDate() const { Q_D(const Breach); return d->addedDate; }
+QDate Breach::breachDate() const { return d->breachDate; }
 
-QDateTime Breach::modifiedDate() const { Q_D(const Breach); return d->modifiedDate; }
+QDateTime Breach::addedDate() const { return d->addedDate; }
 
-quint32 Breach::pwnCount() const { Q_D(const Breach); return d->pwnCount; }
+QDateTime Breach::modifiedDate() const { return d->modifiedDate; }
 
-QString Breach::description() const { Q_D(const Breach); return d->description; }
+quint32 Breach::pwnCount() const { return d->pwnCount; }
 
-QStringList Breach::dataClasses() const { Q_D(const Breach); return d->dataClasses; }
+QString Breach::description() const { return d->description; }
+
+QStringList Breach::dataClasses() const { return d->dataClasses; }
 
 QStringList Breach::dataClassesTranslated() const
 {
-    Q_D(const Breach);
     static QHash<QString,QString> trans({
                                             //% "Account balances"
                                             {QStringLiteral("Account balances"), qtTrId("libintfuorit-account-balances")},
@@ -269,24 +291,34 @@ QStringList Breach::dataClassesTranslated() const
     return transDcs;
 }
 
-bool Breach::isVerified() const { Q_D(const Breach); return d->isVerified; }
+bool Breach::isVerified() const { return d->isVerified; }
 
-bool Breach::isFabricated() const { Q_D(const Breach); return d->isFabricated; }
+bool Breach::isFabricated() const { return d->isFabricated; }
 
-bool Breach::isSensitive() const { Q_D(const Breach); return d->isSensitive; }
+bool Breach::isSensitive() const { return d->isSensitive; }
 
-bool Breach::isActive() const { Q_D(const Breach); return d->isActive; }
+bool Breach::isActive() const { return d->isActive; }
 
-bool Breach::isRetired() const { Q_D(const Breach); return d->isRetired; }
+bool Breach::isRetired() const { return d->isRetired; }
 
-bool Breach::isSpamList() const { Q_D(const Breach); return d->isSpamList; }
+bool Breach::isSpamList() const { return d->isSpamList; }
 
-QUrl Breach::logoPath() const { Q_D(const Breach); return d->logoPath; }
+QUrl Breach::logoPath() const { return d->logoPath; }
 
-Breach* Breach::fromJson(const QJsonObject &o, QObject *parent)
+bool Breach::operator==(const Breach &other) const
+{
+    return d->name == other.name();
+}
+
+bool Breach::operator!=(const Breach &other) const
+{
+    return d->name != other.name();
+}
+
+Breach Breach::fromJson(const QJsonObject &o)
 {
     if (o.isEmpty()) {
-        return new Breach(parent);
+        return Breach();
     }
 
     const QJsonArray dataClassesArray = o.value(QStringLiteral("DataClasses")).toArray();
@@ -296,46 +328,24 @@ Breach* Breach::fromJson(const QJsonObject &o, QObject *parent)
         dataClasses << dc.toString();
     }
 
-    return new Breach(o.value(QStringLiteral("Title")).toString(),
-                      o.value(QStringLiteral("Name")).toString(),
-                      o.value(QStringLiteral("Domain")).toString(),
-                      QDate::fromString(o.value(QStringLiteral("BreachDate")).toString(), QStringLiteral("yyyy-MM-dd")),
-                      QDateTime::fromString(o.value(QStringLiteral("AddedDate")).toString(), Qt::ISODate),
-                      QDateTime::fromString(o.value(QStringLiteral("ModifiedDate")).toString(), Qt::ISODate),
-                      o.value(QStringLiteral("PwnCount")).toInt(),
-                      o.value(QStringLiteral("Description")).toString(),
-                      dataClasses,
-                      o.value(QStringLiteral("IsVerified")).toBool(),
-                      o.value(QStringLiteral("IsFabricated")).toBool(),
-                      o.value(QStringLiteral("IsSensitive")).toBool(),
-                      o.value(QStringLiteral("IsActive")).toBool(),
-                      o.value(QStringLiteral("IsRetired")).toBool(),
-                      o.value(QStringLiteral("IsSpamList")).toBool(),
-                      QUrl(o.value(QStringLiteral("LogoPath")).toString()),
-                      parent);
-}
-
-Breach* Breach::clone(Breach *other, QObject *parent)
-{
-    Q_ASSERT_X(other, "clone breach", "invalid source object");
-
-    return new Breach(other->title(),
-                      other->name(),
-                      other->domain(),
-                      other->breachDate(),
-                      other->addedDate(),
-                      other->modifiedDate(),
-                      other->pwnCount(),
-                      other->description(),
-                      other->dataClasses(),
-                      other->isVerified(),
-                      other->isFabricated(),
-                      other->isSensitive(),
-                      other->isActive(),
-                      other->isRetired(),
-                      other->isSpamList(),
-                      other->logoPath(),
-                      parent);
+    return {
+        o.value(QStringLiteral("Title")).toString(),
+        o.value(QStringLiteral("Name")).toString(),
+        o.value(QStringLiteral("Domain")).toString(),
+        QDate::fromString(o.value(QStringLiteral("BreachDate")).toString(), Qt::ISODate),
+        QDateTime::fromString(o.value(QStringLiteral("AddedDate")).toString(), Qt::ISODate),
+        QDateTime::fromString(o.value(QStringLiteral("ModifiedDate")).toString(), Qt::ISODate),
+        static_cast<quint32>(o.value(QStringLiteral("PwnCount")).toDouble()),
+        o.value(QStringLiteral("Description")).toString(),
+        dataClasses,
+        o.value(QStringLiteral("IsVerified")).toBool(),
+        o.value(QStringLiteral("IsFabricated")).toBool(),
+        o.value(QStringLiteral("IsSensitive")).toBool(),
+        o.value(QStringLiteral("IsActive")).toBool(),
+        o.value(QStringLiteral("IsRetired")).toBool(),
+        o.value(QStringLiteral("IsSpamList")).toBool(),
+        QUrl(o.value(QStringLiteral("LogoPath")).toString())
+    };
 }
 
 #include "moc_breach.cpp"

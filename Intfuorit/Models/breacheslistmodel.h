@@ -59,8 +59,7 @@ public:
      * the model data. The role names correspond to the property names of the Breach class.
      */
     enum Roles : quint16 {
-        Item = Qt::UserRole + 1,    /**< Pointer to the complete Breach object. */
-        Title,                      /**< The display \link Breach::title title \endlink of the breach. */
+        Title = Qt::UserRole + 1,   /**< The display \link Breach::title title \endlink of the breach. */
         Name,                       /**< The unique \link Breach::name name \endlink of the breach. */
         Domain,                     /**< The \link Breach::domain domain \endlink of the breached site. */
         BreachDate,                 /**< The \link Breach::breachDate date \endlink the breach has happened. */
