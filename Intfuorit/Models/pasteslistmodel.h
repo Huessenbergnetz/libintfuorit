@@ -59,8 +59,7 @@ public:
      * model data. The role names correspond to the property names of the Paste class.
      */
     enum Roles : quint16 {
-        Item = Qt::UserRole + 1,    /**< Pointer to the complete Paste object. */
-        Source,                     /**< The \link Paste::source source \endlink service the paste is published on. */
+        Source = Qt::UserRole + 1,  /**< The \link Paste::source source \endlink service the paste is published on. */
         SourceId,                   /**< The \link Paste::sourceId ID \endlink of the paste as it was given at the source service. */
         Title,                      /**< The \link Paste::title title \endlink of the paste, if any. Might be a null string. */
         Date,                       /**< The \link Paste::date date \endlink and time that the paste was posted. */

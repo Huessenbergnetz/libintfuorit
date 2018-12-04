@@ -43,7 +43,6 @@ PastesListModel::~PastesListModel()
 QHash<int, QByteArray> PastesListModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractItemModel::roleNames();
-    roles.insert(Item, QByteArrayLiteral("item"));
     roles.insert(Source, QByteArrayLiteral("source"));
     roles.insert(SourceId, QByteArrayLiteral("sourceId"));
     roles.insert(Title, QByteArrayLiteral("title"));
@@ -80,10 +79,9 @@ QVariant PastesListModel::data(const QModelIndex &index, int role) const
 
     Q_D(const PastesListModel);
 
-    if (index.isValid() && (static_cast<std::size_t>(index.row()) < d->list.size())) {
+    if (index.isValid() && (index.row() < d->list.size())) {
         const Paste p = d->list.at(index.row());
         switch(role) {
-        case Item:          var.setValue<Paste>(p);         break;
         case Source:        var.setValue(p.source());       break;
         case SourceId:      var.setValue(p.sourceId());     break;
         case Title:         var.setValue(p.title());        break;

@@ -24,6 +24,7 @@
 #include "basemodel_p.h"
 #include "../API/getpastesforaccount.h"
 #include "../Objects/paste.h"
+#include <QVector>
 
 namespace Intfuorit {
 
@@ -36,11 +37,11 @@ public:
 
     ~PastesModelPrivate();
 
-    void gotPastes(const QJsonArray &a);
+    void gotPastes(const QVector<Paste> &pastes);
 
     void clearModel();
 
-    std::vector<Paste> list;
+    QVector<Paste> list;
 
     GetPastesForAccount *gpfa = nullptr;
 };

@@ -19,9 +19,12 @@
 
 #include "getpastesforaccount_p.h"
 #include "../error.h"
+#include "../Objects/paste.h"
 #include <QCryptographicHash>
 #include <QStringBuilder>
 #include <QJsonArray>
+#include <QJsonValue>
+#include <QJsonObject>
 
 using namespace Intfuorit;
 
@@ -31,13 +34,10 @@ GetPastesForAccount::GetPastesForAccount(QObject *parent) :
 
 }
 
-
-
 GetPastesForAccount::~GetPastesForAccount()
 {
 
 }
-
 
 void GetPastesForAccount::execute(bool reload)
 {
@@ -101,7 +101,12 @@ void GetPastesForAccount::setAccount(const QString &nAccount)
 void GetPastesForAccount::successCallback(const QJsonDocument &json)
 {
     const QJsonArray array = json.array();
-    Q_EMIT gotPastesForAccount(account(), array);
+    QVector<Paste> pastes;
+    pastes.reserve(array.size());
+    for (const QJsonValue &v : array) {
+        pastes.push_back(Paste::fromJson(v.toObject()));
+    }
+    Q_EMIT gotPastesForAccount(account(), pastes);
     qDebug("Account %s is part of pastes.", qUtf8Printable(account()));
     setInOperation(false);
 }

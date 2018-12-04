@@ -25,7 +25,6 @@
 
 using namespace Intfuorit;
 
-
 PastesModelPrivate::PastesModelPrivate(PastesModel *parent) : BaseModelPrivate(parent)
 {
 
@@ -35,7 +34,6 @@ PastesModelPrivate::~PastesModelPrivate()
 {
 
 }
-
 
 void PastesModelPrivate::clearModel()
 {
@@ -48,28 +46,22 @@ void PastesModelPrivate::clearModel()
     }
 }
 
-
-void PastesModelPrivate::gotPastes(const QJsonArray &a)
+void PastesModelPrivate::gotPastes(const QVector<Paste> &pastes)
 {
-    if (!a.isEmpty()) {
+    if (!pastes.isEmpty()) {
         qDebug("Populating model.");
         Q_Q(PastesModel);
-        q->beginInsertRows(QModelIndex(), list.size(), (list.size() + a.size() - 1));
-        list.reserve(list.size() + a.size());
-        for (const QJsonValue &o : a) {
-            list.push_back(Paste::fromJson(o.toObject()));
-        }
+        q->beginInsertRows(QModelIndex(), list.size(), (list.size() + pastes.size() - 1));
+        list.append(pastes);
         q->endInsertRows();
     }
     setInOperation(false);
 }
 
-
 PastesModel::PastesModel(QObject *parent) : BaseModel(* new PastesModelPrivate(this), parent)
 {
 
 }
-
 
 PastesModel::PastesModel(PastesModelPrivate &dd, QObject *parent) : BaseModel(dd, parent)
 {
@@ -80,7 +72,6 @@ PastesModel::~PastesModel()
 {
 
 }
-
 
 void PastesModel::getPastesForAccount(const QString &account, bool reload)
 {
@@ -96,9 +87,9 @@ void PastesModel::getPastesForAccount(const QString &account, bool reload)
 
     if (!d->gpfa) {
         d->gpfa = new GetPastesForAccount(this);
-        connect(d->gpfa, &GetPastesForAccount::gotPastesForAccount, [d](const QString &account, const QJsonArray &json){
+        connect(d->gpfa, &GetPastesForAccount::gotPastesForAccount, [d](const QString &account, const QVector<Paste> &pastes){
             Q_UNUSED(account);
-            d->gotPastes(json);
+            d->gotPastes(pastes);
         });
         connect(d->gpfa, &GetPastesForAccount::gotPastesForAccount, [d](){
             d->gpfa->deleteLater();
