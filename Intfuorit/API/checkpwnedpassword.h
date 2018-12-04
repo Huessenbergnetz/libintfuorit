@@ -118,7 +118,6 @@ Q_SIGNALS:
     /*!
      * This signal will be emitted if the password has been checked successfully.
      * \a count will contain the number of times the password has been seen before.
-     * \since libintfuorit 2.0.0
      */
     void passwordChecked(int count);
 
