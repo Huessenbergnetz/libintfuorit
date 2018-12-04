@@ -62,7 +62,7 @@ public:
      * API request. On success the model will populated with the data from the API reply.
      * If something failed, the BaseModel::failed() signal will be emitted.
      *
-     * \sa GetAllBreaches::execute()
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void getAllBreaches(bool reload = false);
 
@@ -71,7 +71,7 @@ public:
      * set to \c true, the local cache will be circumvented and the data will be requested
      * from the API directly.
      *
-     * \overload
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
@@ -83,7 +83,7 @@ public:
      * GetBreachesForAccount to request the list of breaches. If \a reload is \c false, cached
      * data will be loaded if inside the \link BaseModel::cachePeriod cachePeriod \endlink.
      *
-     * \sa GetBreachesForAccount::execute()
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void getBreachesForAccount(const QString &account, const QString &domain = QString(), bool includeUnverified = false, bool reload = false);
 

@@ -70,11 +70,15 @@ public:
     /*!
      * Starts the API request. A \link CheckPwnedPassword::password password \endlink to check has to be
      * set before calling this function.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
     /*!
      * Sets the A \link CheckPwnedPassword::password password \endlink to check starts the API request.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(const QString &password, bool reload = false);
 

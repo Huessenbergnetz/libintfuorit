@@ -81,6 +81,8 @@ public:
      * were pastes found the \link GetPastesForAccount::account email address \endlink is part of, the
      * gotPastesForAccount() signal will be emitted, if no pastes were found the gotNoPastesForAccount()
      * signal will be emitted.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
@@ -89,7 +91,7 @@ public:
      * The \a account has to be an email address. Set \a reload to \c true to circumvent the cache
      * file and to load directly from the API.
      *
-     * \overload
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(const QString &account, bool reload = false);
 

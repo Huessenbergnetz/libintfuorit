@@ -70,6 +70,8 @@ public:
      * Starts the API request. Set \a reload to \c true to circumvent the cache file and to load directly from the API.
      * If something failed, the Component::failed() signal will be emitted, on success, the gotAllBreaches() signal will
      * be emitted containing the JSON array of breached sites data.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
@@ -77,7 +79,7 @@ public:
      * Sets the filter \link GetAllBreaches::domain domain \endlink and starts the API request. Set \a reload to \c true
      * to circumvent the local cache file and to load directly from the API.
      *
-     * \overload
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(const QString &domain, bool reload = false);
 

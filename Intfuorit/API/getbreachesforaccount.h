@@ -112,12 +112,14 @@ public:
     /*!
      * Start the API request. An \link GetBreachesForAccount::account account \endlink has to be set.
      * Set \a reload to \c true to circumvent the cache file and to load directly from the API.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
     /*!
      * Start the API request with the given propertis. Set \a reload to \c true to circumvent the cache file and to load directly from the API.
      *
-     * \overload
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(const QString &account, const QString &domain = QString(), bool truncateResponse = false, bool includeUnverified = false, bool reload = false);
 

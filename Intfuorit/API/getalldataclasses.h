@@ -58,6 +58,8 @@ public:
      * file and to load directly from the API. If the request was successful, the
      * gotAllDataClasses() signal will be emitted, otherwise the Component::failed()
      * signal will be emitted.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 

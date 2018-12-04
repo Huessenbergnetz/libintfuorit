@@ -54,6 +54,8 @@ public:
      * Requests all breaches from the HIBP API. If \a reload is set to \c true, the local
      * cache will be circumvented and the data will be requested from the API directly.
      * Internally this will call BreachesListModel::getAllBreaches() from the source model.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void getAllBreaches(bool reload = false);
 
@@ -63,13 +65,15 @@ public:
      * from the API directly. Internally this will call BreachesListModel::getAllBreaches()
      * from the source model.
      *
-     * \overload
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
     /*!
      * Clears all data in the source BreachesListModel and destroys the Breach objects in
      * the source model.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void clear();
 

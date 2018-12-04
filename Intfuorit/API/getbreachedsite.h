@@ -74,6 +74,8 @@ public:
      * has to be set before calling this function. If something failed, the Component::failed() signal
      * will be emitted, on success, the gotBreach() signal will be emitted containg the breached site
      * data.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(bool reload = false) override;
 
@@ -81,7 +83,7 @@ public:
      * Sets the \link GetBreachedSite::name name \endlink of the breached site to request and start the API call.
      * Set \a reload to \c true to circumvent the local cache file and to load directly from the API.
      *
-     * \overload
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
      */
     Q_INVOKABLE void execute(const QString &name, bool reload = false);
 
