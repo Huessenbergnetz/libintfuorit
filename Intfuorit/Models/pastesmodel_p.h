@@ -40,7 +40,7 @@ public:
 
     void clearModel();
 
-    std::vector<Paste*> list;
+    std::vector<Paste> list;
 
     GetPastesForAccount *gpfa = nullptr;
 };

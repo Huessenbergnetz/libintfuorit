@@ -21,17 +21,18 @@
 #ifndef LIBINTFUORITPASTE_H
 #define LIBINTFUORITPASTE_H
 
+#include "../intfuorit_global.h"
 #include <QObject>
 #include <QDateTime>
 #include <QString>
 #include <QUrl>
-#include "../intfuorit_global.h"
+#include <QSharedDataPointer>
 
 class QJsonObject;
 
 namespace Intfuorit {
 
-class PastePrivate;
+class PasteData;
 
 /*!
  * \brief The Paste class contains information about a single paste.
@@ -42,11 +43,9 @@ class PastePrivate;
  * \headerfile "" <Intfuorit/Objects/Paste>
  * \sa PastesListModel, PastesListFilterModel, GetPastesForAccount
  */
-class INTFUORITSHARED_EXPORT Paste : public QObject
+class INTFUORITSHARED_EXPORT Paste
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(Paste)
-    Q_DECLARE_PRIVATE(Paste)
+    Q_GADGET
     /*!
      * This property holds the paste service the record was retrieved from.
      * Current values are: Pastebin, Pastie, Slexy, Ghostbin, QuickLeak, JustPaste, AdHocUrl, OptOut
@@ -100,19 +99,39 @@ class INTFUORITSHARED_EXPORT Paste : public QObject
     Q_PROPERTY(QUrl url READ url CONSTANT)
 public:
     /*!
-     * Constructs a new empty Paste with the given \a parent.
+     * Constructs a new empty %Paste object.
      */
-    explicit Paste(QObject *parent = nullptr);
+    Paste();
 
     /*!
-     * Constructs a new Paste with the given parameters and \a parent.
+     * Constructs a new %Paste with the given parameters.
      */
-    Paste(const QString &source, const QString &sourceId, const QString &title, const QDateTime &date, quint32 emailCount, QObject *parent = nullptr);
+    Paste(const QString &source, const QString &sourceId, const QString &title, const QDateTime &date, quint32 emailCount);
+
+    /*!
+     * Constructs a copy of \a other.
+     */
+    Paste(const Paste &other);
+
+    /*!
+     * Assigns \a other to this %Paste and returns a reference to this %Paste.
+     */
+    Paste &operator=(const Paste &other);
+
+    /*!
+     * Move-assigns \a other this this %Paste.
+     */
+    Paste &operator=(Paste &&other) noexcept;
 
     /*!
      * Deconstructs the Paste object.
      */
     ~Paste();
+
+    /*!
+     * Swaps this %Paste with \a other.
+     */
+    void swap(Paste &other) noexcept;
 
     /*!
      * Getter function for the \link Paste::source source \endlink property.
@@ -140,19 +159,26 @@ public:
     QUrl url() const;
 
     /*!
-     * Creates a new Paste object from JSON object \a o with the given \a parent and returns the pointer to it.
+     * Compares the \a other %Paste's values to this %Paste and returns \c true if it is equal.
      */
-    static Paste* fromJson(const QJsonObject &o, QObject *parent = nullptr);
+    bool operator==(const Paste &other) const;
 
     /*!
-     * Clones the \a other Paste by creating a new Paste with the given \a parent and other's values.
+     * Compares the \a other %Paste's values to this %Paste and returns \c true if it is equal.
      */
-    static Paste* clone(Paste *other, QObject *parent = nullptr);
+    bool operator!=(const Paste &other) const;
 
-private:
-    const QScopedPointer<PastePrivate> d_ptr;
+    /*!
+     * Creates a new Paste object from JSON object \a o.
+     */
+    static Paste fromJson(const QJsonObject &o);
+
+protected:
+    QSharedDataPointer<PasteData> d;
 };
 
 }
+
+Q_DECLARE_TYPEINFO(Intfuorit::Paste, Q_MOVABLE_TYPE);
 
 #endif // LIBINTFUORITPASTE_H

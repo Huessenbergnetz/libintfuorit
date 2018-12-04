@@ -25,17 +25,18 @@
 
 namespace Intfuorit {
 
-class PastePrivate
+class PasteData : public QSharedData
 {
 public:
-    PastePrivate() {}
+    inline PasteData() : QSharedData() {}
 
-    PastePrivate(const QString &_source, const QString &_sourceId, const QString &_title, const QDateTime &_date, quint32 _emailcount) :
-        source(_source),
-        sourceId(_sourceId),
-        title(_title),
-        date(_date),
-        emailCount(_emailcount)
+    inline PasteData(const QString &_source, const QString &_sourceId, const QString &_title, const QDateTime &_date, quint32 _emailcount) :
+        QSharedData(),
+        source{_source},
+        sourceId{_sourceId},
+        title{_title},
+        date{_date},
+        emailCount{_emailcount}
     {
         QUrl _url;
         if (source == QLatin1String("Pastebin")) {
@@ -70,6 +71,16 @@ public:
             url = _url;
         }
     }
+
+    inline PasteData(const PasteData &copy) :
+        QSharedData(copy),
+        url{copy.url},
+        source{copy.source},
+        sourceId{copy.sourceId},
+        title{copy.title},
+        date{copy.date},
+        emailCount{copy.emailCount}
+    {}
 
     QUrl url;
     QString source;

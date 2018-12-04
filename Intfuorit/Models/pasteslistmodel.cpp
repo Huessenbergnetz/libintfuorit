@@ -81,15 +81,15 @@ QVariant PastesListModel::data(const QModelIndex &index, int role) const
     Q_D(const PastesListModel);
 
     if (index.isValid() && (static_cast<std::size_t>(index.row()) < d->list.size())) {
-        Paste *p = d->list.at(index.row());
+        const Paste p = d->list.at(index.row());
         switch(role) {
-        case Item:          var.setValue<Paste*>(p);        break;
-        case Source:        var.setValue(p->source());      break;
-        case SourceId:      var.setValue(p->sourceId());    break;
-        case Title:         var.setValue(p->title());       break;
-        case EmailCount:    var.setValue(p->emailCount());  break;
-        case Date:          var.setValue(p->date());        break;
-        case Url:           var.setValue(p->url());         break;
+        case Item:          var.setValue<Paste>(p);         break;
+        case Source:        var.setValue(p.source());       break;
+        case SourceId:      var.setValue(p.sourceId());     break;
+        case Title:         var.setValue(p.title());        break;
+        case EmailCount:    var.setValue(p.emailCount());   break;
+        case Date:          var.setValue(p.date());         break;
+        case Url:           var.setValue(p.url());          break;
         default: break;
         }
     }

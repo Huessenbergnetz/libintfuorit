@@ -23,42 +23,71 @@
 
 using namespace Intfuorit;
 
-Paste::Paste(QObject *parent) : QObject(parent), d_ptr(new PastePrivate)
+Paste::Paste() : d(new PasteData)
 {
 
 }
 
-
-Paste::Paste(const QString &source, const QString &sourceId, const QString &title, const QDateTime &date, quint32 emailCount, QObject *parent) :
-    QObject(parent), d_ptr(new PastePrivate(source, sourceId, title, date, emailCount))
+Paste::Paste(const QString &source, const QString &sourceId, const QString &title, const QDateTime &date, quint32 emailCount) :
+    d(new PasteData(source, sourceId, title, date, emailCount))
 {
 
 }
 
+Paste::Paste(const Paste &other) :
+    d(other.d)
+{
+
+}
+
+Paste& Paste::operator=(const Paste &other)
+{
+    d = other.d;
+    return *this;
+}
+
+Paste& Paste::operator=(Paste &&other) noexcept
+{
+    swap(other);
+    return *this;
+}
 
 Paste::~Paste()
 {
 
 }
 
+void Paste::swap(Paste &other) noexcept
+{
+    std::swap(d, other.d);
+}
 
-QString Paste::source() const { Q_D(const Paste); return d->source; }
+QString Paste::source() const { return d->source; }
 
-QString Paste::sourceId() const { Q_D(const Paste); return d->sourceId; }
+QString Paste::sourceId() const { return d->sourceId; }
 
-QString Paste::title() const { Q_D(const Paste); return d->title; }
+QString Paste::title() const { return d->title; }
 
-QDateTime Paste::date() const { Q_D(const Paste); return d->date; }
+QDateTime Paste::date() const { return d->date; }
 
-quint32 Paste::emailCount() const { Q_D(const Paste); return d->emailCount; }
+quint32 Paste::emailCount() const { return d->emailCount; }
 
-QUrl Paste::url() const { Q_D(const Paste); return d->url; }
+QUrl Paste::url() const { return d->url; }
 
+bool Paste::operator==(const Paste &other) const
+{
+    return (d->source == other.source() && d->sourceId == other.sourceId());
+}
 
-Paste* Paste::fromJson(const QJsonObject &o, QObject *parent)
+bool Paste::operator!=(const Paste &other) const
+{
+    return (d->source != other.source() || d->sourceId != other.sourceId());
+}
+
+Paste Paste::fromJson(const QJsonObject &o)
 {
     if (o.isEmpty()) {
-        return new Paste(parent);
+        return Paste();
     }
 
     QString title = o.value(QStringLiteral("Title")).toString();
@@ -67,25 +96,13 @@ Paste* Paste::fromJson(const QJsonObject &o, QObject *parent)
         title = qtTrId("libintfuorit-no-title");
     }
 
-    return new Paste(o.value(QStringLiteral("Source")).toString(),
-                     o.value(QStringLiteral("Id")).toString(),
-                     title,
-                     QDateTime::fromString(o.value(QStringLiteral("Date")).toString(), Qt::ISODate),
-                     o.value(QStringLiteral("EmailCount")).toInt(),
-                     parent);
-}
-
-
-Paste* Paste::clone(Paste *other, QObject *parent)
-{
-    Q_ASSERT_X(other, "clone paste", "invalid source object");
-
-    return new Paste(other->source(),
-                     other->sourceId(),
-                     other->title(),
-                     other->date(),
-                     other->emailCount(),
-                     parent);
+    return {
+        o.value(QStringLiteral("Source")).toString(),
+        o.value(QStringLiteral("Id")).toString(),
+        title,
+        QDateTime::fromString(o.value(QStringLiteral("Date")).toString(), Qt::ISODate),
+        static_cast<quint32>(o.value(QStringLiteral("EmailCount")).toDouble())
+    };
 }
 
 #include "moc_paste.cpp"
