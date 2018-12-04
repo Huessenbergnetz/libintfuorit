@@ -123,6 +123,8 @@ class INTFUORITSHARED_EXPORT Breach
      *
      * \par Access functions
      * \li QStringList dataClasses() const
+     *
+     * \sa Breach::dataClassesTranslated, Breach::dataClassesTranslatedString
      */
     Q_PROPERTY(QStringList dataClasses READ dataClasses CONSTANT)
     /*!
@@ -132,9 +134,19 @@ class INTFUORITSHARED_EXPORT Breach
      * \par Access functions
      * \li QStringList dataClassesTranslated() const
      *
-     * \sa Breach::dataClasses
+     * \sa Breach::dataClasses, Breach::dataClassesTranslatedString
      */
     Q_PROPERTY(QStringList dataClassesTranslated READ dataClassesTranslated CONSTANT)
+    /*!
+     * This property holds a string composed of the values available in the \link Breach::dataClassesTranslated dataClassesTranslated \endlink
+     * property. It uses QLocale::createSeparatedList() to join the strings.
+     *
+     * \par Access functions
+     * \li QString dataClassesTranslatedString() const
+     *
+     * \sa Breach::dataClasses, Breach::dataClassesTranslated
+     */
+    Q_PROPERTY(QString dataClassesTranslatedString READ dataClassesTranslatedString CONSTANT)
     /*!
      * This property indicates that the breach is considered unverified. An unverified breach may not have been
      * hacked from the indicated website. An unverified breach is still loaded into HIBP when there's sufficient
@@ -285,6 +297,10 @@ public:
      * Getter function for the \link Breach::dataClassesTranslated dataClassesTranslated \endlink property.
      */
     QStringList dataClassesTranslated() const;
+    /*!
+     * Getter function for the \link Breah::dataClassesTranslatedString dataClassesTranslatedString \endlink property.
+     */
+    QString dataClassesTranslatedString() const;
     /*!
      * Getter function for the \link Breach::isVerified isVerified \endlink property.
      */

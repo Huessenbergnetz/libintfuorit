@@ -21,6 +21,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QLocale>
 
 using namespace Intfuorit;
 
@@ -289,6 +290,12 @@ QStringList Breach::dataClassesTranslated() const
         transDcs.push_back(trans.value(dc, dc));
     }
     return transDcs;
+}
+
+QString Breach::dataClassesTranslatedString() const
+{
+    QLocale l;
+    return l.createSeparatedList(dataClassesTranslated());
 }
 
 bool Breach::isVerified() const { return d->isVerified; }
