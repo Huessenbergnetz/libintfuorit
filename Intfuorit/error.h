@@ -155,12 +155,12 @@ public:
     QString text() const;
 
     /*!
-     * Compare the \a other error's values to this error and returns \c true if it is equal.
+     * Compares the \a other error's values to this error and returns \c true if it is equal.
      */
     bool operator==(const Error &other) const;
 
     /*!
-     * Compare the \a other error's values to this error and returns \c true if it is not equal.
+     * Compares the \a other error's values to this error and returns \c true if it is not equal.
      */
     bool operator!=(const Error &other) const;
 
