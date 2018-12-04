@@ -20,11 +20,8 @@
 #ifndef LIBINTFUORITGETBREACHESFORACCOUNT_H
 #define LIBINTFUORITGETBREACHESFORACCOUNT_H
 
-#include <QObject>
 #include "component.h"
-#include "../intfuorit_global.h"
 
-class QJsonDocument;
 class QJsonArray;
 
 namespace Intfuorit {

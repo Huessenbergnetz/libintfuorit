@@ -20,12 +20,9 @@
 #ifndef LIBINTFUORITGETBREACHEDSITE_H
 #define LIBINTFUORITGETBREACHEDSITE_H
 
-#include <QObject>
 #include "component.h"
-#include "../intfuorit_global.h"
 
 class QJsonObject;
-class QJsonDocument;
 
 namespace Intfuorit {
 

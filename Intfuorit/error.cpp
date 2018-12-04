@@ -239,10 +239,10 @@ void Error::swap(Error &other) noexcept
 }
 
 
-Error::Type Error::type() const { return d->type; }
+Intfuorit::Error::Type Error::type() const { return d->type; }
 
 
-Error::Severity Error::severity() const { return d->severity; }
+Intfuorit::Error::Severity Error::severity() const { return d->severity; }
 
 
 QString Error::text() const { return d->text; }

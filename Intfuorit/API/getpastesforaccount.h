@@ -20,11 +20,8 @@
 #ifndef LIBINTFUORITGETPASTESFORACCOUNT_H
 #define LIBINTFUORITGETPASTESFORACCOUNT_H
 
-#include <QObject>
 #include "component.h"
-#include "../intfuorit_global.h"
 
-class QJsonDocument;
 class QJsonArray;
 
 namespace Intfuorit {

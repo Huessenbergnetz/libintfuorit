@@ -20,13 +20,13 @@
 #ifndef LIBINTFUORITCOMPONENT_H
 #define LIBINTFUORITCOMPONENT_H
 
-#include <QObject>
-#include <QUrl>
-#include "../error.h"
 #include "../intfuorit_global.h"
+#include "../error.h"
+#include <QObject>
 
 class QNetworkReply;
 class QJsonDocument;
+class QUrl;
 
 namespace Intfuorit {
 
@@ -36,7 +36,6 @@ namespace Intfuorit {
  * <a href="https://haveibeenpwned.com/API/v2" rel="external noopener">haveibeenpwned.com API</a>.
  */
 
-class Error;
 class ComponentPrivate;
 class NetworkAccessManagerFactory;
 

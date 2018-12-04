@@ -20,9 +20,7 @@
 #ifndef LIBINTFUORITPASTESMODEL_H
 #define LIBINTFUORITPASTESMODEL_H
 
-#include <QObject>
 #include "basemodel.h"
-#include "../intfuorit_global.h"
 
 namespace Intfuorit {
 

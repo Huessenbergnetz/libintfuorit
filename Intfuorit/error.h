@@ -22,7 +22,6 @@
 
 #include "intfuorit_global.h"
 #include <QObject>
-#include <QVariant>
 #include <QSharedDataPointer>
 
 class QNetworkReply;
@@ -65,7 +64,7 @@ public:
     /*!
      * Defines the error type.
      */
-    enum Type : quint8 {
+    enum Type {
         NoError             = 0,    /**< No error has occurred. */
         RequestError        = 1,    /**< The request was not setup correctly. */
         JSONParsingError    = 2,    /**< Failed to parse JSON data. */
@@ -80,7 +79,7 @@ public:
     /*!
      * Defines the severity of the error.
      */
-    enum Severity : quint8 {
+    enum Severity {
         Nothing     = 0,    /**< No error has occurred */
         Warning     = 1,    /**< Only a warning, but operation was perfmormed */
         Critical    = 2,    /**< A critical error has occurred, the operation has been canceled */
@@ -143,12 +142,12 @@ public:
     /*!
      * Getter function for the \link Error::type type \endlink property.
      */
-    Type type() const;
+    Intfuorit::Error::Type type() const;
 
     /*!
      * Getter function for the \link Error::severity severity \endlink property.
      */
-    Severity severity() const;
+    Intfuorit::Error::Severity severity() const;
 
     /*!
      * Getter function for the \link Error::text text \endlink property.

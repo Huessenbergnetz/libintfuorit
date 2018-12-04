@@ -22,6 +22,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QEventLoop>
+#include <QStringList>
 
 using namespace Intfuorit;
 

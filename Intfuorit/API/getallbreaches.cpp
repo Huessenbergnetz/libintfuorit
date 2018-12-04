@@ -19,6 +19,7 @@
 
 #include "getallbreaches_p.h"
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QUrlQuery>
 #include <QStringBuilder>
 

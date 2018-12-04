@@ -20,10 +20,9 @@
 #ifndef LIBINTFUORITBASEFILTERMODEL_H
 #define LIBINTFUORITBASEFILTERMODEL_H
 
-#include <QObject>
-#include <QSortFilterProxyModel>
 #include "../intfuorit_global.h"
 #include "../error.h"
+#include <QSortFilterProxyModel>
 
 #define INTF_MODEL(Class) Class * const model = d->intf_get_model()
 

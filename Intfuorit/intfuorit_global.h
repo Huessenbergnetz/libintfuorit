@@ -20,7 +20,7 @@
 #ifndef INTFUORIT_GLOBAL_H
 #define INTFUORIT_GLOBAL_H
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 
 /*!
  * \namespace Intfuorit

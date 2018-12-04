@@ -71,7 +71,7 @@ BaseFilterModel::~BaseFilterModel()
 
 bool BaseFilterModel::inOperation() const { Q_D(const BaseFilterModel); return d->bsm ? d->bsm->inOperation() : false; }
 
-Intfuorit::Error BaseFilterModel::error() const { Q_D(const BaseFilterModel); return d->bsm ? d->bsm->error() : Error(); }
+Error BaseFilterModel::error() const { Q_D(const BaseFilterModel); return d->bsm ? d->bsm->error() : Error(); }
 
 QString BaseFilterModel::userAgent() const { Q_D(const BaseFilterModel); return d->bsm ? d->bsm->userAgent() : QString(); }
 

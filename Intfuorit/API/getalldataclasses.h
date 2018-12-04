@@ -21,12 +21,9 @@
 #define LIBINTFUORITGETALLDATACLASSES_H
 
 #include "component.h"
-#include "../intfuorit_global.h"
-#include <QObject>
-#include <QStringList>
 
-class QJsonDocument;
 class QJsonArray;
+class QStringList;
 
 namespace Intfuorit {
 

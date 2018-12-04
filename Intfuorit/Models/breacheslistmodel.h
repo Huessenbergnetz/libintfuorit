@@ -20,15 +20,14 @@
 #ifndef LIBINTFUORITBREACHESLISTMODEL_H
 #define LIBINTFUORITBREACHESLISTMODEL_H
 
-#include <QObject>
 #include "breachesmodel.h"
-#include "../intfuorit_global.h"
 
 namespace Intfuorit {
 
 class BreachesListModelPrivate;
 
 /*!
+ * \ingroup models
  * The %BreachesListModel class provides a single column list model containing Breach objects
  * requested from the HIBP API. This model is designed to be usable in QML list views, the
  * different data fields are accessible via the \link BreachesListModel::Roles model data roles \endlink.

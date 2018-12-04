@@ -20,7 +20,6 @@
 #ifndef LIBINTFUORITBREACHESLISTFILTERMODEL_H
 #define LIBINTFUORITBREACHESLISTFILTERMODEL_H
 
-#include <QObject>
 #include "basefiltermodel.h"
 
 namespace Intfuorit {
@@ -35,7 +34,7 @@ class BreachesListFilterModelPrivate;
  * \headerfile "" <Intfuorit/Models/BreachesListFilterModel>
  * \sa Breach, BreachesListModel, GetAllBreaches, GetBreachesForAccount
  */
-class BreachesListFilterModel : public BaseFilterModel
+class INTFUORITSHARED_EXPORT BreachesListFilterModel : public BaseFilterModel
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(BreachesListFilterModel)

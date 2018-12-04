@@ -20,12 +20,9 @@
 #ifndef LIBINTFUORITCHECKPWNEDPASSWORD_H
 #define LIBINTFUORITCHECKPWNEDPASSWORD_H
 
-#include <QObject>
 #include "component.h"
-#include "../intfuorit_global.h"
 
 class QJsonObject;
-class QJsonDocument;
 
 namespace Intfuorit {
 

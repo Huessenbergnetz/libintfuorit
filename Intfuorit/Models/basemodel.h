@@ -20,10 +20,10 @@
 #ifndef LIBINTFUORITBASEMODEL_H
 #define LIBINTFUORITBASEMODEL_H
 
-#include <QObject>
-#include <QAbstractItemModel>
 #include "../intfuorit_global.h"
 #include "../error.h"
+#include <QAbstractItemModel>
+
 
 namespace Intfuorit {
 

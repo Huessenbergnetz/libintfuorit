@@ -20,9 +20,7 @@
 #ifndef LIBINTFUORITBREACHESMODEL_H
 #define LIBINTFUORITBREACHESMODEL_H
 
-#include <QObject>
 #include "basemodel.h"
-#include "../intfuorit_global.h"
 
 namespace Intfuorit {
 
