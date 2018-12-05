@@ -25,7 +25,7 @@ BreachesListFilterModel::BreachesListFilterModel(QObject *parent) :
     BaseFilterModel(*new BreachesListFilterModelPrivate, parent)
 {
     setSourceModel(new BreachesListModel(this));
-    setSortRole(BreachesListModel::PwnCount);
+    setSortRole(BreachesListModel::AddedDate);
     setFilterRole(BreachesListModel::Title);
     setSortLocaleAware(true);
     setDynamicSortFilter(true);
