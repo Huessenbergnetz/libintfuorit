@@ -47,7 +47,6 @@ void BaseModelPrivate::setInOperation(bool nInOperation)
 
 void BaseModelPrivate::setError(const Error &nError)
 {
-    Q_Q(BaseModel);
     if (error != nError) {
         error = nError;
         qDebug("%s", "error has been changed.");

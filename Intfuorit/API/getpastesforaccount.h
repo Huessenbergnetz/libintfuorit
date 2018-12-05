@@ -136,7 +136,7 @@ Q_SIGNALS:
      * has been found in one or more pastes. It will contain the queried \a account name and the \a pastes the
      * email address was found in.
      */
-    void gotPastesForAccount(const QString &account, const QVector<Paste> &pastes);
+    void gotPastesForAccount(const QString &account, const QVector<Intfuorit::Paste> &pastes);
 
     /*!
      * This signal will be emitted when the request has finished and the  \link GetPastesForAccount::account email address \endlink

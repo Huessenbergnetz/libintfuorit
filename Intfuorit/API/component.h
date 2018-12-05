@@ -222,7 +222,7 @@ Q_SIGNALS:
      * Notifier signal for the \link Component::error error \endlink property.
      * \sa setError() error()
      */
-    void errorChanged(const Error &error);
+    void errorChanged(const Intfuorit::Error &error);
     /*!
      * Notifier signal for the \link Component::inOperation inOperation \endlink property.
      * \sa setInOperation() inOperation()
@@ -234,7 +234,7 @@ Q_SIGNALS:
      *
      * \sa Component::error
      */
-    void failed(const Error &error);
+    void failed(const Intfuorit::Error &error);
     /*!
      * Notifier signal for the \link Component::cachePeriod cachePeriod \endlink property.
      * \sa setCachePeriod() cachePeriod()

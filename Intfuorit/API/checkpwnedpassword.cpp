@@ -89,11 +89,10 @@ void CheckPwnedPassword::successCallback(const QByteArray &data)
     s.setCodec("ASCII");
     int count = 0;
     QString line;
-    line.reserve(45);
+    line.reserve(46);
     while (s.readLineInto(&line)) {
-        const QString suffix = line.left(35);
-        if (d->pwSuffix.compare(suffix, Qt::CaseInsensitive) == 0) {
-            count = line.mid(36).toInt();
+        if (d->pwSuffix.compare(line.leftRef(35), Qt::CaseInsensitive) == 0) {
+            count = line.midRef(36).toInt();
             break;
         }
     }

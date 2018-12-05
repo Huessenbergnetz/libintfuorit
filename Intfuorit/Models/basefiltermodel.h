@@ -184,13 +184,13 @@ Q_SIGNALS:
      * Notifier signal for the \link BaseFilterModel::error error \endlink property.
      * \sa error()
      */
-    void errorChanged(const Error &error);
+    void errorChanged(const Intfuorit::Error &error);
     /*!
      * This signal is emitted when loading the data into the model failed. It will contain
      * the pointer to an Error object providing further information about the occured error.
      * \sa Component::error
      */
-    void failed(const Error &error);
+    void failed(const Intfuorit::Error &error);
     /*!
      * Notifier signal for the \link BaseFilterModel::cachePeriod cachePeriod \endlink property.
      * \sa setCachePeriod() cachePeriod()

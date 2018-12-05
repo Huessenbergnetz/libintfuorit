@@ -120,7 +120,7 @@ Q_SIGNALS:
     /*!
      * This signal will be emitted when the list of breached sites has been successfully requested from the API.
      */
-    void gotAllBreaches(const QVector<Breach> &breaches);
+    void gotAllBreaches(const QVector<Intfuorit::Breach> &breaches);
 
 protected:
     /*!

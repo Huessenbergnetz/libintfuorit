@@ -210,7 +210,7 @@ Q_SIGNALS:
      * has been found in one ore more breaches.
      * \sa gotNoBreachesForAccount()
      */
-    void gotBreachesForAccount(const QString &account, const QVector<Breach> &breaches);
+    void gotBreachesForAccount(const QString &account, const QVector<Intfuorit::Breach> &breaches);
     /*!
      * This signal will be emitted when the request has been finished and the \link GetBreachesForAccount::account account \endlink
      * has not been found in the breaches data of HIBP. It will contain the queried \a account name.

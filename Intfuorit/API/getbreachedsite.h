@@ -128,7 +128,7 @@ Q_SIGNALS:
      * the breached site data as JSON object. See the <A HREF="https://haveibeenpwned.com/API/v2#BreachModel">HIBP API docs</A>
      * for a description of the JSON breach object values.
      */
-    void gotBreach(const Breach &breach);
+    void gotBreach(const Intfuorit::Breach &breach);
 
 protected:
     /*!
