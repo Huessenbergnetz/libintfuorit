@@ -5,6 +5,7 @@ includedir=$$INSTALL_HEADERS_DIR
 
 Name: libintfuorit
 Description: Qt library to access the API of haveibeenpwned.com
+URL: https://github.com/Huessenbergnetz/libintfuorit
 Version: $$VERSION
 Libs: -L${libdir} -lintfuorit
 Cflags: -I${includedir}
