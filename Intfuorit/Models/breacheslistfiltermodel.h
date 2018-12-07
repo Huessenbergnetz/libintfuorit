@@ -69,13 +69,11 @@ public:
      */
     Q_INVOKABLE void getAllBreaches(const QString &domain, bool reload = false);
 
+public Q_SLOTS:
     /*!
-     * Clears all data in the source BreachesListModel and destroys the Breach objects in
-     * the source model.
-     *
-     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
+     * Clears all data in the source BreachesListModel.
      */
-    Q_INVOKABLE void clear();
+    void clear() override;
 
 protected:
     /*!

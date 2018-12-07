@@ -116,4 +116,9 @@ void BaseFilterModel::setSortOrder(Qt::SortOrder nSortOrder)
     }
 }
 
+void BaseFilterModel::clear()
+{
+
+}
+
 #include "moc_basefiltermodel.cpp"

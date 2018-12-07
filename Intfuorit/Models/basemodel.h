@@ -141,6 +141,12 @@ public:
      */
     void setUserAgent(const QString &nUserAgent);
 
+public Q_SLOTS:
+    /*!
+     * Clears the model data. The default implementation does nothing.
+     */
+    virtual void clear();
+
 Q_SIGNALS:
     /*!
      * Notifier signal for the \link BaseModel::inOperation inOperation \endlink property.

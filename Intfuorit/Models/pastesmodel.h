@@ -77,11 +77,9 @@ public:
     Q_INVOKABLE void getPastesForAccount(const QString &account, bool reload = false);
 
     /*!
-     * Clears the model data and destroys all Paste objects in the model.
-     *
-     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
+     * Clears the model data.
      */
-    Q_INVOKABLE void clear();
+     void clear() override;
 
 Q_SIGNALS:
     /*!

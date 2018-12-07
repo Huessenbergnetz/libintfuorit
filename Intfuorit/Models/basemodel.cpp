@@ -112,4 +112,9 @@ void BaseModel::setUserAgent(const QString &nUserAgent)
     }
 }
 
+void BaseModel::clear()
+{
+
+}
+
 #include "moc_basemodel.cpp"

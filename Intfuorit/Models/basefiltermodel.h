@@ -174,6 +174,13 @@ public:
      */
     void setSortOrder(Qt::SortOrder nSortOrder);
 
+public Q_SLOTS:
+    /*!
+     * Clears the data in the underlying source model.
+     * The default implementation does nothing.
+     */
+    virtual void clear();
+
 Q_SIGNALS:
     /*!
      * Notifier signal for the \link BaseFilterModel::inOperation inOperation \endlink property.
