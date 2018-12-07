@@ -56,6 +56,19 @@ class INTFUORITSHARED_EXPORT CheckPwnedPassword : public Component
      * \li void passwordChanged(const QString &password)
      */
     Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+    /*!
+     * This property holds the number of times the \link CheckPwnedPassword::password password \endlink
+     * has been found. It defaults to \c -1 what indicates, that no check has been performed. \c 0
+     * meas that the password has not been found in the data of HIBP, while every positive values indicates
+     * the number of times the password has been found in the HIBP data.
+     *
+     * \par Access function
+     * \li int count() const
+     *
+     * \par Notifier signal
+     * \li void countChanged(int count)
+     */
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
     /*!
      * Constructs a new %CheckPwnedPassword object with the given \a parent.
@@ -95,6 +108,12 @@ public:
     void setPassword(const QString &nPassword);
 
     /*!
+     * Getter function for the \link CheckPwnedPassword::count count \endlink property.
+     * \sa countChanged()
+     */
+    int count() const;
+
+    /*!
      * Checks if the \a password has been pwned and returns the number of times the \a password has been found.
      * If \a reload is set to \c false, cached results will be returned where the default cache time (2 days)
      * will be used.
@@ -110,12 +129,25 @@ public:
      */
     static int check(const QString &password, const QString &userAgent = QString(), bool reload = false);
 
+public Q_SLOTS:
+    /*!
+     * Clears the last \link Component::error error\endlink object and sets \link CheckPwnedPassword::count count\endlink
+     * to \c -1.
+     */
+    void clear();
+
 Q_SIGNALS:
     /*!
      * Notifier signal for the \link CheckPwnedPassword::password password \endlink property.
      * \sa setPassword() password()
      */
     void passwordChanged(const QString &password);
+
+    /*!
+     * Notifier signal for the \link CheckPwnedPassword::count count \endlink property.
+     * \sa count()
+     */
+    void countChanged(int count);
 
     /*!
      * This signal will be emitted if the password has been checked successfully.

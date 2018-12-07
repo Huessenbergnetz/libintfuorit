@@ -39,6 +39,7 @@ public:
     QString password;
     QString pwPrefix;
     QString pwSuffix;
+    int count = -1;
 };
 
 }

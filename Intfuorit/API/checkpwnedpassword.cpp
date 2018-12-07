@@ -33,12 +33,10 @@ CheckPwnedPassword::CheckPwnedPassword(QObject *parent) :
 
 }
 
-
 CheckPwnedPassword::~CheckPwnedPassword()
 {
 
 }
-
 
 void CheckPwnedPassword::execute(bool reload)
 {
@@ -50,7 +48,7 @@ void CheckPwnedPassword::execute(bool reload)
     }
 
     setInOperation(true);
-    setError(Error());
+    clear();
 
     if (d->password.isEmpty()) {
         //% "You can not check for a pwned password without specifying a password."
@@ -74,13 +72,21 @@ void CheckPwnedPassword::execute(bool reload)
     sendRequest(url, reload);
 }
 
-
 void CheckPwnedPassword::execute(const QString &password, bool reload)
 {
     setPassword(password);
     execute(reload);
 }
 
+void CheckPwnedPassword::clear()
+{
+    setError(Error());
+    Q_D(CheckPwnedPassword);
+    if (d->count != -1) {
+        d->count = -1;
+        Q_EMIT countChanged(-1);
+    }
+}
 
 void CheckPwnedPassword::successCallback(const QByteArray &data)
 {
@@ -97,10 +103,13 @@ void CheckPwnedPassword::successCallback(const QByteArray &data)
         }
     }
     qDebug("The password \"%s\" has been found %i times.", qUtf8Printable(d->password), count);
+    if (count != d->count) {
+        d->count = count;
+        Q_EMIT countChanged(count);
+    }
     Q_EMIT passwordChecked(count);
     setInOperation(false);
 }
-
 
 void CheckPwnedPassword::extractError(QNetworkReply *reply)
 {
@@ -108,7 +117,6 @@ void CheckPwnedPassword::extractError(QNetworkReply *reply)
     Component::extractError(reply);
     setInOperation(false);
 }
-
 
 QString CheckPwnedPassword::password() const { Q_D(const CheckPwnedPassword); return d->password; }
 
@@ -125,6 +133,8 @@ void CheckPwnedPassword::setPassword(const QString &nPassword)
         Q_EMIT passwordChanged(nPassword);
     }
 }
+
+int CheckPwnedPassword::count() const { Q_D(const CheckPwnedPassword); return d->count; }
 
 int CheckPwnedPassword::check(const QString &password, const QString &userAgent, bool reload)
 {
