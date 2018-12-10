@@ -88,32 +88,40 @@ QStringList Breach::dataClassesTranslated() const
     static QHash<QString,QString> trans({
                                             //% "Account balances"
                                             {QStringLiteral("Account balances"), qtTrId("libintfuorit-account-balances")},
+                                            //% "Address book contacts"
+                                            {QStringLiteral("Address book contacts"), qtTrId("libintfuorit-address-book-contacts")},
                                             //% "Age groups"
                                             {QStringLiteral("Age groups"), qtTrId("libintfuorit-age-groups")},
                                             //% "Ages"
                                             {QStringLiteral("Ages"), qtTrId("libintfuorit-ages")},
+                                            //% "Apps installed on devices"
+                                            {QStringLiteral("Apps installed on devices"), qtTrId("libintfuorit-apps-installed-on-devices")},
                                             //% "Astrological signs"
                                             {QStringLiteral("Astrological signs"), qtTrId("libintfuorit-astrological-signs")},
+                                            //% "Audio recordings"
+                                            {QStringLiteral("Audio recordings"), qtTrId("libintfuorit-audio-recordings")},
                                             //% "Auth tokens"
                                             {QStringLiteral("Auth tokens"), qtTrId("libintfuorit-auth-tokens")},
                                             //% "Avatars"
                                             {QStringLiteral("Avatars"), qtTrId("libintfuorit-avatars")},
                                             //% "Bank account numbers"
                                             {QStringLiteral("Bank account numbers"), qtTrId("libintfuorit-bank-account-numbers")},
-                                            //% "Banking PINs"
-                                            {QStringLiteral("Banking PINs"), qtTrId("libintfuorit-banking-pins")},
                                             //% "Beauty ratings"
                                             {QStringLiteral("Beauty ratings"), qtTrId("libintfuorit-beauty-ratings")},
                                             //% "Biometric data"
                                             {QStringLiteral("Biometric data"), qtTrId("libintfuorit-biometric-data")},
                                             //% "Browser user agent details"
                                             {QStringLiteral("Browser user agent details"), qtTrId("libintfuorit-browser-user-agent-details")},
+                                            //% "Browsing histories"
+                                            {QStringLiteral("Browsing histories"), qtTrId("libintfuorit-browsing-histories")},
                                             //% "Buying preferences"
                                             {QStringLiteral("Buying preferences"), qtTrId("libintfuorit-buying-preferences")},
                                             //% "Car ownership statuses"
                                             {QStringLiteral("Car ownership statuses"), qtTrId("libintfuorit-car-ownership-statuses")},
                                             //% "Career levels"
                                             {QStringLiteral("Career levels"), qtTrId("libintfuorit-career-levels")},
+                                            //% "Cellular network names"
+                                            {QStringLiteral("Cellular network names"), qtTrId("libintfuorit-cellular-network-names")},
                                             //% "Charitable donations"
                                             {QStringLiteral("Charitable donations"), qtTrId("libintfuorit-charitable-donations")},
                                             //% "Chat logs"
@@ -132,6 +140,8 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Dates of birth"), qtTrId("libintfuorit-dates-of-birth")},
                                             //% "Deceased date"
                                             {QStringLiteral("Deceased date"), qtTrId("libintfuorit-deceased-date")},
+                                            //% "Deceased statuses"
+                                            {QStringLiteral("Deceased statuses"), qtTrId("libintfuorit-deceased-statuses")},
                                             //% "Device information"
                                             {QStringLiteral("Device information"), qtTrId("libintfuorit-device-information")},
                                             //% "Device usage tracking data"
@@ -140,6 +150,8 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Drinking habits"), qtTrId("libintfuorit-drinking-habits")},
                                             //% "Drug habits"
                                             {QStringLiteral("Drug habits"), qtTrId("libintfuorit-drug-habits")},
+                                            //% "Eating habits"
+                                            {QStringLiteral("Eating habits"), qtTrId("libintfuorit-eating-habits")},
                                             //% "Education levels"
                                             {QStringLiteral("Education levels"), qtTrId("libintfuorit-education-levels")},
                                             //% "Email addresses"
@@ -172,10 +184,16 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Health insurance information"), qtTrId("libintfuorit-health-insurance-information")},
                                             //% "Historical passwords"
                                             {QStringLiteral("Historical passwords"), qtTrId("libintfuorit-historical-passwords")},
+                                            //% "Home loan information"
+                                            {QStringLiteral("Home loan information"), qtTrId("libintfuorit-home-loan-information")},
                                             //% "Home ownership statuses"
                                             {QStringLiteral("Home ownership statuses"), qtTrId("libintfuorit-home-ownership-statuses")},
                                             //% "Homepage URLs"
                                             {QStringLiteral("Homepage URLs"), qtTrId("libintfuorit-homepage-urls")},
+                                            //% "IMEI numbers"
+                                            {QStringLiteral("IMEI numbers"), qtTrId("libintfuorit-imei-numbers")},
+                                            //% "IMSI numbers"
+                                            {QStringLiteral("IMSI numbers"), qtTrId("libintfuorit-imsi-numbers")},
                                             //% "Income levels"
                                             {QStringLiteral("Income levels"), qtTrId("libintfuorit-income-levels")},
                                             //% "Instant messenger identities"
@@ -190,10 +208,14 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Marital statuses"), qtTrId("libintfuorit-marital-statuses")},
                                             //% "Names"
                                             {QStringLiteral("Names"), qtTrId("libintfuorit-names")},
+                                            //% "Nationalities"
+                                            {QStringLiteral("Nationalities"), qtTrId("libintfuorit-nationalities")},
                                             //% "Net worths"
                                             {QStringLiteral("Net worths"), qtTrId("libintfuorit-net-worths")},
                                             //% "Nicknames"
                                             {QStringLiteral("Nicknames"), qtTrId("libintfuorit-nicknames")},
+                                            //% "Occupations"
+                                            {QStringLiteral("Occupations"), qtTrId("libintfuorit-occupations")},
                                             //% "Parenting plans"
                                             {QStringLiteral("Parenting plans"), qtTrId("libintfuorit-parenting-plans")},
                                             //% "Partial credit card data"
@@ -216,10 +238,14 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Personal interests"), qtTrId("libintfuorit-personal-interests")},
                                             //% "Phone numbers"
                                             {QStringLiteral("Phone numbers"), qtTrId("libintfuorit-phone-numbers")},
+                                            //% "Photos"
+                                            {QStringLiteral("Photos"), qtTrId("libintfuorit-photos")},
                                             //% "Physical addresses"
                                             {QStringLiteral("Physical addresses"), qtTrId("libintfuorit-physical-addresses")},
                                             //% "Physical attributes"
                                             {QStringLiteral("Physical attributes"), qtTrId("libintfuorit-physical-attributes")},
+                                            //% "PINs"
+                                            {QStringLiteral("PINs"), qtTrId("libintfuorit-pins")},
                                             //% "Political donations"
                                             {QStringLiteral("Political donations"), qtTrId("libintfuorit-political-donations")},
                                             //% "Political views"
@@ -228,6 +254,8 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Private messages"), qtTrId("libintfuorit-private-messages")},
                                             //% "Professional skills"
                                             {QStringLiteral("Professional skills"), qtTrId("libintfuorit-professional-skills")},
+                                            //% "Profile photos"
+                                            {QStringLiteral("Profile photos"), qtTrId("libintfuorit-profile-photos")},
                                             //% "Purchases"
                                             {QStringLiteral("Purchases"), qtTrId("libintfuorit-purchases")},
                                             //% "Purchasing habits"
@@ -244,6 +272,8 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Reward program balances"), qtTrId("libintfuorit-reward-program-balances")},
                                             //% "Salutations"
                                             {QStringLiteral("Salutations"), qtTrId("libintfuorit-salutations")},
+                                            //% "School grades (class levels)"
+                                            {QStringLiteral("School grades (class levels)"), qtTrId("libintfuorit-school-grades-class-levels")},
                                             //% "Security questions and answers"
                                             {QStringLiteral("Security questions and answers"), qtTrId("libintfuorit-security-questions-and-answers")},
                                             //% "Sexual fetishes"
@@ -256,8 +286,12 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("SMS messages"), qtTrId("libintfuorit-sms-messages")},
                                             //% "Social connections"
                                             {QStringLiteral("Social connections"), qtTrId("libintfuorit-social-connections")},
+                                            //% "Social media profiles"
+                                            {QStringLiteral("Social media profiles"), qtTrId("libintfuorit-social-media-profiles")},
                                             //% "Spoken languages"
                                             {QStringLiteral("Spoken languages"), qtTrId("libintfuorit-spoken-languages")},
+                                            //% "Support tickets"
+                                            {QStringLiteral("Support tickets"), qtTrId("libintfuorit-support-tickets")},
                                             //% "Survey results"
                                             {QStringLiteral("Survey results"), qtTrId("libintfuorit-survey-results")},
                                             //% "Time zones"

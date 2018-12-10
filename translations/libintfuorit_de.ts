@@ -252,10 +252,6 @@
         <source>Bank account numbers</source>
         <translation>Bankkontonummern</translation>
     </message>
-    <message id="libintfuorit-banking-pins">
-        <source>Banking PINs</source>
-        <translation>Bank-PINs</translation>
-    </message>
     <message id="libintfuorit-beauty-ratings">
         <source>Beauty ratings</source>
         <translation>Schönheitsbewertungen</translation>
@@ -615,6 +611,78 @@
     <message id="libintfuorit-years-of-professional-experience">
         <source>Years of professional experience</source>
         <translation>Jahre der Berufserfahrung</translation>
+    </message>
+    <message id="libintfuorit-address-book-contacts">
+        <source>Address book contacts</source>
+        <translation>Adressbucheinträge</translation>
+    </message>
+    <message id="libintfuorit-apps-installed-on-devices">
+        <source>Apps installed on devices</source>
+        <translation>Installierte Anwendungen</translation>
+    </message>
+    <message id="libintfuorit-audio-recordings">
+        <source>Audio recordings</source>
+        <translation>Audioaufnahmen</translation>
+    </message>
+    <message id="libintfuorit-browsing-histories">
+        <source>Browsing histories</source>
+        <translation>Browser‐Verläufe</translation>
+    </message>
+    <message id="libintfuorit-cellular-network-names">
+        <source>Cellular network names</source>
+        <translation>Funknetzwerknamen</translation>
+    </message>
+    <message id="libintfuorit-deceased-statuses">
+        <source>Deceased statuses</source>
+        <translation>Sterbezustände</translation>
+    </message>
+    <message id="libintfuorit-eating-habits">
+        <source>Eating habits</source>
+        <translation>Essgewohnheiten</translation>
+    </message>
+    <message id="libintfuorit-home-loan-information">
+        <source>Home loan information</source>
+        <translation>Informationen zu Baukrediten</translation>
+    </message>
+    <message id="libintfuorit-imei-numbers">
+        <source>IMEI numbers</source>
+        <translation>IMEI‐Nummern</translation>
+    </message>
+    <message id="libintfuorit-imsi-numbers">
+        <source>IMSI numbers</source>
+        <translation>IMSI‐Nummern</translation>
+    </message>
+    <message id="libintfuorit-nationalities">
+        <source>Nationalities</source>
+        <translation>Nationalitäten</translation>
+    </message>
+    <message id="libintfuorit-occupations">
+        <source>Occupations</source>
+        <translation>Berufsgruppen</translation>
+    </message>
+    <message id="libintfuorit-photos">
+        <source>Photos</source>
+        <translation>Fotos</translation>
+    </message>
+    <message id="libintfuorit-pins">
+        <source>PINs</source>
+        <translation>PINs</translation>
+    </message>
+    <message id="libintfuorit-profile-photos">
+        <source>Profile photos</source>
+        <translation>Profilfotos</translation>
+    </message>
+    <message id="libintfuorit-social-media-profiles">
+        <source>Social media profiles</source>
+        <translation>Profile in sozialen Medien</translation>
+    </message>
+    <message id="libintfuorit-support-tickets">
+        <source>Support tickets</source>
+        <translation>Supportanfragen</translation>
+    </message>
+    <message id="libintfuorit-school-grades-class-levels">
+        <source>School grades (class levels)</source>
+        <translation>Schulnoten (Klassenstufen)</translation>
     </message>
 </context>
 </TS>

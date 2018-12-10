@@ -252,10 +252,6 @@
         <source>Bank account numbers</source>
         <translation type="unfinished"/>
     </message>
-    <message id="libintfuorit-banking-pins">
-        <source>Banking PINs</source>
-        <translation type="unfinished"/>
-    </message>
     <message id="libintfuorit-beauty-ratings">
         <source>Beauty ratings</source>
         <translation type="unfinished"/>
@@ -614,6 +610,78 @@
     </message>
     <message id="libintfuorit-years-of-professional-experience">
         <source>Years of professional experience</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-address-book-contacts">
+        <source>Address book contacts</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-apps-installed-on-devices">
+        <source>Apps installed on devices</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-audio-recordings">
+        <source>Audio recordings</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-browsing-histories">
+        <source>Browsing histories</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-cellular-network-names">
+        <source>Cellular network names</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-deceased-statuses">
+        <source>Deceased statuses</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-eating-habits">
+        <source>Eating habits</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-home-loan-information">
+        <source>Home loan information</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-imei-numbers">
+        <source>IMEI numbers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-imsi-numbers">
+        <source>IMSI numbers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-nationalities">
+        <source>Nationalities</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-occupations">
+        <source>Occupations</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-photos">
+        <source>Photos</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-pins">
+        <source>PINs</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-profile-photos">
+        <source>Profile photos</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-social-media-profiles">
+        <source>Social media profiles</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-support-tickets">
+        <source>Support tickets</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-school-grades-class-levels">
+        <source>School grades (class levels)</source>
         <translation type="unfinished"/>
     </message>
 </context>
