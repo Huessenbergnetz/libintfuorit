@@ -172,4 +172,10 @@ protected:
 
 Q_DECLARE_TYPEINFO(Intfuorit::Error, Q_MOVABLE_TYPE);
 
+/*!
+ * \relates Intfuorit::Error
+ * \brief Writes the \a error to the \a dbg stream and returns the stream.
+ */
+QDebug operator<<(QDebug dbg, const Intfuorit::Error &error);
+
 #endif // INTFUORITERROR_H

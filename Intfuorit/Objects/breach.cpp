@@ -22,6 +22,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QLocale>
+#include <QDebug>
 
 using namespace Intfuorit;
 
@@ -387,6 +388,28 @@ Breach Breach::fromJson(const QJsonObject &o)
         o.value(QStringLiteral("IsSpamList")).toBool(),
         QUrl(o.value(QStringLiteral("LogoPath")).toString())
     };
+}
+
+QDebug operator<<(QDebug dbg, const Intfuorit::Breach &breach)
+{
+    QDebugStateSaver saver(dbg);
+    Q_UNUSED(saver);
+    dbg.nospace() << "Intfuorit::Breach(";
+    dbg << "Title: " << breach.title();
+    dbg << ", Name: " << breach.name();
+    dbg << ", Domain: " << breach.domain();
+    dbg << ", BreachDate: " << breach.breachDate();
+    dbg << ", AddedDate: " << breach.addedDate();
+    dbg << ", ModifiedDate: " << breach.modifiedDate();
+    dbg << ", PwnCount: " << breach.pwnCount();
+    dbg << ", IsVerified: " << breach.isVerified();
+    dbg << ", IsFabricated: " << breach.isFabricated();
+    dbg << ", IsSensitive: " << breach.isSensitive();
+    dbg << ", IsActive: " << breach.isActive();
+    dbg << ", IsRetired: " << breach.isRetired();
+    dbg << ", IsSpamList: " << breach.isSpamList();
+    dbg << ')';
+    return dbg.maybeSpace();
 }
 
 #include "moc_breach.cpp"

@@ -181,4 +181,10 @@ protected:
 
 Q_DECLARE_TYPEINFO(Intfuorit::Paste, Q_MOVABLE_TYPE);
 
+/*!
+ * \relates Intfuorit::Paste
+ * \brief Writes the \a paste to the \a dbg stream and returns the stream.
+ */
+QDebug operator<<(QDebug dbg, const Intfuorit::Paste &pate);
+
 #endif // LIBINTFUORITPASTE_H

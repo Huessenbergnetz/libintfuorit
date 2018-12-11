@@ -298,7 +298,7 @@ public:
      */
     QStringList dataClassesTranslated() const;
     /*!
-     * Getter function for the \link Breah::dataClassesTranslatedString dataClassesTranslatedString \endlink property.
+     * Getter function for the \link Breach::dataClassesTranslatedString dataClassesTranslatedString \endlink property.
      */
     QString dataClassesTranslatedString() const;
     /*!
@@ -352,5 +352,13 @@ protected:
 }
 
 Q_DECLARE_TYPEINFO(Intfuorit::Breach, Q_MOVABLE_TYPE);
+
+/*!
+ * \relates Intfuorit::Breach
+ * \brief Writes the \a breach to the \a dbg stream and returns the stream.
+ *
+ * Description and data classes will be omitted in the output.
+ */
+QDebug operator<<(QDebug dbg, const Intfuorit::Breach &breach);
 
 #endif // LIBINTFUORITBREACH_H

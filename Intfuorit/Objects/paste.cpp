@@ -20,6 +20,7 @@
 #include "paste_p.h"
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QDebug>
 
 using namespace Intfuorit;
 
@@ -103,6 +104,21 @@ Paste Paste::fromJson(const QJsonObject &o)
         QDateTime::fromString(o.value(QStringLiteral("Date")).toString(), Qt::ISODate),
         static_cast<quint32>(o.value(QStringLiteral("EmailCount")).toDouble())
     };
+}
+
+QDebug operator<<(QDebug dbg, const Intfuorit::Paste &paste)
+{
+    QDebugStateSaver saver(dbg);
+    Q_UNUSED(saver);
+    dbg.nospace() << "Intfuorit::Paste(";
+    dbg << "Source: " << paste.source();
+    dbg << ", SourceID: " << paste.sourceId();
+    dbg << ", Title: " << paste.title();
+    dbg << ", Date: " << paste.date();
+    dbg << ", EmailCount: " << paste.emailCount();
+    dbg << ", URL: " << paste.url();
+    dbg << ')';
+    return dbg.maybeSpace();
 }
 
 #include "moc_paste.cpp"

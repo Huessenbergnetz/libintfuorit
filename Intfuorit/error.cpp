@@ -20,6 +20,7 @@
 #include "error_p.h"
 #include <QNetworkReply>
 #include <QJsonParseError>
+#include <QDebug>
 
 using namespace Intfuorit;
 
@@ -184,7 +185,6 @@ Error::Error(QNetworkReply *reply) : d(new ErrorData)
     }
 }
 
-
 Error::Error(const QJsonParseError jsonError) :
     d(new ErrorData)
 {
@@ -198,13 +198,11 @@ Error::Error(const QJsonParseError jsonError) :
     d->printOut();
 }
 
-
 Error::Error(const Error &other) :
     d(other.d)
 {
 
 }
-
 
 //Error::Error(Error &&error) noexcept :
 //    d(std::move(other.d))
@@ -212,13 +210,11 @@ Error::Error(const Error &other) :
 
 //}
 
-
 Error& Error::operator=(const Error &other)
 {
     d = other.d;
     return *this;
 }
-
 
 Error& Error::operator=(Error &&other) noexcept
 {
@@ -226,37 +222,42 @@ Error& Error::operator=(Error &&other) noexcept
     return *this;
 }
 
-
 Error::~Error()
 {
 
 }
-
 
 void Error::swap(Error &other) noexcept
 {
     std::swap(d, other.d);
 }
 
-
 Intfuorit::Error::Type Error::type() const { return d->type; }
-
 
 Intfuorit::Error::Severity Error::severity() const { return d->severity; }
 
-
 QString Error::text() const { return d->text; }
-
 
 bool Error::operator!=(const Error &other) const
 {
     return ((d->type != other.type()) || (d->severity != other.severity()) || (d->text != other.text()));
 }
 
-
 bool Error::operator==(const Error &other) const
 {
     return ((d->type == other.type()) && (d->severity == other.severity()) && (d->text == other.text()));
+}
+
+QDebug operator<<(QDebug dbg, const Intfuorit::Error &error)
+{
+    QDebugStateSaver saver(dbg);
+    Q_UNUSED(saver);
+    dbg.nospace() << "Intfuorit::Error(";
+    dbg << "Type: " << error.type();
+    dbg << ", Severity: " << error.severity();
+    dbg << ", Text: " << error.text();
+    dbg << ')';
+    return dbg.maybeSpace();
 }
 
 #include "moc_error.cpp"
