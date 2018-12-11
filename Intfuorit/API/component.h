@@ -310,9 +310,7 @@ protected:
      * \link Component::error error \endlink property. If \a reload is \c false or if
      * \link Component::cachePeriod cachePeriod \endlink is set to \c 0, the cache will be ommited.
      *
-     * When no \link Component::networkManager networkManager \endlink has been set, this will also
-     * create a new QNetworkManager object to perform the API request. If a timeout has been set
-     * greater than \c 0, the timeout timer will be started.
+     * If a timeout has been set greater than \c 0, the timeout timer will be started.
      *
      * In the end, the QNetworkReply::finished() signal will be connected to the
      * ComponentPrivate::requestFinished() function and the QNetworkReply::readyRead() signal will

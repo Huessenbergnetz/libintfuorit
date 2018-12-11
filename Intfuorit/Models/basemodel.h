@@ -29,7 +29,7 @@ namespace Intfuorit {
 
 /*!
  * \defgroup models Data Models
- * \brief Classes in this module are used to present requested data in data models..
+ * \brief Classes in this module are used to present requested data in data models.
  */
 
 class BaseModelPrivate;
