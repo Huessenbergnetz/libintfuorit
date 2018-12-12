@@ -1,11 +1,4 @@
 *.qm
-Doxyfile
-Doxyfile.qhp
-Doxyfile.html
-Doxyfile.web
-qtdocs
-htmldocs
-webdocs
 doxyWebFooter.html
 makeWebDocs.sh
 
