@@ -38,7 +38,7 @@ public:
     virtual void registerTypes(const char *uri)
     {
         if (Q_LIKELY(QLatin1String(uri) == QLatin1String("de.huessenbergnetz.intfuorit"))) {
-            qDebug() << "REGISTERING TYPES!!!!!!!";
+
             int major = 1;
             int minor = 0;
 
