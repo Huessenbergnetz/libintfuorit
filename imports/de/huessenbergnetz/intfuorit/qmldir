@@ -1,0 +1,4 @@
+module de.huessenbergnetz.intfuorit
+plugin qmlintfuoritplugin
+classname QmlIntfuoritPlugin
+typeinfo plugins.qmltypes
