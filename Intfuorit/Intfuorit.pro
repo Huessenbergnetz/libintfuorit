@@ -29,6 +29,8 @@ isEmpty(INSTALL_LIB_DIR): INSTALL_LIB_DIR = $$[QT_INSTALL_LIBS]
 isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = $$[QT_INSTALL_TRANSLATIONS]
 
 PUBLIC_HEADERS = \
+    Intfuorit \
+    intfuorit.h \
     Error \
     error.h \
     intfuorit_global.h \
@@ -83,7 +85,8 @@ PRIVATE_HEADERS = \
 
 HEADERS += $$PRIVATE_HEADERS $$PUBLIC_HEADERS
 
-SOURCES += \
+SOURCES +=  \
+    intfuorit.cpp \
     error.cpp \
     API/component.cpp \
     API/getallbreaches.cpp \
