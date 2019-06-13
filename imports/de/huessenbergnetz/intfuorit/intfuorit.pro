@@ -28,3 +28,9 @@ INSTALLS += qmlDir
     qmlTypes.files = plugins.qmltypes
     INSTALLS += qmlTypes
 }
+
+clazy {
+    DEFINES += CLAZY
+    QMAKE_CXX = clazy
+    QMAKE_CXXFLAGS += "-Xclang -plugin-arg-clazy -Xclang level0,level1,level2"
+}
