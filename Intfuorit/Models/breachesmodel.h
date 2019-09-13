@@ -84,8 +84,27 @@ public:
      * data will be loaded if inside the \link BaseModel::cachePeriod cachePeriod \endlink.
      *
      * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
+     *
+     * \deprecated Since version 1.1.0 libintfuorit uses HIPB API version 3 that requires an API key for some calls.
      */
-    Q_INVOKABLE void getBreachesForAccount(const QString &account, const QString &domain = QString(), bool includeUnverified = false, bool reload = false);
+    Q_DECL_DEPRECATED Q_INVOKABLE void getBreachesForAccount(const QString &account, const QString &domain = QString(), bool includeUnverified = false, bool reload = false);
+
+    /*!
+     * Requests the breaches the given \a account was part in from the HIBP API and populates
+     * the model, optionally filtered by \a domain. (Set \a domain to an empty string if you do
+     * not want to filter for domain.) The current model data will be cleared.
+     * By default, no unverified breaches are included in the response, set
+     * \a includeUnverified to \c true to include thos ones as well. Internally this uses
+     * GetBreachesForAccount to request the list of breaches. If \a reload is \c false, cached
+     * data will be loaded if inside the \link BaseModel::cachePeriod cachePeriod \endlink.
+     *
+     * The \a apiKey is mandatory for this API call since HIBP API version 3.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
+     *
+     * \since libintfuorit 1.1.0
+     */
+    Q_INVOKABLE void getBreachesForAccount(const QString &apiKey, const QString &account, const QString &domain, bool includeUnverified = false, bool reload = false);
 
     /*!
      * Clears the model data.

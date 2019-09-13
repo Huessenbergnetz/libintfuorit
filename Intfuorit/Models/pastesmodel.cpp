@@ -71,6 +71,11 @@ PastesModel::~PastesModel()
 
 void PastesModel::getPastesForAccount(const QString &account, bool reload)
 {
+    getPastesForAccount(QString(), account, reload);
+}
+
+void PastesModel::getPastesForAccount(const QString &apiKey, const QString &account, bool reload)
+{
     Q_D(PastesModel);
     if (d->inOperation) {
         qWarning("Model is still working. Will not reload.");
@@ -108,6 +113,7 @@ void PastesModel::getPastesForAccount(const QString &account, bool reload)
 
     d->gpfa->setCachePeriod(d->cachePeriod);
     d->gpfa->setUserAgent(d->userAgent);
+    d->gpfa->setApiKey(apiKey);
     d->gpfa->execute(account, reload);
 }
 

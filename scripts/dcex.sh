@@ -18,7 +18,7 @@
 # License along with this library.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-readarray -t ARR < <(curl -s -X GET -H "User-Agent: libintfuorit data classes extractor" https://haveibeenpwned.com/api/v2/dataclasses | jq -c '.[]')
+readarray -t ARR < <(curl -s -X GET -H "User-Agent: libintfuorit data classes extractor" https://haveibeenpwned.com/api/v3/dataclasses | jq -c '.[]')
 
 for T in "${ARR[@]}"
 do

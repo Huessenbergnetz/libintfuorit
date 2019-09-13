@@ -34,6 +34,7 @@ public:
     {
         expectedJSONType = ComponentPrivate::Array;
         namOperation = QNetworkAccessManager::GetOperation;
+        useApiKey = true;
     }
 
     QString domain;

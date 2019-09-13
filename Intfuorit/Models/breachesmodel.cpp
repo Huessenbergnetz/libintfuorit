@@ -109,6 +109,11 @@ void BreachesModel::getAllBreaches(const QString &domain, bool reload)
 
 void BreachesModel::getBreachesForAccount(const QString &account, const QString &domain, bool includeUnverified, bool reload)
 {
+    getBreachesForAccount(QString(), account, domain, includeUnverified, reload);
+}
+
+void BreachesModel::getBreachesForAccount(const QString &apiKey, const QString &account, const QString &domain, bool includeUnverified, bool reload)
+{
     Q_D(BreachesModel);
     if (d->inOperation) {
         qWarning("Model is still working. Will not reload.");
@@ -144,6 +149,7 @@ void BreachesModel::getBreachesForAccount(const QString &account, const QString 
 
     d->gbfa->setCachePeriod(d->cachePeriod);
     d->gbfa->setUserAgent(d->userAgent);
+    d->gbfa->setAccount(apiKey);
     d->gbfa->execute(account, domain, false, includeUnverified, reload);
 }
 

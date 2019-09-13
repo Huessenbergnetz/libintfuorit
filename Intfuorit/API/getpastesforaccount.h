@@ -33,6 +33,9 @@ class GetPastesForAccountPrivate;
  * Set the email address to the \link GetPastesForAccount::account account \endlink property
  * and call execute() to start the request.
  *
+ * Since version 1.1.0 libintfuorit uses HIBP API version 3 that requires an \link Component::apiKey apiKey\endlink
+ * for authorisation for this API call.
+ *
  * If there are pastes found on HIBP the \link GetPastesForAccount::account email addres \endlink is
  * part of, the gotPastesForAccount() will be emitted. If there are no pates, gotNoPastesForAccount()
  * will be emitted. If something failed, the Component::failed() signal will be emitted.
@@ -121,8 +124,31 @@ public:
      *
      * This function performs a synchronous request and will block the event loop until the request has finished
      * or failed.
+     *
+     * \deprecated Since version 1.1.0 libintfuorit uses HIPB API version 3 that requires an API key for some calls.
      */
-    static QVector<Paste> get(const QString &account, const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
+    Q_DECL_DEPRECATED static QVector<Paste> get(const QString &account, const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
+
+    /*!
+     * Gets a list of pastes from the HIBP API the \a account is part of.
+     * If \a reload is set to \c false, cached results will be returned where the default
+     * cache time (2 days) will be used.
+     *
+     * The \a apiKey is mandatory for this API call since HIBP API version 3.
+     *
+     * If \a userAgent is empty, a default user agent will be created, using QCoreApplication::applicationName()
+     * and QCoreApplication::applicationVersion(). Note that the HIBP API does not allow sending an empty user
+     * agent string.
+     *
+     * If \a ok ist not \c nullptr, failure is reported by setting \a *ok to \c false, and success
+     * by setting \a *ok to \c true.
+     *
+     * This function performs a synchronous request and will block the event loop until the request has finished
+     * or failed.
+     *
+     * \since libintfuorit 1.1.0
+     */
+    static QVector<Paste> get(const QString &account, const QString &apiKey, const QString &userAgent = QString(), bool reload = false, bool *ok = nullptr);
 
 Q_SIGNALS:
     /*!

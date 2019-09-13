@@ -73,8 +73,31 @@ public:
      * failed, the BaseModel::failed() signal will be emitted.
      *
      * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
+     *
+     * \deprecated Since version 1.1.0 libintfuorit uses HIPB API version 3 that requires an API key for some calls.
      */
-    Q_INVOKABLE void getPastesForAccount(const QString &account, bool reload = false);
+    Q_DECL_DEPRECATED Q_INVOKABLE void getPastesForAccount(const QString &account, bool reload = false);
+
+    /*!
+     * Requests all pastes from the HIBP API the given \a account is part of. If \a reload is
+     * set to \c true, the local cache will be circumvented and the data will be requested from
+     * the API directly. Use BaseModel::cachePeriod to set the valid period for cached data.
+     * Internally this uses GetPastesForAccount to request the list of pastes.
+     *
+     * The \a apiKey is mandatory for this API call since HIBP API version 3.
+     *
+     * Befor sending a new request, the current model data will be cleared and all Paste objects
+     * currently available in the model will be destroyed.
+     *
+     * If pastes were found for the given \a account, the model will be populated with the result,
+     * if no pastes were found, the gotNoPastesForAccount() signal will be emitted. If something
+     * failed, the BaseModel::failed() signal will be emitted.
+     *
+     * \note This function can be invoked via the meta-object system and from QML. See Q_INVOKABLE.
+     *
+     * \since libintfuorit 1.1.0
+     */
+    Q_INVOKABLE void getPastesForAccount(const QString &apiKey, const QString &account, bool reload = false);
 
     /*!
      * Clears the model data.

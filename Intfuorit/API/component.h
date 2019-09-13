@@ -71,7 +71,7 @@ class INTFUORITSHARED_EXPORT Component : public QObject
      * QCoreApplication::applicationVersion().
      *
      * \par HIBP API Docs
-     * <a href="https://haveibeenpwned.com/API/v2#UserAgent" rel="external noopener">Specifying the user agent</a>
+     * <a href="https://haveibeenpwned.com/API/v3#UserAgent" rel="external noopener">Specifying the user agent</a>
      *
      * \par Access functions
      * \li QString userAgent() const
@@ -81,6 +81,26 @@ class INTFUORITSHARED_EXPORT Component : public QObject
      * \li void userAgentChanged(const QString &userAgent)
      */
     Q_PROPERTY(QString userAgent READ userAgent WRITE setUserAgent NOTIFY userAgentChanged)
+    /*!
+     * Since version 3 of the HIBP API, an API key is required for all APIs that enable searching HIBP by email addres,
+     * nameley \link GetBreachesForAccount retrieving all breaches fo an account\endlink and
+     * \link GetPastesForAccount retrieving all pastes for an account\endlink. An HIBP subscription key is required to
+     * make an authorised call and can be obtained on the <a href="https://haveibeenpwned.com/API/Key" rel="external noopner>API key page</a>.
+     * The key is then passed in a "hibp-api-key" header.
+     *
+     * \par HIBP API Docs
+     * <a href="https://haveibeenpwned.com/API/v3#Authorisation" rel="external noopener">Authorisation</a>
+     *
+     * \par Access functions
+     * \li QString apiKey() const
+     * \li void setApiKey(const QString &nApiKey)
+     *
+     * \par Notified signal
+     * \li void apiKeyChanged(const QString &apiKey)
+     *
+     * \since libintfuorit 1.1.0
+     */
+    Q_PROPERTY(QString apiKey READ apiKey WRITE setApiKey NOTIFY apiKeyChanged)
     /*!
      * This property holds wether the API request is running or not. It can be used to show/check the operational status
      * of the request. While it is \c true, no new request will be sent from the current instance (sendRequest() will
@@ -193,10 +213,24 @@ public:
     QString userAgent() const;
 
     /*!
+     * Getter function for the \link Component::apiKey apiKey\endlink property.
+     * \sa setApiKey() apiKeyChanged()
+     * \since libintfuorit 1.1.0
+     */
+    QString apiKey() const;
+
+    /*!
      * Setter function for the \link Component::cachePeriod cachePeriod \endlink property.
      * \sa cachePeriod() cachePeriodChanged()
      */
     void setCachePeriod(quint32 nCachePeriod);
+
+    /*!
+     * Setter function for the \link Component::apiKey apiKey\endlink property.
+     * \sa apiKey() apiKeyChanged()
+     * \since libintfuorit 1.1.0
+     */
+    void setApiKey(const QString &nApiKey);
 
     /*!
      * Setter function for the \link Component::userAgent userAgent \endlink property.
@@ -245,6 +279,12 @@ Q_SIGNALS:
      * \sa setUserAgent() userAgent()
      */
     void userAgentChanged(const QString &userAgent);
+    /*!
+     * Notified signal for the \link Component::apiKey apiKey\endlink property.
+     * \sa setApiKey() apiKey()
+     * \since libintfuorit 1.1.0
+     */
+    void apiKeyChanged(const QString &apiKey);
 
 protected:
     const QScopedPointer<ComponentPrivate> d_ptr;

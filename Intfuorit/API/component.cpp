@@ -69,11 +69,14 @@ QNetworkRequest ComponentPrivate::buildRequest(const QUrl &url, int contentLengt
     req.setUrl(url);
 
     req.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
-    req.setRawHeader(QByteArrayLiteral("Accept"), QByteArrayLiteral("application/vnd.haveibeenpwned.v2+json"));
 
     if (contentLength > 0) {
         req.setHeader(QNetworkRequest::ContentTypeHeader, QLatin1String("application/x-www-form-urlencoded"));
         req.setHeader(QNetworkRequest::ContentLengthHeader, contentLength);
+    }
+
+    if (useApiKey) {
+        req.setRawHeader(QByteArrayLiteral("hibp-api-key"), apiKey.toLatin1());
     }
 
     return req;
@@ -353,9 +356,9 @@ QUrl Component::buildUrl(const QString &service, const QString &parameter) const
     url.setHost(QStringLiteral("haveibeenpwned.com"));
 
     if (!parameter.isEmpty()) {
-        url.setPath(QLatin1String("/api/") % service % QLatin1Char('/') % parameter);
+        url.setPath(QLatin1String("/api/v3/") % service % QLatin1Char('/') % parameter);
     } else {
-        url.setPath(QLatin1String("/api/") % service);
+        url.setPath(QLatin1String("/api/v3/") % service);
     }
 
     return url;
@@ -400,6 +403,14 @@ void Component::extractError(QNetworkReply *reply)
     Q_ASSERT_X(reply, "extract error", "invalid QNetworkReply object");
 
     switch(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()) {
+    case 400:
+        //% "The account to check does not comply with an acceptable format (i.e. it’s an empty string)."
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-bad-request")));
+        break;
+    case 401:
+        //% "Unauthorised — the API key provided was not valid."
+        setError(Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-invalid-api-key")));
+        break;
     case 403:
         //% "No user agent has been specified in the request. HIBP API requires a user agent header."
         setError(Error(Error::RequestError, Error::Critical, qtTrId("libintfuorit-err-forbidden-req")));
@@ -575,6 +586,19 @@ void Component::setUserAgent(const QString &nUserAgent)
         qWarning("You can not set an empty user agent because HIBP API requires an user agent.");
     }
 
+}
+
+QString Component::apiKey() const { Q_D(const Component); return d->apiKey; }
+
+void Component::setApiKey(const QString &nApiKey)
+{
+    Q_D(Component);
+    const QString akTrimmed = nApiKey.trimmed();
+    if (d->apiKey != akTrimmed) {
+        d->apiKey = akTrimmed;
+        qDebug("API key changed to \"%s\".", qUtf8Printable(akTrimmed));
+        Q_EMIT apiKeyChanged(akTrimmed);
+    }
 }
 
 void Component::setNetworkAccessManagerFactory(NetworkAccessManagerFactory *factory)

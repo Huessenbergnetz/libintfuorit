@@ -69,6 +69,7 @@ public:
     QFile cacheFile;
     QString userAgent;
     QString cacheDirPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QString apiKey;
     QNetworkAccessManager::Operation namOperation = QNetworkAccessManager::GetOperation;
     QNetworkAccessManager *nam = nullptr;
     Error error;
@@ -79,6 +80,7 @@ public:
     quint8 requestTimeout = 120;
     bool inOperation = false;
     bool useCache = false;
+    bool useApiKey = false;
 };
 
 }

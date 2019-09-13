@@ -51,6 +51,13 @@ void GetPastesForAccount::execute(bool reload)
 
     Q_D(GetPastesForAccount);
 
+    if (d->apiKey.isEmpty()) {
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-apikey-required")));
+        setInOperation(false);
+        Q_EMIT failed(error());
+        return;
+    }
+
     if (d->account.isEmpty()) {
         //% "Can not request list of pastes for empty account email address."
         setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-get-pastes-empty-account")));
@@ -127,8 +134,22 @@ void GetPastesForAccount::extractError(QNetworkReply *reply)
 
 QVector<Paste> GetPastesForAccount::get(const QString &account, const QString &userAgent, bool reload, bool *ok)
 {
+    return GetPastesForAccount::get(account, QString(), userAgent, reload, ok);
+}
+
+QVector<Paste> GetPastesForAccount::get(const QString &account, const QString &apiKey, const QString &userAgent, bool reload, bool *ok)
+{
     QVector<Paste> pastes;
+    const QString ak = apiKey.trimmed();
+    if (ak.isEmpty()) {
+        qCritical("%s", "This API call needs an API key for authorisation.");
+        if (ok) {
+            *ok = false;
+        }
+        return pastes;
+    }
     GetPastesForAccount api;
+    api.setApiKey(ak);
     const QString ua = userAgent.trimmed();
     if (ua.isEmpty()) {
         api.setUserAgent(ua);

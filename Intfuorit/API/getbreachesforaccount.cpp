@@ -54,6 +54,14 @@ void GetBreachesForAccount::execute(bool reload)
 
     Q_D(GetBreachesForAccount);
 
+    if (d->apiKey.isEmpty()) {
+        //% "This request needs an API key to be performed."
+        setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-apikey-required")));
+        setInOperation(false);
+        Q_EMIT failed(error());
+        return;
+    }
+
     if (d->account.isEmpty()) {
         //% "Can not request list of breaches for empty account user name/email address."
         setError(Error(Error::InputError, Error::Critical, qtTrId("libintfuorit-err-empty-account")));
@@ -192,8 +200,22 @@ void GetBreachesForAccount::extractError(QNetworkReply *reply)
 
 QVector<Breach> GetBreachesForAccount::get(const QString &account, const QString &domain, bool includeUnverified, const QString &userAgent, bool reload, bool *ok)
 {
+    return GetBreachesForAccount::get(QString(), account, domain, includeUnverified, userAgent, reload, ok);
+}
+
+QVector<Breach> GetBreachesForAccount::get(const QString &apiKey, const QString &account, const QString &domain, bool includeUnverified, const QString &userAgent, bool reload, bool *ok)
+{
     QVector<Breach> breaches;
+    const QString ak = apiKey.trimmed();
+    if (ak.isEmpty()) {
+        qCritical("%s", "This API call needs an API key for authorisation.");
+        if (ok) {
+            *ok = false;
+        }
+        return breaches;
+    }
     GetBreachesForAccount api;
+    api.setApiKey(ak);
     const QString ua = userAgent.trimmed();
     if (!ua.isEmpty()) {
         api.setUserAgent(ua);
@@ -213,7 +235,7 @@ QVector<Breach> GetBreachesForAccount::get(const QString &account, const QString
             *ok = true;
         }
     });
-    api.execute(account,domain, false, includeUnverified, reload);
+    api.execute(account, domain, false, includeUnverified, reload);
     if (api.inOperation()) {
         loop.exec();
     }
