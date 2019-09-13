@@ -680,8 +680,36 @@
         <source>Support tickets</source>
         <translation type="unfinished"/>
     </message>
-    <message id="libintfuorit-school-grades-class-levels">
+    <message id="libintfuorit-err-bad-request">
+        <source>The account to check does not comply with an acceptable format (i.e. it’s an empty string).</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-err-invalid-api-key">
+        <source>Unauthorised — the API key provided was not valid.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-err-apikey-required">
+        <source>This request needs an API key to be performed.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-bios">
+        <source>Bios</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-employment-statuses">
+        <source>Employment statuses</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-school-grades-(class-levels)">
         <source>School grades (class levels)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-social-security-numbers">
+        <source>Social security numbers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="libintfuorit-taxation-records">
+        <source>Taxation records</source>
         <translation type="unfinished"/>
     </message>
 </context>

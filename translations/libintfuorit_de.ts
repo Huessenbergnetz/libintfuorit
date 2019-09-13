@@ -680,9 +680,37 @@
         <source>Support tickets</source>
         <translation>Supportanfragen</translation>
     </message>
-    <message id="libintfuorit-school-grades-class-levels">
+    <message id="libintfuorit-err-bad-request">
+        <source>The account to check does not comply with an acceptable format (i.e. it’s an empty string).</source>
+        <translation>Das zu überprüfende Konto entspricht nicht einem akzeptablen Format (d.h. es ist bspw. eine leere Zeichenkette).</translation>
+    </message>
+    <message id="libintfuorit-err-invalid-api-key">
+        <source>Unauthorised — the API key provided was not valid.</source>
+        <translation>Nicht autorisiert – der angegebene API-Schlüssel war nicht gültig.</translation>
+    </message>
+    <message id="libintfuorit-err-apikey-required">
+        <source>This request needs an API key to be performed.</source>
+        <translation>Diese Abfrage benötigt zur Durchführung einen API‐Schlüssel.</translation>
+    </message>
+    <message id="libintfuorit-bios">
+        <source>Bios</source>
+        <translation>Biographien</translation>
+    </message>
+    <message id="libintfuorit-employment-statuses">
+        <source>Employment statuses</source>
+        <translation>Beschäftigungssituation</translation>
+    </message>
+    <message id="libintfuorit-school-grades-(class-levels)">
         <source>School grades (class levels)</source>
         <translation>Schulnoten (Klassenstufen)</translation>
+    </message>
+    <message id="libintfuorit-social-security-numbers">
+        <source>Social security numbers</source>
+        <translation>Sozialversicherungsnummern</translation>
+    </message>
+    <message id="libintfuorit-taxation-records">
+        <source>Taxation records</source>
+        <translation>Steuerunterlagen</translation>
     </message>
 </context>
 </TS>
