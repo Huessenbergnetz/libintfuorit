@@ -111,6 +111,8 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Beauty ratings"), qtTrId("libintfuorit-beauty-ratings")},
                                             //% "Biometric data"
                                             {QStringLiteral("Biometric data"), qtTrId("libintfuorit-biometric-data")},
+                                            //% "Bios"
+                                            {QStringLiteral("Bios"), qtTrId("libintfuorit-bios")},
                                             //% "Browser user agent details"
                                             {QStringLiteral("Browser user agent details"), qtTrId("libintfuorit-browser-user-agent-details")},
                                             //% "Browsing histories"
@@ -161,6 +163,8 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Email messages"), qtTrId("libintfuorit-email-messages")},
                                             //% "Employers"
                                             {QStringLiteral("Employers"), qtTrId("libintfuorit-employers")},
+                                            //% "Employment statuses"
+                                            {QStringLiteral("Employment statuses"), qtTrId("libintfuorit-employment-statuses")},
                                             //% "Ethnicities"
                                             {QStringLiteral("Ethnicities"), qtTrId("libintfuorit-ethnicities")},
                                             //% "Family members' names"
@@ -274,7 +278,7 @@ QStringList Breach::dataClassesTranslated() const
                                             //% "Salutations"
                                             {QStringLiteral("Salutations"), qtTrId("libintfuorit-salutations")},
                                             //% "School grades (class levels)"
-                                            {QStringLiteral("School grades (class levels)"), qtTrId("libintfuorit-school-grades-class-levels")},
+                                            {QStringLiteral("School grades (class levels)"), qtTrId("libintfuorit-school-grades-(class-levels)")},
                                             //% "Security questions and answers"
                                             {QStringLiteral("Security questions and answers"), qtTrId("libintfuorit-security-questions-and-answers")},
                                             //% "Sexual fetishes"
@@ -289,12 +293,16 @@ QStringList Breach::dataClassesTranslated() const
                                             {QStringLiteral("Social connections"), qtTrId("libintfuorit-social-connections")},
                                             //% "Social media profiles"
                                             {QStringLiteral("Social media profiles"), qtTrId("libintfuorit-social-media-profiles")},
+                                            //% "Social security numbers"
+                                            {QStringLiteral("Social security numbers"), qtTrId("libintfuorit-social-security-numbers")},
                                             //% "Spoken languages"
                                             {QStringLiteral("Spoken languages"), qtTrId("libintfuorit-spoken-languages")},
                                             //% "Support tickets"
                                             {QStringLiteral("Support tickets"), qtTrId("libintfuorit-support-tickets")},
                                             //% "Survey results"
                                             {QStringLiteral("Survey results"), qtTrId("libintfuorit-survey-results")},
+                                            //% "Taxation records"
+                                            {QStringLiteral("Taxation records"), qtTrId("libintfuorit-taxation-records")},
                                             //% "Time zones"
                                             {QStringLiteral("Time zones"), qtTrId("libintfuorit-time-zones")},
                                             //% "Travel habits"
